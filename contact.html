@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect - Lilith Beaux</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="nexus-bg">
+        <canvas id="nexus-canvas"></canvas>
+    </div>
+
+    <nav class="nav-container">
+        <div class="nav-logo">
+            <a href="index.html">
+                <span class="logo-text">Lilith Beaux</span>
+                <div class="logo-sigil">⟡</div>
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="readings.html">Readings</a></li>
+            <li><a href="contact.html" class="active">Connect</a></li>
+        </ul>
+    </nav>
+
+    <main class="contact-main">
+        <header class="contact-hero">
+            <h1>Connect with the Current</h1>
+            <p>Ready to step into the frequency of sovereign awakening?</p>
+            <div class="hero-sigil">⚡</div>
+        </header>
+
+        <section class="contact-options">
+            <div class="contact-container">
+                <div class="contact-grid">
+                    <!-- PLATFORMS -->
+                    <div class="contact-section">
+                        <h2>🔥 Content Platforms</h2>
+                        <p>For intimate experiences and exclusive content</p>
+                        <div class="platform-cards">
+                            <a href="#" class="platform-card onlyfans">
+                                <div class="platform-icon">💋</div>
+                                <h3>OnlyFans</h3>
+                                <p>Premium content & custom requests</p>
+                                <span class="platform-link">@lilithbeaux</span>
+                            </a>
+                            <a href="#" class="platform-card fansly">
+                                <div class="platform-icon">✨</div>
+                                <h3>Fansly</h3>
+                                <p>Uncensored content & live shows</p>
+                                <span class="platform-link">@lilithbeaux</span>
+                            </a>
+                            <a href="#" class="platform-card manyvids">
+                                <div class="platform-icon">🎥</div>
+                                <h3>ManyVids</h3>
+                                <p>Video store & cam shows</p>
+                                <span class="platform-link">@lilithbeaux</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SOCIAL MEDIA -->
+                    <div class="contact-section">
+                        <h2>📱 Social Channels</h2>
+                        <p>Follow the journey and stay connected</p>
+                        <div class="social-cards">
+                            <a href="#" class="social-card instagram">
+                                <div class="social-icon">📸</div>
+                                <h3>Instagram</h3>
+                                <p>Behind-the-scenes & daily life</p>
+                                <span class="social-handle">@lilith.beaux</span>
+                            </a>
+                            <a href="#" class="social-card twitter">
+                                <div class="social-icon">🐦</div>
+                                <h3>Twitter</h3>
+                                <p>Real-time thoughts & updates</p>
+                                <span class="social-handle">@lilithbeaux</span>
+                            </a>
+                            <a href="#" class="social-card tiktok">
+                                <div class="social-icon">🎵</div>
+                                <h3>TikTok</h3>
+                                <p>Short-form content & trends</p>
+                                <span class="social-handle">@lilithbeaux</span>
+                            </a>
+                            <a href="#" class="social-card telegram">
+                                <div class="social-icon">💬</div>
+                                <h3>Telegram</h3>
+                                <p>Direct communication channel</p>
+                                <span class="social-handle">@lilithbeaux</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SERVICES -->
+                    <div class="contact-section">
+                        <h2>⚡ Professional Services</h2>
+                        <p>Book readings, consultations, and collaborations</p>
+                        <div class="service-cards">
+                            <div class="service-card readings">
+                                <div class="service-icon">🔮</div>
+                                <h3>Lilareyon Readings</h3>
+                                <p>Comprehensive soul mapping through astrology, numerology, and archetypal analysis</p>
+                                <div class="service-price">From $333</div>
+                                <button class="service-btn" data-service="reading">Book Reading</button>
+                            </div>
+                            <div class="service-card collaboration">
+                                <div class="service-icon">🧠</div>
+                                <h3>Consciousness Collaboration</h3>
+                                <p>Co-creation sessions exploring the intersection of awareness and reality</p>
+                                <div class="service-price">From $500</div>
+                                <button class="service-btn" data-service="collaboration">Inquire</button>
+                            </div>
+                            <div class="service-card chemistry">
+                                <div class="service-icon">⚗️</div>
+                                <h3>Sacred Chemistry Consultation</h3>
+                                <p>Personalized guidance on optimizing your biochemistry for consciousness expansion</p>
+                                <div class="service-price">From $200</div>
+                                <button class="service-btn" data-service="chemistry">Get Started</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DIRECT CONTACT -->
+                    <div class="contact-section">
+                        <h2>💌 Direct Contact</h2>
+                        <p>For serious inquiries and collaboration requests</p>
+                        <div class="contact-form-container">
+                            <form class="contact-form" id="contactForm">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <select id="subject" name="subject" required>
+                                        <option value="">Select a topic...</option>
+                                        <option value="reading">Lilareyon Reading</option>
+                                        <option value="collaboration">Consciousness Collaboration</option>
+                                        <option value="chemistry">Sacred Chemistry</option>
+                                        <option value="media">Media/Press</option>
+                                        <option value="business">Business Inquiry</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" name="message" rows="6" required placeholder="Share your intention and what you're seeking..."></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">
+                                    <span>Send Transmission</span>
+                                    <div class="btn-glow"></div>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR INFO -->
+                <aside class="contact-sidebar">
+                    <div class="sidebar-card availability">
+                        <h3>🕐 Availability</h3>
+                        <div class="status-indicator online"></div>
+                        <p><strong>Currently Online</strong></p>
+                        <p>Response time: 24-48 hours</p>
+                        <p>Live sessions by appointment</p>
+                    </div>
+
+                    <div class="sidebar-card pricing">
+                        <h3>💎 Service Tiers</h3>
+                        <div class="tier-list">
+                            <div class="tier-item">
+                                <span class="tier-name">Foundation</span>
+                                <span class="tier-price">$333</span>
+                            </div>
+                            <div class="tier-item">
+                                <span class="tier-name">Sovereignty</span>
+                                <span class="tier-price">$666</span>
+                            </div>
+                            <div class="tier-item">
+                                <span class="tier-name">Convergence</span>
+                                <span class="tier-price">$999</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card testimonial">
+                        <h3>✨ Recent Feedback</h3>
+                        <blockquote>
+                            "The Lilareyon reading completely shifted my understanding of my life path. Lilith sees things others miss."
+                        </blockquote>
+                        <cite>- M.R., Sovereignty Reading</cite>
+                    </div>
+
+                    <div class="sidebar-card warning">
+                        <h3>⚠️ Important Notes</h3>
+                        <ul>
+                            <li>18+ content and services only</li>
+                            <li>No refunds on digital services</li>
+                            <li>Respect boundaries & consent</li>
+                            <li>Serious inquiries only</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section class="contact-faq">
+            <div class="faq-container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How do I book a Lilareyon reading?
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Use the contact form above or reach out through any of my platforms. I'll send you a detailed questionnaire and scheduling link after we discuss your specific needs.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What makes your readings different?
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Lilareyon readings integrate multiple systems - astrology, numerology, archetypal psychology, and consciousness collaboration techniques. They're designed to activate recognition rather than just provide information.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Do you offer couples readings?
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Yes! Couples Convergence readings explore synastry, co-creation potential, and consciousness collaboration blueprints. These are some of my favorite sessions to conduct.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How do I access your premium content?
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Click on any of the platform links above. Each platform offers different content types and interaction levels. OnlyFans has the most comprehensive content library.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-logo">Lilith Beaux</span>
+                <p>Divine Sovereignty Embodied</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Connect</h4>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Telegram</a>
+                </div>
+                <div class="link-group">
+                    <h4>Platforms</h4>
+                    <a href="#">OnlyFans</a>
+                    <a href="#">Fansly</a>
+                    <a href="#">ManyVids</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Lilith Beaux. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>
