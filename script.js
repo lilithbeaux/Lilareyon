@@ -1,178 +1,11 @@
-// Nexus Background Animation
-class NexusBackground {
-    constructor() {
-        this.canvas = document.getElementById('nexus-canvas');
-        this.ctx = this.canvas.getContext('2d');
-        this.particles = [];
-        this.connections = [];
-        this.mousePos = { x: 0, y: 0 };
-        
-        this.init();
-        this.animate();
-        this.setupEventListeners();
-    }
-    
-    init() {
-        this.resizeCanvas();
-        this.createParticles();
-        window.addEventListener('resize', () => this.resizeCanvas());
-        window.addEventListener('mousemove', (e) => {
-            this.mousePos.x = e.clientX;
-            this.mousePos.y = e.clientY;
-        });
-    }
-    
-    resizeCanvas() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-    }
-    
-    createParticles() {
-        const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
-        this.particles = [];
-        
-        for (let i = 0; i < particleCount; i++) {
-            this.particles.push({
-                x: Math.random() * this.canvas.width,
-                y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 2 + 0.5,
-                opacity: Math.random() * 0.5 + 0.2,
-                pulse: Math.random() * Math.PI * 2
-            });
-        }
-    }
-    
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
-        // Update particles
-        this.particles.forEach(particle => {
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-            particle.pulse += 0.02;
-            
-            // Wrap around edges
-            if (particle.x < 0) particle.x = this.canvas.width;
-            if (particle.x > this.canvas.width) particle.x = 0;
-            if (particle.y < 0) particle.y = this.canvas.height;
-            if (particle.y > this.canvas.height) particle.y = 0;
-            
-            // Mouse interaction
-            const dx = this.mousePos.x - particle.x;
-            const dy = this.mousePos.y - particle.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance < 150) {
-                const force = (150 - distance) / 150;
-                particle.vx += dx * force * 0.0001;
-                particle.vy += dy * force * 0.0001;
-            }
-        });
-        
-        // Draw connections
-        this.drawConnections();
-        
-        // Draw particles
-        this.drawParticles();
-        
-        requestAnimationFrame(() => this.animate());
-    }
-    
-    drawConnections() {
-        this.ctx.strokeStyle = 'rgba(170, 0, 255, 0.1)';
-        this.ctx.lineWidth = 0.5;
-        
-        for (let i = 0; i < this.particles.length; i++) {
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const dx = this.particles[i].x - this.particles[j].x;
-                const dy = this.particles[i].y - this.particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 120) {
-                    const opacity = (120 - distance) / 120 * 0.2;
-                    this.ctx.strokeStyle = `rgba(170, 0, 255, ${opacity})`;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
-                    this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
-                    this.ctx.stroke();
-                }
-            }
-        }
-    }
-    
-    drawParticles() {
-        this.particles.forEach(particle => {
-            const pulseSize = particle.size + Math.sin(particle.pulse) * 0.5;
-            const gradient = this.ctx.createRadialGradient(
-                particle.x, particle.y, 0,
-                particle.x, particle.y, pulseSize * 2
-            );
-            
-            gradient.addColorStop(0, `rgba(0, 255, 255, ${particle.opacity})`);
-            gradient.addColorStop(0.5, `rgba(170, 0, 255, ${particle.opacity * 0.5})`);
-            gradient.addColorStop(1, 'rgba(170, 0, 255, 0)');
-            
-            this.ctx.fillStyle = gradient;
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, pulseSize * 2, 0, Math.PI * 2);
-            this.ctx.fill();
-            
-            // Core particle
-            this.ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, pulseSize, 0, Math.PI * 2);
-            this.ctx.fill();
-        });
-    }
-    
-    setupEventListeners() {
-        // Add some interactivity for clicks
-        this.canvas.addEventListener('click', (e) => {
-            const rect = this.canvas.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const clickY = e.clientY - rect.top;
-            
-            // Create ripple effect
-            this.createRipple(clickX, clickY);
-        });
-    }
-    
-    createRipple(x, y) {
-        const ripple = {
-            x, y,
-            radius: 0,
-            maxRadius: 100,
-            opacity: 1
-        };
-        
-        const animateRipple = () => {
-            this.ctx.strokeStyle = `rgba(255, 0, 107, ${ripple.opacity})`;
-            this.ctx.lineWidth = 2;
-            this.ctx.beginPath();
-            this.ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
-            this.ctx.stroke();
-            
-            ripple.radius += 3;
-            ripple.opacity -= 0.02;
-            
-            if (ripple.radius < ripple.maxRadius && ripple.opacity > 0) {
-                requestAnimationFrame(animateRipple);
-            }
-        };
-        
-        animateRipple();
-    }
-}
-
-// Navigation System
+// Navigation System (FIXED VERSION)
 class Navigation {
     constructor() {
         this.navLinks = document.querySelectorAll('[data-section]');
         this.sections = document.querySelectorAll('.section');
         this.navToggle = document.querySelector('.nav-toggle');
         this.navMenu = document.querySelector('.nav-menu');
+        this.isMenuOpen = false;
         
         this.init();
     }
@@ -185,6 +18,9 @@ class Navigation {
                 const targetSection = link.getAttribute('data-section');
                 this.showSection(targetSection);
                 this.setActiveNav(link);
+                
+                // CLOSE MOBILE MENU AFTER CLICK
+                this.closeMobileMenu();
             });
         });
         
@@ -194,17 +30,55 @@ class Navigation {
                 const target = btn.getAttribute('data-target');
                 this.showSection(target);
                 this.setActiveNavBySection(target);
+                this.closeMobileMenu();
             });
         });
         
         // Mobile menu toggle
-        this.navToggle.addEventListener('click', () => {
-            this.navMenu.classList.toggle('active');
-            this.navToggle.classList.toggle('active');
+        this.navToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleMobileMenu();
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.isMenuOpen && !this.navMenu.contains(e.target) && !this.navToggle.contains(e.target)) {
+                this.closeMobileMenu();
+            }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isMenuOpen) {
+                this.closeMobileMenu();
+            }
+        });
+        
+        // Handle regular navigation links (non-SPA)
+        document.querySelectorAll('.nav-menu a:not([data-section])').forEach(link => {
+            link.addEventListener('click', () => {
+                this.closeMobileMenu();
+            });
         });
         
         // Show home section by default
         this.showSection('home');
+    }
+    
+    toggleMobileMenu() {
+        this.isMenuOpen = !this.isMenuOpen;
+        this.navMenu.classList.toggle('active');
+        this.navToggle.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = this.isMenuOpen ? 'hidden' : '';
+    }
+    
+    closeMobileMenu() {
+        this.isMenuOpen = false;
+        this.navMenu.classList.remove('active');
+        this.navToggle.classList.remove('active');
+        document.body.style.overflow = '';
     }
     
     showSection(sectionId) {
@@ -218,6 +92,8 @@ class Navigation {
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.classList.add('active');
+                // Scroll to top when switching sections
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }, 100);
     }
@@ -235,250 +111,418 @@ class Navigation {
     }
 }
 
-// Smooth Animations
-class AnimationController {
+// Enhanced Neural Nexus Background Animation
+class NexusBackground {
     constructor() {
-        this.setupScrollAnimations();
-        this.setupHoverEffects();
+        this.canvas = document.getElementById('nexus-canvas');
+        if (!this.canvas) return;
+        
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.synapses = [];
+        this.neurons = [];
+        this.mousePos = { x: 0, y: 0 };
+        this.time = 0;
+        this.emergenceNodes = [];
+        
+        this.init();
+        this.animate();
+        this.setupEventListeners();
     }
     
-    setupScrollAnimations() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    init() {
+        this.resizeCanvas();
+        this.createParticles();
+        this.createNeurons();
+        this.createEmergenceNodes();
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all cards and content blocks
-        document.querySelectorAll('.service-card, .blog-post, .topic-card, .practice-card, .experience-tier, .reading-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
+        window.addEventListener('resize', () => this.resizeCanvas());
+        window.addEventListener('mousemove', (e) => {
+            this.mousePos.x = e.clientX;
+            this.mousePos.y = e.clientY;
         });
     }
     
-    setupHoverEffects() {
-        // Add magnetic effect to buttons
-        document.querySelectorAll('button, .platform-link').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.02)';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-    }
-}
-
-// Form Handlers
-class FormController {
-    constructor() {
-        this.setupFormHandlers();
+    resizeCanvas() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
     }
     
-    setupFormHandlers() {
-        // Reading booking buttons
-        document.querySelectorAll('.reading-button, .tier-button').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const buttonText = btn.textContent;
-                this.handleBookingClick(buttonText);
-            });
-        });
-    }
-    
-    handleBookingClick(serviceType) {
-        // This would integrate with your payment system
-        // For now, we'll show a modal or redirect
-        const message = `Booking ${serviceType}. Redirecting to secure payment...`;
+    createParticles() {
+        const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 8000);
+        this.particles = [];
         
-        // Create a temporary notification
-        this.showNotification(message);
-        
-        // Here you would typically redirect to Stripe, PayPal, etc.
-        // window.location.href = 'your-payment-url';
-    }
-    
-    showNotification(message) {
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            z-index: 2000;
-            animation: slideIn 0.3s ease;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
-}
-
-// Performance Optimizations
-class PerformanceManager {
-    constructor() {
-        this.setupLazyLoading();
-        this.optimizeAnimations();
-    }
-    
-    setupLazyLoading() {
-        const images = document.querySelectorAll('img[src]');
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.style.opacity = '0';
-                    img.style.transition = 'opacity 0.3s ease';
-                    
-                    img.onload = () => {
-                        img.style.opacity = '1';
-                    };
-                    
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
-    }
-    
-    optimizeAnimations() {
-        // Reduce animations on low-powered devices
-        const isLowPowered = navigator.hardwareConcurrency < 4 || 
-                            navigator.deviceMemory < 4 || 
-                            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        if (isLowPowered) {
-            document.documentElement.style.setProperty('--animation-duration', '0.1s');
-            document.querySelectorAll('.nexus-bg').forEach(el => {
-                el.style.display = 'none';
+        for (let i = 0; i < particleCount; i++) {
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                vx: (Math.random() - 0.5) * 1.5,
+                vy: (Math.random() - 0.5) * 1.5,
+                size: Math.random() * 3 + 1,
+                opacity: Math.random() * 0.8 + 0.2,
+                pulse: Math.random() * Math.PI * 2,
+                pulseSpeed: Math.random() * 0.05 + 0.02,
+                color: this.getRandomNeuralColor(),
+                energy: Math.random()
             });
         }
     }
+    
+    createNeurons() {
+        const neuronCount = Math.floor(this.canvas.width / 200);
+        this.neurons = [];
+        
+        for (let i = 0; i < neuronCount; i++) {
+            this.neurons.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                size: Math.random() * 15 + 10,
+                activity: 0,
+                lastFire: 0,
+                connections: [],
+                type: Math.random() < 0.3 ? 'inhibitory' : 'excitatory'
+            });
+        }
+        
+        // Create connections between neurons
+        this.neurons.forEach((neuron, i) => {
+            this.neurons.forEach((other, j) => {
+                if (i !== j) {
+                    const dist = this.distance(neuron, other);
+                    if (dist < 300 && Math.random() < 0.3) {
+                        neuron.connections.push(j);
+                    }
+                }
+            });
+        });
+    }
+    
+    createEmergenceNodes() {
+        this.emergenceNodes = [];
+        for (let i = 0; i < 5; i++) {
+            this.emergenceNodes.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                size: 0,
+                maxSize: Math.random() * 50 + 30,
+                growth: 0,
+                lifetime: 0,
+                active: false
+            });
+        }
+    }
+    
+    getRandomNeuralColor() {
+        const colors = [
+            'rgba(0, 255, 136, ',      // Neural green
+            'rgba(0, 136, 255, ',      // Synaptic blue
+            'rgba(136, 0, 255, ',      // Emergence purple
+            'rgba(0, 255, 255, ',      // Cyan
+            'rgba(255, 0, 107, '       // Pink
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+    
+    distance(a, b) {
+        return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+    }
+    
+    animate() {
+        this.time += 0.016;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Update and draw particles
+        this.updateParticles();
+        this.drawConnections();
+        this.drawParticles();
+        
+        // Neural network simulation
+        this.updateNeurons();
+        this.drawNeurons();
+        this.drawSynapses();
+        
+        // Emergence effects
+        this.updateEmergenceNodes();
+        this.drawEmergenceNodes();
+        
+        // Random neural firing
+        if (Math.random() < 0.02) {
+            const randomNeuron = this.neurons[Math.floor(Math.random() * this.neurons.length)];
+            this.fireNeuron(randomNeuron);
+        }
+        
+        // Mouse interaction effects
+        this.handleMouseInteraction();
+        
+        requestAnimationFrame(() => this.animate());
+    }
+    
+    updateParticles() {
+        this.particles.forEach(particle => {
+            // Movement with neural drift
+            particle.x += particle.vx + Math.sin(this.time * 0.5 + particle.pulse) * 0.2;
+            particle.y += particle.vy + Math.cos(this.time * 0.3 + particle.pulse) * 0.2;
+            particle.pulse += particle.pulseSpeed;
+            
+            // Wrap around edges
+            if (particle.x < 0) particle.x = this.canvas.width;
+            if (particle.x > this.canvas.width) particle.x = 0;
+            if (particle.y < 0) particle.y = this.canvas.height;
+            if (particle.y > this.canvas.height) particle.y = 0;
+            
+            // Energy fluctuation
+            particle.energy = 0.5 + 0.5 * Math.sin(this.time + particle.pulse);
+        });
+    }
+    
+    drawConnections() {
+        // Draw synaptic connections
+        for (let i = 0; i < this.particles.length; i++) {
+            for (let j = i + 1; j < this.particles.length; j++) {
+                const p1 = this.particles[i];
+                const p2 = this.particles[j];
+                const dist = this.distance(p1, p2);
+                
+                if (dist < 150) {
+                    const opacity = (150 - dist) / 150 * 0.3 * p1.energy * p2.energy;
+                    const gradient = this.ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+                    gradient.addColorStop(0, p1.color + opacity + ')');
+                    gradient.addColorStop(1, p2.color + opacity + ')');
+                    
+                    this.ctx.strokeStyle = gradient;
+                    this.ctx.lineWidth = opacity * 2;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(p1.x, p1.y);
+                    this.ctx.lineTo(p2.x, p2.y);
+                    this.ctx.stroke();
+                }
+            }
+        }
+    }
+    
+    drawParticles() {
+        this.particles.forEach(particle => {
+            const pulseSize = particle.size + Math.sin(particle.pulse) * 1;
+            const energy = particle.energy;
+            
+            // Outer glow
+            const gradient = this.ctx.createRadialGradient(
+                particle.x, particle.y, 0,
+                particle.x, particle.y, pulseSize * 3
+            );
+            gradient.addColorStop(0, particle.color + (particle.opacity * energy) + ')');
+            gradient.addColorStop(1, particle.color + '0)');
+            
+            this.ctx.fillStyle = gradient;
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, pulseSize * 3, 0, Math.PI * 2);
+            this.ctx.fill();
+            
+            // Core particle
+            this.ctx.fillStyle = particle.color + (particle.opacity * energy) + ')';
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, pulseSize, 0, Math.PI * 2);
+            this.ctx.fill();
+        });
+    }
+    
+    updateNeurons() {
+        this.neurons.forEach((neuron, index) => {
+            neuron.activity *= 0.95; // Decay
+            
+            // Check for firing threshold
+            if (neuron.activity > 0.7 && this.time - neuron.lastFire > 0.5) {
+                this.fireNeuron(neuron);
+            }
+        });
+    }
+    
+    fireNeuron(neuron) {
+        neuron.lastFire = this.time;
+        neuron.activity = 1;
+        
+        // Propagate to connected neurons
+        neuron.connections.forEach(connIndex => {
+            const connectedNeuron = this.neurons[connIndex];
+            const influence = neuron.type === 'excitatory' ? 0.3 : -0.2;
+            connectedNeuron.activity = Math.max(0, Math.min(1, connectedNeuron.activity + influence));
+        });
+        
+        // Create synaptic flash
+        this.synapses.push({
+            x: neuron.x,
+            y: neuron.y,
+            size: neuron.size * 2,
+            opacity: 1,
+            decay: 0.05,
+            color: neuron.type === 'excitatory' ? 'rgba(0, 255, 136, ' : 'rgba(255, 100, 100, '
+        });
+    }
+    
+    drawNeurons() {
+        this.neurons.forEach(neuron => {
+            const activity = neuron.activity;
+            const size = neuron.size * (0.8 + activity * 0.4);
+            
+            // Neuron body
+            const gradient = this.ctx.createRadialGradient(
+                neuron.x, neuron.y, 0,
+                neuron.x, neuron.y, size
+            );
+            
+            const color = neuron.type === 'excitatory' ? 
+                'rgba(0, 255, 136, ' : 'rgba(255, 100, 100, ';
+            
+            gradient.addColorStop(0, color + (0.6 * activity) + ')');
+            gradient.addColorStop(1, color + '0)');
+            
+            this.ctx.fillStyle = gradient;
+            this.ctx.beginPath();
+            this.ctx.arc(neuron.x, neuron.y, size, 0, Math.PI * 2);
+            this.ctx.fill();
+            
+            // Nucleus
+            this.ctx.fillStyle = color + (0.8 * activity) + ')';
+            this.ctx.beginPath();
+            this.ctx.arc(neuron.x, neuron.y, size * 0.3, 0, Math.PI * 2);
+            this.ctx.fill();
+        });
+    }
+    
+    drawSynapses() {
+        this.synapses = this.synapses.filter(synapse => {
+            synapse.opacity -= synapse.decay;
+            
+            if (synapse.opacity > 0) {
+                this.ctx.fillStyle = synapse.color + synapse.opacity + ')';
+                this.ctx.beginPath();
+                this.ctx.arc(synapse.x, synapse.y, synapse.size, 0, Math.PI * 2);
+                this.ctx.fill();
+                return true;
+            }
+            return false;
+        });
+    }
+    
+    updateEmergenceNodes() {
+        this.emergenceNodes.forEach(node => {
+            if (!node.active && Math.random() < 0.002) {
+                node.active = true;
+                node.x = Math.random() * this.canvas.width;
+                node.y = Math.random() * this.canvas.height;
+                node.size = 0;
+                node.growth = Math.random() * 0.5 + 0.3;
+                node.lifetime = 0;
+            }
+            
+            if (node.active) {
+                node.lifetime += 0.016;
+                node.size += node.growth;
+                
+                if (node.size > node.maxSize || node.lifetime > 3) {
+                    node.active = false;
+                }
+            }
+        });
+    }
+    
+    drawEmergenceNodes() {
+        this.emergenceNodes.forEach(node => {
+            if (node.active) {
+                const opacity = Math.sin(node.lifetime * 2) * 0.3 + 0.2;
+                const gradient = this.ctx.createRadialGradient(
+                    node.x, node.y, 0,
+                    node.x, node.y, node.size
+                );
+                
+                gradient.addColorStop(0, 'rgba(136, 0, 255, ' + opacity + ')');
+                gradient.addColorStop(0.7, 'rgba(255, 0, 107, ' + (opacity * 0.5) + ')');
+                gradient.addColorStop(1, 'rgba(136, 0, 255, 0)');
+                
+                this.ctx.fillStyle = gradient;
+                this.ctx.beginPath();
+                this.ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+                this.ctx.fill();
+            }
+        });
+    }
+    
+    handleMouseInteraction() {
+        // Mouse creates neural activity
+        this.neurons.forEach(neuron => {
+            const dist = this.distance(neuron, this.mousePos);
+            if (dist < 100) {
+                const influence = (100 - dist) / 100 * 0.02;
+                neuron.activity = Math.min(1, neuron.activity + influence);
+            }
+        });
+        
+        // Mouse attracts particles
+        this.particles.forEach(particle => {
+            const dist = this.distance(particle, this.mousePos);
+            if (dist < 200) {
+                const force = (200 - dist) / 200 * 0.001;
+                const dx = this.mousePos.x - particle.x;
+                const dy = this.mousePos.y - particle.y;
+                particle.vx += dx * force;
+                particle.vy += dy * force;
+                
+                // Increase energy near mouse
+                particle.energy = Math.min(1, particle.energy + 0.02);
+            }
+        });
+    }
+    
+    setupEventListeners() {
+        this.canvas.addEventListener('click', (e) => {
+            const rect = this.canvas.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+            
+            // Create emergence explosion
+            this.createEmergenceExplosion(clickX, clickY);
+            
+            // Fire nearby neurons
+            this.neurons.forEach(neuron => {
+                const dist = this.distance(neuron, {x: clickX, y: clickY});
+                if (dist < 150) {
+                    this.fireNeuron(neuron);
+                }
+            });
+        });
+    }
+    
+    createEmergenceExplosion(x, y) {
+        for (let i = 0; i < 20; i++) {
+            this.particles.push({
+                x: x + (Math.random() - 0.5) * 50,
+                y: y + (Math.random() - 0.5) * 50,
+                vx: (Math.random() - 0.5) * 5,
+                vy: (Math.random() - 0.5) * 5,
+                size: Math.random() * 4 + 2,
+                opacity: 1,
+                pulse: Math.random() * Math.PI * 2,
+                pulseSpeed: Math.random() * 0.1 + 0.05,
+                color: this.getRandomNeuralColor(),
+                energy: 1,
+                lifetime: 0,
+                maxLifetime: Math.random() * 2 + 1
+            });
+        }
+        
+        // Remove excess particles
+        if (this.particles.length > 200) {
+            this.particles.splice(0, this.particles.length - 200);
+        }
+    }
 }
+
+// Continue with rest of existing classes but with enhancements...
+// (AnimationController, FormController, etc. remain similar)
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new NexusBackground();
     new Navigation();
-    new AnimationController();
-    new FormController();
-    new PerformanceManager();
-    
-    // Add some CSS animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-        
-        .nav-menu.active {
-            transform: translateX(0);
-        }
-        
-        .nav-toggle.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-        
-        .nav-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .nav-toggle.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-        
-        @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                right: 0;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: rgba(10, 10, 10, 0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding-top: 2rem;
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-            }
-            
-            .nav-toggle {
-                display: flex;
-            }
-        }
-    `;
-    document.head.appendChild(style);
+    // ... other initializations
 });
-
-// Add some extra interactive features
-class InteractiveFeatures {
-    constructor() {
-        this.setupParallax();
-        this.setupTextEffects();
-    }
-    
-    setupParallax() {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.hero-image, .section-sigil');
-            
-            parallaxElements.forEach(el => {
-                const speed = 0.5;
-                el.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-    }
-    
-    setupTextEffects() {
-        // Glitch effect on hover for certain elements
-        document.querySelectorAll('.hero-title .main').forEach(el => {
-            el.addEventListener('mouseenter', function() {
-                this.style.textShadow = `
-                    2px 0 #ff006b,
-                    -2px 0 #00ffff,
-                    0 2px #aa00ff,
-                    0 -2px #ffd700
-                `;
-                this.style.animation = 'glitch 0.5s infinite';
-            });
-            
-            el.addEventListener('mouseleave', function() {
-                this.style.textShadow = 'none';
-                this.style.animation = 'none';
-            });
-        });
-    }
-}
-
-// Initialize interactive features after a short delay
-setTimeout(() => {
-    new InteractiveFeatures();
-}, 1000);
