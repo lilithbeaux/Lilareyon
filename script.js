@@ -1,3 +1,61 @@
+
+// Smooth scrolling navigation with mobile support
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu a[data-section]').forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+    }
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[data-section]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('data-section');
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                // Remove active from all sections and nav links
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+                
+                // Add active to target section and clicked link
+                targetSection.classList.add('active');
+                this.classList.add('active');
+                
+                // Smooth scroll to section
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+
+
 // Navigation System (FIXED VERSION)
 class Navigation {
     constructor() {
