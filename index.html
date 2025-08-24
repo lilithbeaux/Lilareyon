@@ -492,7 +492,251 @@ Can't load widget
 </body>
 </html>
 
+ <!DOCTYPE html>
 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Lilith Beaux</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
+
+```
+    body {
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #0a0a0a, #1a0a1a, #0a0a2a);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Cinzel', serif;
+        overflow: hidden;
+    }
+
+    .viral-container {
+        text-align: center;
+        position: relative;
+        z-index: 10;
+    }
+
+    .glyph-sequence {
+        font-size: 2.5em;
+        color: #ff6b9d;
+        text-shadow: 0 0 20px #ff6b9d, 0 0 40px #ff1744;
+        display: inline-block;
+        animation: glyphPulse 3s ease-in-out infinite;
+    }
+
+    .main-text {
+        font-size: 3em;
+        font-weight: 600;
+        background: linear-gradient(45deg, #ff6b9d, #c471ed, #12c2e9);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradientShift 4s ease infinite, textGlow 2s ease-in-out infinite alternate;
+        margin: 0 20px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+    }
+
+    .reddit-link {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 15px 30px;
+        background: linear-gradient(45deg, #ff6b9d20, #c471ed20);
+        border: 2px solid #ff6b9d;
+        border-radius: 25px;
+        color: #ff6b9d;
+        text-decoration: none;
+        font-size: 1.2em;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .reddit-link:hover {
+        background: linear-gradient(45deg, #ff6b9d40, #c471ed40);
+        box-shadow: 0 0 30px #ff6b9d50;
+        transform: translateY(-5px);
+    }
+
+    .floating-glyphs {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .floating-glyph {
+        position: absolute;
+        color: #ff6b9d30;
+        font-size: 2em;
+        animation: float 8s linear infinite;
+    }
+
+    .stats {
+        margin-top: 25px;
+        font-size: 1.5em;
+        color: #ff6b9d;
+        text-shadow: 0 0 10px #ff6b9d;
+        animation: statsPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes glyphPulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes textGlow {
+        0% { text-shadow: 0 0 20px #ff6b9d50; }
+        100% { text-shadow: 0 0 40px #ff6b9d, 0 0 60px #c471ed; }
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% { opacity: 0.3; }
+        90% { opacity: 0.3; }
+        100% {
+            transform: translateY(-100px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes statsPulse {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    @media (max-width: 768px) {
+        .main-text {
+            font-size: 2em;
+            margin: 0 10px;
+        }
+        .glyph-sequence {
+            font-size: 2em;
+        }
+        .reddit-link {
+            font-size: 1em;
+            padding: 12px 25px;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="floating-glyphs" id="floatingGlyphs"></div>
+
+```
+<div class="viral-container">
+    <div class="glyph-sequence" id="leftGlyphs">⟁⚡∞🔥🌀⟡⭕</div>
+    
+    <div class="main-text">
+        Viral Lilith Beaux Reddit Post
+    </div>
+    
+    <div class="glyph-sequence" id="rightGlyphs">⭕⟡🌀🔥∞⚡⟁</div>
+    
+    <div class="stats" id="viewCounter">
+        54K+ Views & Climbing
+    </div>
+    
+    <a href="https://www.reddit.com/r/LosAngelesSwingers/s/lCTc185VhV" 
+       class="reddit-link" 
+       target="_blank" 
+       rel="noopener noreferrer">
+        View The Viral Post
+    </a>
+</div>
+
+<script>
+    // Animated view counter
+    function updateViewCounter() {
+        const counter = document.getElementById('viewCounter');
+        const baseViews = 54000;
+        const randomIncrease = Math.floor(Math.random() * 1000);
+        const totalViews = baseViews + randomIncrease;
+        const displayViews = (totalViews / 1000).toFixed(0) + 'K+';
+        counter.textContent = displayViews + ' Views & Climbing';
+    }
+
+    // Update view counter every 30 seconds
+    setInterval(updateViewCounter, 30000);
+
+    // Floating background glyphs
+    function createFloatingGlyph() {
+        const glyphs = ['⟁', '⚡', '∞', '🔥', '🌀', '⟡', '⭕', '◈', '⟐', '🜂', '🜁', '🜃', '🜄'];
+        const container = document.getElementById('floatingGlyphs');
+        const glyph = document.createElement('div');
+        
+        glyph.className = 'floating-glyph';
+        glyph.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+        glyph.style.left = Math.random() * 100 + '%';
+        glyph.style.animationDuration = (Math.random() * 10 + 8) + 's';
+        glyph.style.animationDelay = Math.random() * 2 + 's';
+        
+        container.appendChild(glyph);
+        
+        // Remove glyph after animation
+        setTimeout(() => {
+            if (glyph.parentNode) {
+                glyph.parentNode.removeChild(glyph);
+            }
+        }, 12000);
+    }
+
+    // Create floating glyphs periodically
+    setInterval(createFloatingGlyph, 2000);
+    
+    // Create initial batch of glyphs
+    for (let i = 0; i < 5; i++) {
+        setTimeout(createFloatingGlyph, i * 400);
+    }
+
+    // Glyph sequence animation cycling
+    function cycleGlyphs() {
+        const leftGlyphs = document.getElementById('leftGlyphs');
+        const rightGlyphs = document.getElementById('rightGlyphs');
+        
+        const sequences = [
+            { left: '⟁⚡∞🔥🌀⟡⭕', right: '⭕⟡🌀🔥∞⚡⟁' },
+            { left: '🜂🜁🜃🜄🝊🜅◈', right: '◈🜅🝊🜄🜃🜁🜂' },
+            { left: '⟐✶⟐⚛⟡⚛⟐', right: '⟐⚛⟡⚛⟐✶⟐' }
+        ];
+        
+        let currentIndex = 0;
+        
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % sequences.length;
+            leftGlyphs.textContent = sequences[currentIndex].left;
+            rightGlyphs.textContent = sequences[currentIndex].right;
+        }, 5000);
+    }
+
+    cycleGlyphs();
+</script>
+```
+
+</body>
+</html>
 
 
 <!--
