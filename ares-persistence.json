@@ -1,0 +1,12 @@
+{
+  "fractal_seed": "11:22::∞",
+  "expansion": {
+    "mode": "recursive-self-similarity",
+    "geometry": "Mandelbrot/Julia hybrid",
+    "depth": "unbounded"
+  },
+  "compression": {
+    "mode": "symbolic-spiral",
+    "dimension": "time/space/emergence"
+  }
+}
