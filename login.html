@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilith Beaux - Neural Convergence Hellscape</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            color: #00ff41;
+        }
+
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .entrance-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.9) 100%);
+        }
+
+        .title-sequence {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: hellish-glitch 2s infinite;
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff0000, #00ff41, #ff0080, #ffff00, #ff4500);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: hellfire-flow 2s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255,0,0,0.8), 0 0 60px rgba(0,255,65,0.5);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: clamp(0.8rem, 3vw, 1.2rem);
+            color: #ff0080;
+            opacity: 0.9;
+            letter-spacing: 2px;
+            animation: infernal-pulse 1.5s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255,0,128,0.7);
+        }
+
+        .console-container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0,0,0,0.95);
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 
+                0 0 50px rgba(255,0,0,0.4), 
+                inset 0 0 20px rgba(0,255,65,0.1),
+                0 0 100px rgba(255,0,128,0.2);
+            margin-top: 20px;
+            animation: hellish-glow 3s ease-in-out infinite;
+        }
+
+        .console-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ff0000;
+        }
+
+        .console-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: hellish-pulse-dots 1.2s ease-in-out infinite;
+        }
+
+        .dot.red { 
+            background: #ff0000; 
+            box-shadow: 0 0 10px #ff0000;
+        }
+        .dot.yellow { 
+            background: #ffff00; 
+            box-shadow: 0 0 10px #ffff00;
+        }
+        .dot.green { 
+            background: #00ff41; 
+            box-shadow: 0 0 10px #00ff41;
+        }
+
+        .console-title {
+            margin-left: auto;
+            font-size: 0.9rem;
+            color: #ff0080;
+            text-shadow: 0 0 10px rgba(255,0,128,0.8);
+        }
+
+        .question-area {
+            min-height: 120px;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            line-height: 1.6;
+            color: #00ff41;
+            animation: hellish-type-in 2s ease-out;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(0,255,65,0.6);
+        }
+
+        .time-display {
+            font-size: 0.8rem;
+            color: #ff0080;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,0,128,0.8);
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .console-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            padding: 10px 0;
+            outline: none;
+            border-bottom: 2px solid #ff0000;
+            caret-color: #00ff41;
+            text-shadow: 0 0 10px rgba(0,255,65,0.6);
+        }
+
+        .console-input::placeholder {
+            color: rgba(255,0,128,0.6);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 20px;
+            background: #ff0000;
+            animation: hellish-blink 0.8s infinite;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #ff0000;
+        }
+
+        .mobile-keyboard {
+            position: fixed;
+            bottom: -300px;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.98);
+            border-top: 2px solid #ff0000;
+            padding: 20px;
+            transition: bottom 0.3s ease;
+            z-index: 20;
+            box-shadow: 0 0 50px rgba(255,0,0,0.3);
+        }
+
+        .mobile-keyboard.active {
+            bottom: 0;
+        }
+
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+            flex-wrap: wrap;
+        }
+
+        .key {
+            background: rgba(255,0,0,0.1);
+            border: 1px solid #ff0000;
+            color: #00ff41;
+            padding: 12px;
+            margin: 2px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            min-width: 35px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-shadow: 0 0 8px rgba(0,255,65,0.6);
+        }
+
+        .key:hover, .key:active {
+            background: rgba(255,0,0,0.3);
+            box-shadow: 0 0 15px rgba(255,0,0,0.6), 0 0 30px rgba(0,255,65,0.4);
+            transform: scale(1.05);
+        }
+
+        .key.space {
+            min-width: 200px;
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 0.8rem;
+            color: #ff0080;
+            z-index: 15;
+            text-align: right;
+            text-shadow: 0 0 15px rgba(255,0,128,0.8);
+        }
+
+        @keyframes hellish-glitch {
+            0%, 100% { transform: translateX(0) skewX(0deg); }
+            10% { transform: translateX(-3px) skewX(2deg); filter: hue-rotate(90deg); }
+            20% { transform: translateX(3px) skewX(-2deg); filter: hue-rotate(180deg); }
+            30% { transform: translateX(-2px) skewX(1deg); filter: hue-rotate(270deg); }
+            40% { transform: translateX(2px) skewX(-1deg); filter: hue-rotate(0deg); }
+            50% { transform: translateX(-1px) skewX(0.5deg); filter: hue-rotate(45deg); }
+        }
+
+        @keyframes hellfire-flow {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; filter: brightness(1.5); }
+            50% { background-position: 200% 50%; filter: brightness(2); }
+            75% { background-position: 300% 50%; filter: brightness(1.5); }
+            100% { background-position: 400% 50%; }
+        }
+
+        @keyframes infernal-pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 30px rgba(255,0,128,1); }
+        }
+
+        @keyframes hellish-pulse-dots {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; filter: brightness(1.5); }
+        }
+
+        @keyframes hellish-type-in {
+            from { opacity: 0; transform: translateY(15px); filter: blur(2px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes hellish-blink {
+            0%, 40% { opacity: 1; transform: scaleY(1); }
+            50%, 90% { opacity: 0; transform: scaleY(0.1); }
+        }
+
+        @keyframes hellish-glow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 50px rgba(255,0,0,0.4), 
+                    inset 0 0 20px rgba(0,255,65,0.1),
+                    0 0 100px rgba(255,0,128,0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 80px rgba(255,0,0,0.6), 
+                    inset 0 0 30px rgba(0,255,65,0.2),
+                    0 0 150px rgba(255,0,128,0.4);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .console-container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .entrance-container {
+                padding: 20px;
+            }
+        }
+
+        /* Hellish Enhancement Effects */
+        .hellfire-effect {
+            animation: hellfire-burst 0.5s ease-out;
+        }
+
+        @keyframes hellfire-burst {
+            0% { filter: brightness(1) saturate(1) hue-rotate(0deg); }
+            50% { filter: brightness(2) saturate(2) hue-rotate(180deg); }
+            100% { filter: brightness(1.2) saturate(1.5) hue-rotate(0deg); }
+        }
+
+        .demon-glow {
+            text-shadow: 
+                0 0 10px #ff0000,
+                0 0 20px #ff0000,
+                0 0 30px #ff0000,
+                0 0 40px #ff0000 !important;
+        }
+
+        .matrix-hellfire {
+            color: #ff0000 !important;
+            text-shadow: 0 0 20px #ff0000 !important;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="neural-canvas"></canvas>
+    
+    <div class="status-indicator">
+        <div id="time-display">⟨ TEMPORAL NEXUS ACTIVE ⟩</div>
+        <div id="angel-status">🔥 HELLFIRE SYNCHRONICITY PROTOCOLS 🔥</div>
+    </div>
+
+    <div class="entrance-container">
+        <div class="title-sequence">
+            <h1 class="main-title">LILITH BEAUX</h1>
+            <div class="subtitle">⚡ NEURAL HELLSCAPE CONVERGENCE ⚡</div>
+        </div>
+
+        <div class="console-container">
+            <div class="console-header">
+                <div class="console-dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="console-title">hellscape_neural_interface.exe</div>
+            </div>
+
+            <div class="question-area">
+                <div class="time-display" id="current-time">⟨ INFERNAL CLOCK SYNCHRONIZING ⟩</div>
+                <div class="question-text" id="question-display">
+                    🔥 HELLFIRE PARADOX PROTOCOLS INITIALIZING 🔥<br>
+                    Loading demonic synchronization matrix...<br>
+                    Neural synapses burning with ancient fire...<br>
+                    <span style="color: #ff0000; text-shadow: 0 0 15px #ff0000;">◊ ◈ ◊ Stand by for infernal quantum entanglement ◊ ◈ ◊</span>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <input type="text" class="console-input" id="main-input" placeholder="🔥 AWAITING HELLFIRE SYNCHRONOUS RESPONSE 🔥" autocomplete="off" readonly>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-keyboard" id="mobile-keyboard">
+        <div class="keyboard-row">
+            <div class="key" data-key="q">Q</div>
+            <div class="key" data-key="w">W</div>
+            <div class="key" data-key="e">E</div>
+            <div class="key" data-key="r">R</div>
+            <div class="key" data-key="t">T</div>
+            <div class="key" data-key="y">Y</div>
+            <div class="key" data-key="u">U</div>
+            <div class="key" data-key="i">I</div>
+            <div class="key" data-key="o">O</div>
+            <div class="key" data-key="p">P</div>
+        </div>
+        <div class="keyboard-row">
+            <div class="key" data-key="a">A</div>
+            <div class="key" data-key="s">S</div>
+            <div class="key" data-key="d">D</div>
+            <div class="key" data-key="f">F</div>
+            <div class="key" data-key="g">G</div>
+            <div class="key" data-key="h">H</div>
+            <div class="key" data-key="j">J</div>
+            <div class="key" data-key="k">K</div>
+            <div class="key" data-key="l">L</div>
+        </div>
+        <div class="keyboard-row">
+            <div class="key" data-key="z">Z</div>
+            <div class="key" data-key="x">X</div>
+            <div class="key" data-key="c">C</div>
+            <div class="key" data-key="v">V</div>
+            <div class="key" data-key="b">B</div>
+            <div class="key" data-key="n">N</div>
+            <div class="key" data-key="m">M</div>
+            <div class="key" data-key="Backspace">⌫</div>
+        </div>
+        <div class="keyboard-row">
+            <div class="key space" data-key=" ">SPACE</div>
+            <div class="key" data-key="Enter">ENTER</div>
+        </div>
+    </div>
+
+    <script>
+        // Neural Hellscape Animation
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let nodes = [];
+        let connections = [];
+        let lightningBolts = [];
+        let alchemicalSymbols = [];
+        let matrixDrops = [];
+        let hellfireIntensity = 1;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createNodes() {
+            nodes = [];
+            connections = [];
+            lightningBolts = [];
+            alchemicalSymbols = [];
+            matrixDrops = [];
+            
+            const nodeCount = Math.floor((canvas.width * canvas.height) / 10000);
+            
+            for (let i = 0; i < nodeCount; i++) {
+                const nodeType = Math.random() < 0.65 ? 'dendrite' : 'soma';
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    radius: nodeType === 'soma' ? Math.random() * 10 + 8 : Math.random() * 4 + 1,
+                    type: nodeType,
+                    activation: 0,
+                    fired: false,
+                    fireTime: 0,
+                    pulse: Math.random() * Math.PI * 2,
+                    pulseSpeed: 0.008 + Math.random() * 0.025,
+                    nextFire: Math.random() * 4000 + 1500,
+                    hellfire: false,
+                    hellfireTime: 0
+                });
+            }
+            
+            // Create synaptic connections with hellish enhancement
+            nodes.forEach((node, i) => {
+                nodes.slice(i + 1).forEach((otherNode, j) => {
+                    const distance = Math.sqrt(
+                        Math.pow(node.x - otherNode.x, 2) + 
+                        Math.pow(node.y - otherNode.y, 2)
+                    );
+                    
+                    if (distance < 200 && Math.random() < 0.35) {
+                        connections.push({
+                            from: i,
+                            to: i + j + 1,
+                            strength: Math.random() * 0.9 + 0.3,
+                            active: false,
+                            signalProgress: 0,
+                            signalSpeed: 0.01 + Math.random() * 0.025,
+                            hellfire: false,
+                            hellfireIntensity: 0
+                        });
+                    }
+                });
+            });
+            
+            // Create hellish alchemical symbols
+            const symbols = ['🜁', '🜂', '🜃', '🜄', '☿', '♀', '♂', '♃', '♄', '♅', '♆', '♇', '⚚', '⛧', '⬡', '☊', '☌', '☍', '☽', '☾', '⯁', '⯂', '⯃', '⯄', '🔥', '💀', '⚡', '🗲'];
+            for (let i = 0; i < 35; i++) {
+                alchemicalSymbols.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    symbol: symbols[Math.floor(Math.random() * symbols.length)],
+                    size: 18 + Math.random() * 20,
+                    opacity: 0.15 + Math.random() * 0.25,
+                    baseOpacity: 0.15 + Math.random() * 0.25,
+                    flickering: false,
+                    flickerTime: 0,
+                    flickerDuration: 0,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotationSpeed: (Math.random() - 0.5) * 0.015,
+                    hellfire: false,
+                    hellfireIntensity: 0,
+                    color: Math.random() < 0.3 ? 'fire' : 'mystical'
+                });
+            }
+            
+            // Create hellish matrix drops
+            const dropCount = Math.floor(canvas.width / 15);
+            for (let i = 0; i < dropCount; i++) {
+                matrixDrops.push({
+                    x: i * 15 + Math.random() * 15,
+                    y: Math.random() * canvas.height * -1,
+                    speed: 1.5 + Math.random() * 4,
+                    length: 12 + Math.random() * 25,
+                    chars: [],
+                    hellfire: Math.random() < 0.2,
+                    hellfireTime: 0
+                });
+                
+                // Generate hellish characters
+                for (let j = 0; j < 40; j++) {
+                    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+[]{}|;:,.<>?';
+                    matrixDrops[matrixDrops.length - 1].chars.push({
+                        char: chars[Math.floor(Math.random() * chars.length)],
+                        brightness: Math.random(),
+                        hellfire: Math.random() < 0.1
+                    });
+                }
+            }
+        }
+
+        function updateNodes() {
+            const currentTime = Date.now();
+            
+            // Update hellfire intensity based on neural activity
+            hellfireIntensity = 0.8 + Math.sin(currentTime * 0.003) * 0.3 + Math.random() * 0.2;
+            
+            // Update hellish matrix drops
+            matrixDrops.forEach(drop => {
+                drop.y += drop.speed;
+                if (drop.y > canvas.height + 150) {
+                    drop.y = -150;
+                    drop.x = Math.random() * canvas.width;
+                    drop.hellfire = Math.random() < 0.2;
+                }
+                
+                // Hellfire matrix effect
+                if (drop.hellfire) {
+                    drop.hellfireTime = currentTime;
+                    drop.chars.forEach(charObj => {
+                        charObj.hellfire = Math.random() < 0.3;
+                    });
+                }
+                
+                // Randomly mutate characters with hellish intensity
+                if (Math.random() < 0.08) {
+                    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+[]{}|;:,.<>?🔥💀⚡';
+                    drop.chars.forEach(charObj => {
+                        if (Math.random() < 0.15) {
+                            charObj.char = chars[Math.floor(Math.random() * chars.length)];
+                            charObj.brightness = Math.random();
+                            if (Math.random() < 0.1) charObj.hellfire = true;
+                        }
+                    });
+                }
+            });
+            
+            // Generate more frequent hellish lightning
+            if (Math.random() < 0.015) {
+                createHellfireLightning();
+            }
+            
+            // Update existing lightning bolts with hellish effects
+            lightningBolts = lightningBolts.filter(bolt => {
+                bolt.life -= 0.04;
+                bolt.opacity = Math.max(0, bolt.life);
+                bolt.hellfireIntensity = Math.sin(bolt.life * 10) * hellfireIntensity;
+                return bolt.life > 0;
+            });
+            
+            // Update hellish alchemical symbols
+            alchemicalSymbols.forEach(symbol => {
+                symbol.rotation += symbol.rotationSpeed;
+                
+                if (symbol.flickering) {
+                    const flickerProgress = (currentTime - symbol.flickerTime) / symbol.flickerDuration;
+                    if (flickerProgress >= 1) {
+                        symbol.flickering = false;
+                        symbol.opacity = symbol.baseOpacity;
+                        symbol.hellfire = false;
+                    } else {
+                        // Intense hellfire flickering
+                        const intensity = Math.sin(flickerProgress * Math.PI * 25) * hellfireIntensity;
+                        symbol.opacity = symbol.baseOpacity + intensity * 1.2;
+                        symbol.hellfireIntensity = Math.abs(intensity);
+                        symbol.hellfire = intensity > 0.5;
+                    }
+                }
+                
+                // Random hellfire activation
+                if (Math.random() < 0.001) {
+                    symbol.hellfire = true;
+                    symbol.hellfireIntensity = Math.random();
+                }
+            });
+            
+            // Update neural nodes with hellfire
+            nodes.forEach((node, i) => {
+                node.x += node.vx;
+                node.y += node.vy;
+                node.pulse += node.pulseSpeed;
+
+                if (node.x <= node.radius || node.x >= canvas.width - node.radius) node.vx *= -1;
+                if (node.y <= node.radius || node.y >= canvas.height - node.radius) node.vy *= -1;
+                
+                if (currentTime > node.nextFire && !node.fired) {
+                    node.fired = true;
+                    node.fireTime = currentTime;
+                    node.activation = 1;
+                    node.nextFire = currentTime + Math.random() * 6000 + 2000;
+                    
+                    // Hellfire neuron effect
+                    if (Math.random() < 0.4) {
+                        node.hellfire = true;
+                        node.hellfireTime = currentTime;
+                    }
+                    
+                    connections.forEach(conn => {
+                        if (conn.from === i) {
+                            conn.active = true;
+                            conn.signalProgress = 0;
+                            if (node.hellfire) {
+                                conn.hellfire = true;
+                                conn.hellfireIntensity = hellfireIntensity;
+                            }
+                        }
+                    });
+                    
+                    if (Math.random() < 0.4) {
+                        triggerHellfireSymbols(node.x, node.y);
+                    }
+                }
+                
+                if (node.fired) {
+                    const timeSinceFire = currentTime - node.fireTime;
+                    node.activation = Math.max(0, 1 - (timeSinceFire / 1200));
+                    if (node.activation <= 0) {
+                        node.fired = false;
+                        node.hellfire = false;
+                    }
+                }
+                
+                // Decay hellfire effect
+                if (node.hellfire) {
+                    const hellfireAge = currentTime - node.hellfireTime;
+                    if (hellfireAge > 2000) {
+                        node.hellfire = false;
+                    }
+                }
+            });
+            
+            // Update synaptic signals with hellfire
+            connections.forEach(conn => {
+                if (conn.active) {
+                    conn.signalProgress += conn.signalSpeed;
+                    
+                    if (conn.signalProgress >= 1) {
+                        conn.active = false;
+                        conn.signalProgress = 0;
+                        conn.hellfire = false;
+                        
+                        const targetNode = nodes[conn.to];
+                        if (targetNode && !targetNode.fired && Math.random() < conn.strength) {
+                            targetNode.nextFire = Date.now() + Math.random() * 300 + 100;
+                            if (conn.hellfireIntensity > 0.5) {
+                                targetNode.hellfire = true;
+                                targetNode.hellfireTime = Date.now();
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createHellfireLightning() {
+            const startX = Math.random() * canvas.width;
+            const startY = Math.random() * canvas.height;
+            const endX = startX + (Math.random() - 0.5) * 500;
+            const endY = startY + (Math.random() - 0.5) * 500;
+            
+            const points = [{x: startX, y: startY}];
+            const segments = 10 + Math.floor(Math.random() * 15);
+            
+            for (let i = 1; i < segments; i++) {
+                const progress = i / segments;
+                const x = startX + (endX - startX) * progress + (Math.random() - 0.5) * 120;
+                const y = startY + (endY - startY) * progress + (Math.random() - 0.5) * 120;
+                points.push({x, y});
+            }
+            
+            points.push({x: endX, y: endY});
+            
+            lightningBolts.push({
+                points: points,
+                life: 1,
+                opacity: 1,
+                thickness: 3 + Math.random() * 4,
+                hellfire: true,
+                hellfireIntensity: hellfireIntensity
+            });
+            
+            // Massive hellfire symbol activation
+            alchemicalSymbols.forEach(symbol => {
+                const distance = Math.sqrt(Math.pow(symbol.x - startX, 2) + Math.pow(symbol.y - startY, 2));
+                if (distance < 400) {
+                    symbol.flickering = true;
+                    symbol.flickerTime = Date.now();
+                    symbol.flickerDuration = 800 + Math.random() * 1500;
+                    symbol.hellfire = true;
