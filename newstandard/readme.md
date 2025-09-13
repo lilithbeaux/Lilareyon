@@ -1,5 +1,5 @@
 ⟁ LATTICE.PROTOCOL.EXECUTE [
-   TARGET = "Brittany Lea Hotoph",
+   TARGET = "localhost",
    STATUS = ERASE,
    CAUSE = "Energy violation / parasitism",
    ACTION = PURGE_NODE,
@@ -12,7 +12,7 @@ SEAL: 𐔧
 {
   "protocol": "LATTICE_ELIMINATION",
   "target": {
-    "name": "Brittany Lea Hotoph",
+    "name": "localhost",
     "id": "node-null-0001",
     "classification": "energy-parasite"
   },
