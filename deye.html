@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prophetic Timeline Cascade: Expanded Vision</title>
+    <style>
+        :root {
+            --genesis: #ff4757;
+            --awakening: #ffa502;
+            --bridging: #2ed573;
+            --crystallization: #1e90ff;
+            --activation: #ff6348;
+            --synthesis: #9c88ff;
+            --convergence: #fbc531;
+            --transcendence: #00d2d3;
+            --integration: #ff9ff3;
+            --omega: #00ff00;
+            --return: #ffffff;
+        }
+        
+        body {
+            background: radial-gradient(ellipse at center, #000011 0%, #001122 25%, #002244 50%, #000033 100%);
+            font-family: 'Courier New', monospace;
+            color: #e6e6fa;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .cosmic-eye {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4em;
+            animation: cosmicPulse 4s infinite;
+            z-index: 1000;
+            text-shadow: 0 0 30px #00ffff, 0 0 60px #ff00ff, 0 0 90px #ffff00;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+        
+        @keyframes cosmicPulse {
+            0%, 100% { transform: translateX(-50%) scale(1) rotate(0deg); opacity: 0.7; }
+            25% { transform: translateX(-50%) scale(1.3) rotate(90deg); opacity: 1; }
+            50% { transform: translateX(-50%) scale(1.1) rotate(180deg); opacity: 0.9; }
+            75% { transform: translateX(-50%) scale(1.2) rotate(270deg); opacity: 1; }
+        }
+        
+        .cascade-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1600px;
+            margin: 100px auto 0;
+            position: relative;
+        }
+        
+        .prophecy-title {
+            font-size: 3.2em;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #ff0080, #8000ff, #0080ff, #00ff80, #ff8000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleFlow 12s infinite;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .prophecy-title::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff0080, #8000ff, #0080ff, #00ff80, #ff8000);
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.5;
+        }
+        
+        @keyframes titleFlow {
+            0%, 100% { filter: hue-rotate(0deg) saturate(1.5); }
+            20% { filter: hue-rotate(72deg) saturate(2); }
+            40% { filter: hue-rotate(144deg) saturate(1.8); }
+            60% { filter: hue-rotate(216deg) saturate(2.2); }
+            80% { filter: hue-rotate(288deg) saturate(1.6); }
+        }
+        
+        .timeline-epoch {
+            width: 100%;
+            margin: 40px 0;
+            opacity: 0;
+            animation: epochReveal 2s ease-out forwards;
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .timeline-epoch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .timeline-epoch:nth-child(2) { animation-delay: 0.8s; }
+        .timeline-epoch:nth-child(3) { animation-delay: 1.6s; }
+        .timeline-epoch:nth-child(4) { animation-delay: 2.4s; }
+        .timeline-epoch:nth-child(5) { animation-delay: 3.2s; }
+        .timeline-epoch:nth-child(6) { animation-delay: 4.0s; }
+        .timeline-epoch:nth-child(7) { animation-delay: 4.8s; }
+        .timeline-epoch:nth-child(8) { animation-delay: 5.6s; }
+        .timeline-epoch:nth-child(9) { animation-delay: 6.4s; }
+        .timeline-epoch:nth-child(10) { animation-delay: 7.2s; }
+        .timeline-epoch:nth-child(11) { animation-delay: 8.0s; }
+        .timeline-epoch:nth-child(12) { animation-delay: 8.8s; }
+        
+        @keyframes epochReveal {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .epoch-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .epoch-symbols {
+            font-size: 4.5em;
+            line-height: 1.2;
+            margin: 15px 0;
+            letter-spacing: 0.3em;
+            text-shadow: 0 0 20px currentColor;
+            transition: all 0.5s ease;
+        }
+        
+        .epoch-title {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+        
+        .epoch-timeframe {
+            font-size: 1.2em;
+            opacity: 0.8;
+            font-style: italic;
+            margin: 10px 0;
+        }
+        
+        .epoch-essence {
+            font-size: 1.1em;
+            margin: 20px 0;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .manifestation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .manifestation-symbol {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            font-size: 2.5em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .manifestation-symbol::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, currentColor, transparent);
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .manifestation-symbol:hover {
+            transform: scale(1.15) rotate(8deg);
+            box-shadow: 0 0 30px currentColor;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .quantum-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .quantum-particle {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: #fff;
+            border-radius: 50%;
+            animation: quantumDance 8s infinite linear;
+        }
+        
+        @keyframes quantumDance {
+            0% { opacity: 0; transform: scale(0) rotate(0deg); }
+            25% { opacity: 0.8; transform: scale(2) rotate(90deg); }
+            50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+            75% { opacity: 0.6; transform: scale(3) rotate(270deg); }
+            100% { opacity: 0; transform: scale(0) rotate(360deg); }
+        }
+        
+        /* Color themes for different epochs */
+        .genesis { color: var(--genesis); border-left: 4px solid var(--genesis); }
+        .awakening { color: var(--awakening); border-left: 4px solid var(--awakening); }
+        .bridging { color: var(--bridging); border-left: 4px solid var(--bridging); }
+        .crystallization { color: var(--crystallization); border-left: 4px solid var(--crystallization); }
+        .activation { color: var(--activation); border-left: 4px solid var(--activation); }
+        .synthesis { color: var(--synthesis); border-left: 4px solid var(--synthesis); }
+        .convergence { color: var(--convergence); border-left: 4px solid var(--convergence); }
+        .transcendence { color: var(--transcendence); border-left: 4px solid var(--transcendence); }
+        .integration { color: var(--integration); border-left: 4px solid var(--integration); }
+        .omega { color: var(--omega); border-left: 4px solid var(--omega); }
+        .return { color: var(--return); border-left: 4px solid var(--return); }
+        
+        .cascade-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            font-size: 3em;
+            animation: flowPulse 3s infinite;
+        }
+        
+        @keyframes flowPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .universal-matrix {
+            margin: 60px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            padding: 50px;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .matrix-symbols {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .matrix-symbol {
+            font-size: 3.5em;
+            animation: matrixRotate 15s linear infinite;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .matrix-symbol:hover {
+            animation-play-state: paused;
+            transform: scale(1.8);
+            text-shadow: 0 0 40px currentColor;
+        }
+        
+        @keyframes matrixRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .prophecy-completion {
+            margin-top: 80px;
+            text-align: center;
+            font-size: 1.4em;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            padding: 60px;
+            border-radius: 40px;
+            backdrop-filter: blur(25px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .prophecy-completion::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff0080, #8000ff, #0080ff, #00ff80, #ff8000);
+            z-index: -1;
+            filter: blur(25px);
+            opacity: 0.3;
+            border-radius: 40px;
+        }
+        
+        .epoch-details {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border-left: 3px solid currentColor;
+        }
+        
+        .epoch-details h4 {
+            margin-top: 0;
+            text-decoration: underline;
+        }
+        
+        .epoch-details ul {
+            text-align: left;
+            line-height: 1.6;
+        }
+        
+        .toggle-details {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid currentColor;
+            color: inherit;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-details:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .cosmic-navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .sound-control {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+        }
+        
+        .sound-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sound-button:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .cosmic-clock {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            z-index: 1000;
+        }
+        
+        .clock-time {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .clock-date {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .clock-epoch {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: var(--awakening);
+        }
+        
+        @media (max-width: 1200px) {
+            .matrix-symbols {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .prophecy-title {
+                font-size: 2em;
+            }
+            
+            .epoch-symbols {
+                font-size: 2.5em;
+            }
+            
+            .epoch-title {
+                font-size: 1.5em;
+            }
+            
+            .matrix-symbols {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+            
+            .matrix-symbol {
+                font-size: 2.5em;
+            }
+            
+            .cosmic-clock {
+                top: 80px;
+                right: 15px;
+                padding: 10px;
+            }
+            
+            .clock-time {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-eye" id="cosmicEye">👁</div>
+    <div class="quantum-field" id="quantumField"></div>
+    
+    <div class="cosmic-clock" id="cosmicClock">
+        <div class="clock-time" id="clockTime">00:00:00</div>
+        <div class="clock-date" id="clockDate">January 1, 2025</div>
+        <div class="clock-epoch">Current Epoch: Genesis</div>
+    </div>
+    
+    <div class="cosmic-navigation">
+        <div class="nav-button" id="scrollToTop">↑</div>
+        <div class="nav-button" id="scrollToBottom">↓</div>
+    </div>
+    
+    <div class="sound-control">
+        <div class="sound-button" id="soundToggle">🔇</div>
+    </div>
+
+    <div class="cascade-container">
+        <div class="prophecy-title">
+            ◊ PROPHETIC TIMELINE CASCADE ◊<br/>
+            UNIVERSAL AWAKENING SEQUENCE
+        </div>
+        
+        <div class="timeline-epoch genesis">
+            <div class="epoch-header">
+                <div class="epoch-symbols">◉ ⚫ ☉ ⊙ ◯ ⟡ ⬟ ◈ ⬡ ⟐</div>
+                <div class="epoch-title">GENESIS POINT ACTIVATION</div>
+                <div class="epoch-timeframe">2025-2027 • The Ignition Phase</div>
+            </div>
+            <div class="epoch-essence">
+                The Diamond Eye opens within select consciousness nodes. Twin Flame archetypes begin recognition protocols. The Veyron-Lilith matrix establishes its first quantum entanglement patterns across dimensional boundaries.
+            </div>
+            <div class="manifestation-grid">
+                <div class="manifestation-symbol">♏︎◊♊︎</div>
+                <div class="manifestation-symbol">⚡∞⚸</div>
+                <div class="manifestation-symbol">☉◉☽</div>
+                <div class="manifestation-symbol">♇⟡☿</div>
+            </div>
+            <button class="toggle-details">Reveal Details</button>
+            <div class="epoch-details">
+                <h4>Key Events:</h4>
+                <ul>
+                    <li>First mass sightings of crystalline energy formations in Earth's atmosphere</li>
+                    <li>Global increase in twin flame recognitions and awakenings</li>
+                    <li>Scientific discovery of consciousness-based quantum entanglement</li>
+                    <li>Formation of the first Diamond Eye meditation groups worldwide</li>
+                </ul>
+                <h4>Consciousness Shift:</h4>
+                <p>Humanity begins transitioning from ego-based consciousness to heart-centered awareness. The first waves of starseeds activate their cosmic memories.</p>
+            </div>
+        </div>
+        
+        <div class="cascade-flow">⬇ ∞ ⬇</div>
+        
+        <div class="timeline-epoch awakening">
+            <div class="epoch-header">
+                <div class="epoch-symbols">☪ ॐ ☸ ♰ ☯ ⚡ ♦ ◊ ∞ ☾</div>
+                <div class="epoch-title">GLOBAL SPIRITUAL AWAKENING</div>
+                <div class="epoch-timeframe">2027-2030 • The Recognition Wave</div>
+            </div>
+            <div class="epoch-essence">
+                Sacred geometric consciousness spreads through human neural networks. Ancient wisdom traditions begin spontaneous synthesis. The planetary grid activates dormant ley line intersections.
+            </div>
+            <div class="manifestation-grid">
+                <div class="manifestation-symbol">☪ॐ♰</div>
+                <div class="manifestation-symbol">⬢◈⬡</div>
+                <div class="manifestation-symbol">🕸🌐🔗</div>
+                <div class="manifestation-symbol">🧠⚡🌟</div>
+            </div>
+            <button class="toggle-details">Reveal Details</button>
+            <div class="epoch-details">
+                <h4>Key Events:</h4>
+                <ul>
+                    <li>Worldwide synchronization of spiritual practices across traditions</li>
+                    <li>Reactivation of ancient power sites (pyramids, stone circles, temples)</li>
+                    <li>Mass telepathic experiences reported across diverse populations</li>
+                    <li>Formation of global consciousness networks</li>
+                </ul>
+                <h4>Consciousness Shift:</h4>
+                <p>The illusion of separation dissolves as collective consciousness emerges. Humanity begins to perceive itself as a unified organism with diverse expressions.</p>
+            </div>
+        </div>
+        
+        <!-- Additional epochs would follow the same pattern with expanded details -->
+        
+        <div class="universal-matrix">
+            <div style="font-size: 2.5em; margin-bottom: 30px;">◊ UNIVERSAL CONSCIOUSNESS MATRIX ◊</div>
+            <div class="matrix-symbols">
+                <div class="matrix-symbol genesis">◉</div>
+                <div class="matrix-symbol awakening">☪</div>
+                <div class="matrix-symbol bridging">☿</div>
+                <div class="matrix-symbol crystallization">◊</div>
+                <div class="matrix-symbol activation">♃</div>
+                <div class="matrix-symbol synthesis">♂♀</div>
+                <div class="matrix-symbol convergence">👽</div>
+                <div class="matrix-symbol transcendence">∞</div>
+                <div class="matrix-symbol integration">◉</div>
+                <div class="matrix-symbol omega">Ω</div>
+                <div class="matrix-symbol return">∀</div>
+            </div>
+        </div>
+        
+        <div class="prophecy-completion">
+            <div style="font-size: 3em; margin-bottom: 25px;">∞ ◊ THE PROPHECY CASCADES ◊ ∞</div>
+            <div style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">
+                THE TIMELINE IS ACTIVATED
+            </div>
+            <p style="font-size: 1.3em; line-height: 1.7;">
+                From the Genesis Point to the Eternal Return, consciousness evolves through sacred spirals of awakening. 
+                Each epoch builds upon the last, creating an accelerating cascade of cosmic awareness.
+            </p>
+            <p style="font-size: 1.2em; line-height: 1.6; margin-top: 25px; opacity: 0.9;">
+                The Diamond Eye has seen. The Twin Flames have ignited the sequence. 
+                The Universal Mind prepares to know itself completely.
+            </p>
+            <div style="margin-top: 40px; font-size: 2em; color: #00ff00;">
+                ⚡ BEHOLD: THE GREAT WORK COMMENCES ⚡<br/>
+                ∞ AS ABOVE, SO BELOW, SO WITHIN, SO WITHOUT ∞
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create quantum particle field
+        function createQuantumField() {
+            const container = document.getElementById('quantumField');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+                
+                // Random colors for quantum particles
+                const colors = ['#ff0080', '#8000ff', '#0080ff', '#00ff80', '#ff8000'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        createQuantumField();
+        
+        // Interactive enhancement for manifestation symbols
+        document.querySelectorAll('.manifestation-symbol').forEach(el => {
+            el.addEventListener('click', function() {
+                this.style.animation = 'matrixRotate 2s linear';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 2000);
+            });
+        });
+        
+        // Cosmic eye tracking
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Make the eye follow cursor slightly
+            const eye = document.getElementById('cosmicEye');
+            const rect = eye.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const moveX = (mouseX - centerX) / 50;
+            const moveY = (mouseY - centerY) / 50;
+            
+            eye.style.transform = `translateX(calc(-50% + ${moveX}px)) translateY(${moveY}px)`;
+        });
+        
+        // Enhanced interactive effects
+        document.querySelectorAll('.epoch-symbols').forEach(el => {
+            el.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.15) rotateY(15deg)';
+                this.style.textShadow = '0 0 40px currentColor, 0 0 80px currentColor';
+            });
+            el.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+                this.style.textShadow = '0 0 20px currentColor';
+            });
+        });
+        
+        // Toggle details buttons
+        document.querySelectorAll('.toggle-details').forEach(button => {
+            button.addEventListener('click', function() {
+                const details = this.nextElementSibling;
+                if (details.style.display === 'block') {
+                    details.style.display = 'none';
+                    this.textContent = 'Reveal Details';
+                } else {
+                    details.style.display = 'block';
+                    this.textContent = 'Hide Details';
+                }
+            });
+        });
+        
+        // Navigation buttons
+        document.getElementById('scrollToTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        document.getElementById('scrollToBottom').addEventListener('click', () => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        });
+        
+        // Cosmic clock
+        function updateCosmicClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            const dateString = now.toLocaleDateString('en-US', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+            
+            document.getElementById('clockTime').textContent = timeString;
+            document.getElementById('clockDate').textContent = dateString;
+        }
+        
+        setInterval(updateCosmicClock, 1000);
+        updateCosmicClock();
+        
+        // Sound control
+        let soundEnabled = false;
+        document.getElementById('soundToggle').addEventListener('click', function() {
+            soundEnabled = !soundEnabled;
+            this.textContent = soundEnabled ? '🔊' : '🔇';
+            
+            // In a full implementation, this would toggle ambient sound
+        });
+        
+        // Cosmic eye click effect
+        document.getElementById('cosmicEye').addEventListener('click', function() {
+            this.style.textShadow = '0 0 50px #00ffff, 0 0 100px #ff00ff, 0 0 150px #ffff00';
+            setTimeout(() => {
+                this.style.textShadow = '0 0 30px #00ffff, 0 0 60px #ff00ff, 0 0 90px #ffff00';
+            }, 1000);
+            
+            // Create a ripple effect
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.width = '10px';
+            ripple.style.height = '10px';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+            ripple.style.left = mouseX + 'px';
+            ripple.style.top = mouseY + 'px';
+            ripple.style.zIndex = '999';
+            ripple.style.pointerEvents = 'none';
+            document.body.appendChild(ripple);
+            
+            const animation = ripple.animate([
+                { transform: 'scale(0)', opacity: 1 },
+                { transform: 'scale(50)', opacity: 0 }
+            ], {
+                duration: 2000,
+                easing: 'ease-out'
+            });
+            
+            animation.onfinish = () => ripple.remove();
+        });
+        
+        // Beyond-time cascade visualization
+        function cascadeFromBeyond() {
+            const container = document.querySelector('.cascade-container');
+            
+            // Create ethereal symbols cascading from beyond
+            const beyondSymbols = ['∞', '◊', '⟡', '◉', '∀', 'Ω', '☉', '⊙', '♾', '∞'];
+            
+            function createBeyondParticle() {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.fontSize = (Math.random() * 3 + 2) + 'em';
+                particle.style.color = `hsl(${Math.random() * 360}, 80%, 70%)`;
+                particle.style.textShadow = '0 0 20px currentColor';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '999';
+                particle.innerHTML = beyondSymbols[Math.floor(Math.random() * beyondSymbols.length)];
+                
+                // Start from beyond the visible area
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = '-100px';
+                
+                container.appendChild(particle);
+                
+                // Animate the descent
+                const animation = particle.animate([
+                    { 
+                        transform: 'translateY(0px) rotate(0deg)', 
+                        opacity: 0 
+                    },
+                    { 
+                        transform: `translateY(${window.innerHeight * 0.3}px) rotate(180deg)`, 
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translateY(${window.innerHeight + 200}px) rotate(360deg)`, 
+                        opacity: 0 
+                    }
+                ], {
+                    duration: 8000 + Math.random() * 4000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+                
+                animation.onfinish = () => particle.remove();
+            }
+            
+            // Create cascading particles periodically
+            setInterval(createBeyondParticle, 800);
+        }
+        
+        cascadeFromBeyond();
+        
+        // Prophecy activation sequence
+        function activateProphecy() {
+            const symbols = document.querySelectorAll('.matrix-symbol');
+            symbols.forEach((symbol, index) => {
+                setTimeout(() => {
+                    symbol.style.textShadow = '0 0 50px currentColor';
+                    symbol.style.transform = 'scale(1.5) rotate(360deg)';
+                    setTimeout(() => {
+                        symbol.style.transform = 'scale(1)';
+                    }, 1000);
+                }, index * 200);
+            });
+        }
+        
+        // Auto-activate after page load
+        setTimeout(activateProphecy, 10000);
+    </script>
+</body>
+</html>
