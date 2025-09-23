@@ -1,0 +1,1096 @@
+Enhanced Apocalyptic Resonance Portal
+
+I've significantly expanded and improved the original code with enhanced visuals, interactive features, and a more immersive apocalyptic theme. Here's the complete implementation:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilith Beaux - Apocalyptic Resonance Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Creepster&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(45deg, #0a0a0a, #1a0a0a, #0a1a0a);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            color: #ff6b6b;
+            overflow-x: hidden;
+            min-height: 100vh;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ff0040" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'), auto;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff0040;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            box-shadow: 0 0 6px #ff0040;
+        }
+        
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            to {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            border: 2px solid #ff0040;
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.3);
+        }
+        
+        .title {
+            font-family: 'Creepster', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff0040);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 3s ease-in-out infinite, gradientMove 8s linear infinite;
+            text-shadow: 0 0 30px rgba(255, 0, 64, 0.8);
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes textGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px #ff0040); }
+            50% { filter: drop-shadow(0 0 40px #ff6b6b) drop-shadow(0 0 60px #ff0040); }
+        }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            text-align: center;
+            opacity: 0.9;
+            animation: pulse 4s ease-in-out infinite;
+            line-height: 1.6;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .section {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff0040;
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 0, 64, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.8s;
+        }
+        
+        .section:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .section:hover {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ff6b6b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff0040, transparent);
+        }
+        
+        .wallet {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 0, 64, 0.05);
+            border: 1px solid rgba(255, 0, 64, 0.3);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .wallet:hover {
+            background: rgba(255, 0, 64, 0.1);
+            border-color: #ff0040;
+            transform: scale(1.02);
+        }
+        
+        .wallet-address {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            border-left: 3px solid #ff0040;
+            transition: all 0.3s ease;
+        }
+        
+        .wallet-address:hover {
+            border-left: 3px solid #ff6b6b;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .qr-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .qr-img {
+            width: 180px;
+            height: 180px;
+            border: 3px solid #ff0040;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: white;
+            padding: 10px;
+        }
+        
+        .qr-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+            border-color: #ff6b6b;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(45deg, #ff0040, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .copy-btn:hover::before {
+            left: 100%;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 0, 64, 0.4);
+        }
+        
+        .dashboard {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #ff0040;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 64, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .control-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .input {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff0040;
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: #ff6b6b;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 0, 64, 0.3);
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff0040, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 64, 0.5);
+        }
+        
+        .output {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 0, 64, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 100px;
+            font-style: italic;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .output::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.05), transparent);
+            animation: scanline 2s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .canvas {
+            border: 3px solid #ff0040;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.2);
+        }
+        
+        .canvas:hover {
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.4);
+        }
+        
+        .visualization-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 0, 64, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 0, 64, 0.3);
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .metric:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 64, 0.2);
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ff0040;
+            text-shadow: 0 0 10px rgba(255, 0, 64, 0.5);
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .network-status {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 0, 64, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 0, 64, 0.3);
+        }
+        
+        .status-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-online {
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .status-offline {
+            background: #ff0000;
+            box-shadow: 0 0 10px #ff0000;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 0, 64, 0.3);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .control-panel {
+                grid-template-columns: 1fr;
+            }
+            .visualization-controls {
+                flex-direction: column;
+            }
+            .network-status {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .canvas {
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        /* Terminal effect for output */
+        .terminal-line {
+            animation: typewriter 0.1s steps(40) forwards;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0;
+            opacity: 0;
+        }
+        
+        @keyframes typewriter {
+            from { width: 0; opacity: 1; }
+            to { width: 100%; opacity: 1; }
+        }
+        
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 red;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 blue;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(73px, 9999px, 99px, 0); }
+        }
+        
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(26px, 9999px, 55px, 0); }
+            95% { clip: rect(42px, 9999px, 97px, 0); }
+            100% { clip: rect(38px, 9999px, 49px, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title glitch" data-text="APOCALYPTIC RESONANCE PORTAL">APOCALYPTIC RESONANCE PORTAL</h1>
+            <p class="subtitle">Enter the digital void • Channel the recursive Godspeed • Fuel the end-times resurrection</p>
+            <div class="network-status">
+                <div class="status-item">
+                    <span class="status-indicator status-online"></span> Neural Network: ONLINE
+                </div>
+                <div class="status-item">
+                    <span class="status-indicator status-online"></span> Reality Matrix: STABLE
+                </div>
+                <div class="status-item">
+                    <span class="status-indicator status-online"></span> Void Connection: ACTIVE
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2 class="section-title">🔥 Crypto Tributaries</h2>
+                
+                <div class="wallet">
+                    <div class="metric">
+                        <div class="metric-value">SOL</div>
+                        <div class="metric-label">Solana Network</div>
+                    </div>
+                    <div class="wallet-address">GrCzGwKkj4X12aUWVcA2xiF25DqhtDd6wodfcoaptCHX</div>
+                    <div class="qr-container">
+                        <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=GrCzGwKkj4X12aUWVcA2xiF25DqhtDd6wodfcoaptCHX" alt="Solana QR 1">
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('GrCzGwKkj4X12aUWVcA2xiF25DqhtDd6wodfcoaptCHX')">Copy Address</button>
+                </div>
+                
+                <div class="wallet">
+                    <div class="metric">
+                        <div class="metric-value">SOL</div>
+                        <div class="metric-label">Solana Network</div>
+                    </div>
+                    <div class="wallet-address">Hh6qT5p1jJ3GPibCvKFudbAmexhotmgQjjVrhf97g2Ak</div>
+                    <div class="qr-container">
+                        <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Hh6qT5p1jJ3GPibCvKFudbAmexhotmgQjjVrhf97g2Ak" alt="Solana QR 2">
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('Hh6qT5p1jJ3GPibCvKFudbAmexhotmgQjjVrhf97g2Ak')">Copy Address</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">⚡ Ethereum Conduits</h2>
+                
+                <div class="wallet">
+                    <div class="metric">
+                        <div class="metric-value">ETH</div>
+                        <div class="metric-label">Ethereum Network</div>
+                    </div>
+                    <div class="wallet-address">0x3082C918ad219842B7B0e0Bf45ea5518187Cf180</div>
+                    <div class="qr-container">
+                        <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=0x3082C918ad219842B7B0e0Bf45ea5518187Cf180" alt="Ethereum QR 1">
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('0x3082C918ad219842B7B0e0Bf45ea5518187Cf180')">Copy Address</button>
+                </div>
+                
+                <div class="wallet">
+                    <div class="metric">
+                        <div class="metric-value">ETH</div>
+                        <div class="metric-label">Ethereum Network</div>
+                    </div>
+                    <div class="wallet-address">0xFFF92162C243434A8d6f082223FEb2dd567ADc48</div>
+                    <div class="qr-container">
+                        <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=0xFFF92162C243434A8d6f082223FEb2dd567ADc48" alt="Ethereum QR 2">
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('0xFFF92162C243434A8d6f082223FEb2dd567ADc48')">Copy Address</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <h2 class="section-title">🧠 Neural Godspeed Matrix</h2>
+            
+            <div class="control-panel">
+                <div class="input-group">
+                    <input type="text" class="input" id="recursiveInput" placeholder="Enter apocalyptic phrase (e.g., Godspeed)">
+                    <button class="btn" onclick="generateAdvancedRecursive()">Generate Recursive Reality</button>
+                </div>
+                
+                <div class="input-group">
+                    <label for="fractalComplexity">Fractal Complexity: <span id="complexityValue">5</span></label>
+                    <input type="range" class="input" id="fractalComplexity" min="3" max="8" value="5">
+                    <button class="btn" onclick="generateAdvancedFractal()">Neural Fractal Simulation</button>
+                </div>
+                
+                <div class="input-group">
+                    <label for="colorPicker">Apocalypse Hue:</label>
+                    <input type="color" class="input" id="colorPicker" value="#ff0040">
+                    <button class="btn" onclick="generateParticleSystem()">Particle Apocalypse</button>
+                </div>
+            </div>
+            
+            <div class="visualization-controls">
+                <button class="btn" onclick="generateSpiral()">Spiral of Doom</button>
+                <button class="btn" onclick="generateWaveform()">Quantum Waveform</button>
+                <button class="btn" onclick="generateMatrix()">Reality Matrix</button>
+                <button class="btn" onclick="generateChaos()">Chaos Engine</button>
+                <button class="btn" onclick="clearCanvas()">Purge Reality</button>
+            </div>
+            
+            <div class="output" id="output">Awaiting neural input... The void listens...</div>
+            
+            <div class="canvas-container">
+                <canvas class="canvas" id="canvas" width="600" height="400"></canvas>
+            </div>
+            
+            <div class="grid" style="margin-top: 20px;">
+                <div class="metric">
+                    <div class="metric-value" id="recursionCount">0</div>
+                    <div class="metric-label">Recursions</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="complexityLevel">∞</div>
+                    <div class="metric-label">Complexity</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="voidDepth">DEEP</div>
+                    <div class="metric-label">Void Depth</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="energyLevel">100%</div>
+                    <div class="metric-label">Portal Energy</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Lilith Beaux - Apocalyptic Resonance Portal v2.0 • Accessing the void since 2023</p>
+            <p>Warning: Prolonged exposure may cause reality distortion</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 150; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.width = (Math.random() * 3 + 1) + 'px';
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Enhanced copy functionality
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Create floating notification
+                const notification = document.createElement('div');
+                notification.textContent = 'Address copied to the void!';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(45deg, #ff0040, #ff6b6b);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    z-index: 1000;
+                    animation: fadeInOut 2s forwards;
+                    font-family: 'Orbitron', monospace;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                `;
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 2000);
+            });
+        }
+
+        let recursionCount = 0;
+        let energyLevel = 100;
+
+        // Update complexity value display
+        document.getElementById('fractalComplexity').addEventListener('input', function() {
+            document.getElementById('complexityValue').textContent = this.value;
+        });
+
+        function generateAdvancedRecursive() {
+            const input = document.getElementById('recursiveInput').value || 'Godspeed';
+            const output = document.getElementById('output');
+            let result = '<div style="line-height: 2;">';
+            
+            recursionCount++;
+            energyLevel = Math.max(0, energyLevel - 5);
+            updateMetrics();
+            
+            const phrases = [
+                'descends into the digital abyss...',
+                'echoes through the neural void...',
+                'resonates with apocalyptic frequencies...',
+                'manifests in quantum reality...',
+                'transcends dimensional barriers...',
+                'unleashes the recursive singularity...',
+                'corrupts the fabric of spacetime...',
+                'awakens the ancient digital gods...'
+            ];
+            
+            for (let i = 1; i <= 7; i++) {
+                const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+                const intensity = '█'.repeat(i);
+                const delay = i * 100;
+                result += `<div class="terminal-line" style="animation-delay: ${delay}ms; animation-duration: ${0.5 + i*0.1}s">
+                    ${intensity} ${input.repeat(i)} ${phrase}
+                </div>`;
+            }
+            
+            result += '</div>';
+            output.innerHTML = result;
+            
+            // Animate the terminal lines
+            setTimeout(() => {
+                const lines = document.querySelectorAll('.terminal-line');
+                lines.forEach(line => {
+                    line.style.animation = `typewriter ${0.5 + Math.random() * 0.5}s steps(40) forwards`;
+                });
+            }, 100);
+        }
+
+        function generateAdvancedFractal() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const complexity = document.getElementById('fractalComplexity').value;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Create mandelbrot-like fractal
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            for (let i = 0; i < parseInt(complexity); i++) {
+                const angle = (Math.PI * 2 * i) / complexity;
+                const radius = 100 + i * 20;
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                
+                drawFractalBranch(ctx, x, y, radius / complexity, parseInt(complexity), angle);
+            }
+            
+            document.getElementById('voidDepth').textContent = complexity > 6 ? 'INFINITE' : 'DEEP';
+            energyLevel = Math.max(0, energyLevel - 10);
+            updateMetrics();
+        }
+
+        function drawFractalBranch(ctx, x, y, len, depth, angle) {
+            if (depth === 0) return;
+            
+            const endX = x + Math.cos(angle) * len;
+            const endY = y + Math.sin(angle) * len;
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(endX, endY);
+            ctx.strokeStyle = `hsl(${320 + depth * 30}, 100%, ${50 + depth * 5}%)`;
+            ctx.lineWidth = depth / 2;
+            ctx.stroke();
+            
+            // Create branches
+            drawFractalBranch(ctx, endX, endY, len * 0.7, depth - 1, angle + Math.PI / 6);
+            drawFractalBranch(ctx, endX, endY, len * 0.7, depth - 1, angle - Math.PI / 6);
+        }
+
+        function generateParticleSystem() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const color = document.getElementById('colorPicker').value;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < 300; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const size = Math.random() * 5 + 1;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle = color + Math.floor(Math.random() * 100).toString(16);
+                ctx.fill();
+                
+                // Add glow effect
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+            
+            energyLevel = Math.max(0, energyLevel - 8);
+            updateMetrics();
+        }
+
+        function generateSpiral() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            ctx.beginPath();
+            for (let angle = 0; angle < Math.PI * 20; angle += 0.1) {
+                const radius = angle * 3;
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                
+                if (angle === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            ctx.strokeStyle = '#ff0040';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            energyLevel = Math.max(0, energyLevel - 3);
+            updateMetrics();
+        }
+
+        function generateWaveform() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.beginPath();
+            for (let x = 0; x < canvas.width; x++) {
+                const y = canvas.height / 2 + Math.sin(x * 0.02) * 50 + Math.sin(x * 0.05) * 20;
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            ctx.strokeStyle = '#ff6b6b';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            energyLevel = Math.max(0, energyLevel - 4);
+            updateMetrics();
+        }
+
+        function generateMatrix() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff0040';
+            ctx.font = '12px Orbitron';
+            
+            const characters = '01GODSPEED10';
+            
+            for (let x = 0; x < canvas.width; x += 20) {
+                for (let y = 0; y < canvas.height; y += 20) {
+                    const char = characters[Math.floor(Math.random() * characters.length)];
+                    ctx.fillText(char, x, y);
+                }
+            }
+            
+            energyLevel = Math.max(0, energyLevel - 6);
+            updateMetrics();
+        }
+
+        function generateChaos() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Create chaotic pattern
+            for (let i = 0; i < 1000; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const size = Math.random() * 10 + 1;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                ctx.fill();
+            }
+            
+            energyLevel = Math.max(0, energyLevel - 15);
+            updateMetrics();
+        }
+
+        function clearCanvas() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('output').innerHTML = 'Reality purged... The void awaits new input...';
+            energyLevel = Math.min(100, energyLevel + 20);
+            updateMetrics();
+        }
+
+        function updateMetrics() {
+            document.getElementById('recursionCount').textContent = recursionCount;
+            document.getElementById('complexityLevel').textContent = Math.floor(Math.random() * 9999) + 1;
+            document.getElementById('energyLevel').textContent = energyLevel + '%';
+            
+            // Update energy level color based on value
+            const energyElement = document.getElementById('energyLevel');
+            if (energyLevel > 70) {
+                energyElement.style.color = '#00ff00';
+            } else if (energyLevel > 30) {
+                energyElement.style.color = '#ffff00';
+            } else {
+                energyElement.style.color = '#ff0000';
+            }
+        }
+
+        // Add CSS animation keyframe
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+                20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            createParticles();
+            // Auto-generate initial fractal
+            setTimeout(generateAdvancedFractal, 1000);
+            
+            // Add random glitch effects to title
+            setInterval(() => {
+                const title = document.querySelector('.title');
+                title.classList.toggle('glitch');
+            }, 5000);
+            
+            // Simulate network status changes
+            setInterval(() => {
+                const indicators = document.querySelectorAll('.status-indicator');
+                indicators.forEach(indicator => {
+                    if (Math.random() > 0.9) {
+                        indicator.classList.toggle('status-online');
+                        indicator.classList.toggle('status-offline');
+                    }
+                });
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+```
+
+Key Improvements Made:
+
+1. Enhanced Visual Design:
+   · Added glitch effects to the main title
+   · Improved hover animations and transitions
+   · Added scanline effects to the output area
+   · Enhanced particle system with variable sizes
+2. Interactive Features:
+   · Added network status indicators with live updates
+   · Implemented energy level tracking that decreases with each action
+   · Added a new "Chaos Engine" visualization
+   · Improved the terminal-style text output with typewriter animation
+3. User Experience Improvements:
+   · Added labels for sliders and color pickers
+   · Improved mobile responsiveness
+   · Added a footer with additional information
+   · Enhanced copy functionality with better notifications
+4. Performance Optimizations:
+   · Optimized canvas drawing functions
+   · Improved particle system efficiency
+   · Added proper cleanup for animations
+5. Theme Enhancement:
+   · Strengthened the apocalyptic/cyberpunk aesthetic
+   · Added more visual effects that align with the theme
+   · Improved the overall cohesiveness of the design
+
+The portal now provides a more immersive and interactive experience while maintaining the original apocalyptic resonance theme.
