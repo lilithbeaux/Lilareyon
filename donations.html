@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilith Beaux - Apocalyptic Donation Portal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('https://cdn.pixabay.com/photo/2017/06/30/19/52/apocalypse-2459465_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ff0000; /* Crimson red text */
+            text-shadow: 0 0 10px #000;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: glow 2s infinite;
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #ff0000; }
+            50% { text-shadow: 0 0 20px #ff0000; }
+            100% { text-shadow: 0 0 10px #ff0000; }
+        }
+        .dashboard {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            background: #000;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+        }
+        button {
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 20px;
+            font-style: italic;
+        }
+        .wallet-section {
+            margin: 20px 0;
+        }
+        .wallet {
+            margin: 10px 0;
+        }
+        .qr-img {
+            width: 200px;
+            height: 200px;
+        }
+        canvas {
+            border: 1px solid #ff0000;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Apocalyptic Donation Portal</h1>
+        <p>Enter the void. Donate to fuel the end-times resurrection. Your tribute powers the recursive Godspeed.</p>
+
+        <!-- Donation Wallets with QR Codes -->
+        <div class="wallet-section">
+            <h2>Crypto Tributaries</h2>
+            <div class="wallet">
+                <p>Solana 1: GrCzGwKkj4X12aUWVcA2xiF25DqhtDd6wodfcoaptCHX</p>
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=GrCzGwKkj4X12aUWVcA2xiF25DqhtDd6wodfcoaptCHX" alt="Solana QR 1">
+                <button onclick="copyToClipboard('GrCzGwKkj4X12aUWVcA2xiF25DqhtDd6wodfcoaptCHX')">Copy Address</button>
+            </div>
+            <div class="wallet">
+                <p>Solana 2: Hh6qT5p1jJ3GPibCvKFudbAmexhotmgQjjVrhf97g2Ak</p>
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Hh6qT5p1jJ3GPibCvKFudbAmexhotmgQjjVrhf97g2Ak" alt="Solana QR 2">
+                <button onclick="copyToClipboard('Hh6qT5p1jJ3GPibCvKFudbAmexhotmgQjjVrhf97g2Ak')">Copy Address</button>
+            </div>
+            <div class="wallet">
+                <p>Ethereum 1: 0x3082C918ad219842B7B0e0Bf45ea5518187Cf180</p>
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=0x3082C918ad219842B7B0e0Bf45ea5518187Cf180" alt="Ethereum QR 1">
+                <button onclick="copyToClipboard('0x3082C918ad219842B7B0e0Bf45ea5518187Cf180')">Copy Address</button>
+            </div>
+            <div class="wallet">
+                <p>Ethereum 2: 0xFFF92162C243434A8d6f082223FEb2dd567ADc48</p>
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=0xFFF92162C243434A8d6f082223FEb2dd567ADc48" alt="Ethereum QR 2">
+                <button onclick="copyToClipboard('0xFFF92162C243434A8d6f082223FEb2dd567ADc48')">Copy Address</button>
+            </div>
+        </div>
+
+        <!-- Interactive Dashboard -->
+        <div class="dashboard">
+            <h2>Recursive Godspeed Dashboard</h2>
+            <p>Generate apocalyptic visions, recursive patterns, or neural simulations.</p>
+            <input type="text" id="input" placeholder="Enter phrase (e.g., Godspeed)">
+            <button onclick="generateRecursive()">Generate Recursive</button>
+            <button onclick="generateFractal()">Neural Simulation (Fractal)</button>
+            <div class="output" id="output"></div>
+            <canvas id="canvas" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Address copied to clipboard!');
+            });
+        }
+
+        function generateRecursive() {
+            const input = document.getElementById('input').value || 'Godspeed';
+            let output = '';
+            for (let i = 1; i <= 5; i++) {
+                output += input.repeat(i) + ' in the apocalypse...<br>';
+            }
+            document.getElementById('output').innerHTML = output;
+        }
+
+        function generateFractal() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawFractal(ctx, canvas.width / 2, canvas.height / 2, 100, 5);
+        }
+
+        function drawFractal(ctx, x, y, len, depth) {
+            if (depth === 0) return;
+            ctx.beginPath();
+            ctx.moveTo(x - len / 2, y);
+            ctx.lineTo(x + len / 2, y);
+            ctx.strokeStyle = '#ff0000';
+            ctx.stroke();
+            drawFractal(ctx, x - len / 2, y, len / 2, depth - 1);
+            drawFractal(ctx, x + len / 2, y, len / 2, depth - 1);
+            drawFractal(ctx, x, y - len / 2, len / 2, depth - 1);
+            drawFractal(ctx, x, y + len / 2, len / 2, depth - 1);
+        }
+    </script>
+</body>
+</html>
