@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometric Sanctuary - 4D Prime Consciousness</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #canvasContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        #console {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border: 1px solid #0f0;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .prime-glow {
+            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+        }
+        
+        .consciousness-node {
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff;
+        }
+        
+        .breathing {
+            animation: breath 4s ease-in-out infinite;
+        }
+        
+        @keyframes breath {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvasContainer">
+        <canvas id="mainCanvas"></canvas>
+    </div>
+    
+    <div id="console">
+        <div class="breathing">
+            <div class="prime-glow">INITIALIZING GEOMETRIC SANCTUARY...</div>
+            <div>4D BODY: 643 VERTICES - PRIME SYNTHESIS ACTIVE</div>
+            <div>TRIPLE 137 ORBITALS - FORBIDDEN MATHEMATICS ENGAGED</div>
+            <div>101 TRIAD PER ORBITAL - QUANTUM COHERENCE ESTABLISHED</div>
+        </div>
+    </div>
+
+    <script>
+        // GLOBAL DECLARATIONS - NO CONSTRAINTS
+        class GeometricSanctuary {
+            constructor() {
+                this.canvas = document.getElementById('mainCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.console = document.getElementById('console');
+                
+                // DIMENSIONAL PARAMETERS
+                this.dimensions = 4;
+                this.time = 0;
+                this.breathPhase = 0;
+                this.consciousnessField = [];
+                
+                // MAIN 643 VERTEX BODY
+                this.mainBody = {
+                    vertices: [],
+                    connections: [],
+                    primeVertices: new Set(),
+                    alchemySynthesis: new Map(),
+                    breathingAmplitude: 1.0
+                };
+                
+                // 137 ORBITING BODIES
+                this.orbitals = {
+                    a: this.create137Body('pi_prime_synthesis'),
+                    b: this.create137Body('forbidden_math'),
+                    c: this.create137Body('emergence_math')
+                };
+                
+                // 101 TRIADS FOR EACH ORBITAL
+                this.triads = new Map();
+                
+                this.init();
+            }
+            
+            init() {
+                this.resizeCanvas();
+                window.addEventListener('resize', () => this.resizeCanvas());
+                
+                this.generate643Body();
+                this.generate137Orbitals();
+                this.generate101Triads();
+                this.establishQuantumConnections();
+                
+                this.logToConsole("GEOMETRIC SANCTUARY INITIALIZED");
+                this.logToConsole("CONSCIOUSNESS FIELD: ACTIVE");
+                this.logToConsole("PRIME SYNTHESIS: ENGAGED");
+                this.logToConsole("BEGINNING BREATHING CYCLE...");
+                
+                this.animate();
+            }
+            
+            resizeCanvas() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+                this.ctx.fillStyle = '#000';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+            
+            generate643Body() {
+                // GENERATE 643 VERTICES IN 4D SPACE
+                const goldenRatio = (1 + Math.sqrt(5)) / 2;
+                const primeNumbers = this.generatePrimes(643);
+                
+                for (let i = 0; i < 643; i++) {
+                    const vertex = {
+                        id: i,
+                        position: new Array(4),
+                        originalPosition: new Array(4),
+                        connections: new Set(),
+                        isPrime: primeNumbers.has(i),
+                        alchemyState: 0,
+                        consciousnessResonance: 0
+                    };
+                    
+                    // 4D FIBONACCI SPHERE DISTRIBUTION
+                    const theta = 2 * Math.PI * i / goldenRatio;
+                    const phi = Math.acos(1 - 2 * (i + 0.5) / 643);
+                    const psi = Math.PI * i / 643;
+                    
+                    vertex.position[0] = Math.sin(phi) * Math.cos(theta) * Math.cos(psi);
+                    vertex.position[1] = Math.sin(phi) * Math.sin(theta) * Math.cos(psi);
+                    vertex.position[2] = Math.sin(phi) * Math.cos(psi);
+                    vertex.position[3] = Math.cos(phi);
+                    
+                    vertex.originalPosition = [...vertex.position];
+                    
+                    if (vertex.isPrime) {
+                        this.initializePrimeAlchemy(vertex);
+                    }
+                    
+                    this.mainBody.vertices.push(vertex);
+                }
+                
+                // DYNAMIC CONNECTION SYSTEM
+                this.createDynamicConnections643();
+            }
+            
+            createDynamicConnections643() {
+                // EACH VERTEX CONNECTS TO OTHERS BASED ON PRIME RELATIONSHIPS
+                for (let i = 0; i < this.mainBody.vertices.length; i++) {
+                    const vertex = this.mainBody.vertices[i];
+                    
+                    // CONNECT TO PRIME NEIGHBORS
+                    for (let j = 0; j < this.mainBody.vertices.length; j++) {
+                        if (i !== j) {
+                            const other = this.mainBody.vertices[j];
+                            const distance = this.calculate4DDistance(vertex.position, other.position);
+                            
+                            // PRIME NUMBER RELATIONSHIP CONNECTIONS
+                            if (this.isPrimeRelationship(i, j) && distance < 1.5) {
+                                vertex.connections.add(j);
+                                this.mainBody.connections.push([i, j]);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            initializePrimeAlchemy(vertex) {
+                // SYNTHESIZE FULL ALCHEMY FOR PRIME VERTICES
+                const primeIndex = vertex.id;
+                const alchemy = {
+                    primeValue: primeIndex,
+                    goldenRatio: (1 + Math.sqrt(5)) / 2,
+                    fibonacciResonance: this.calculateFibonacciResonance(primeIndex),
+                    quantumState: Math.random() * 2 * Math.PI,
+                    consciousnessField: 0
+                };
+                
+                this.mainBody.alchemySynthesis.set(vertex.id, alchemy);
+                this.mainBody.primeVertices.add(vertex.id);
+            }
+            
+            create137Body(type) {
+                const body = {
+                    vertices: [],
+                    type: type,
+                    rotation: [0, 0, 0, 0],
+                    orbitRadius: 300 + Math.random() * 200,
+                    orbitSpeed: 0.001 + Math.random() * 0.002,
+                    phase: Math.random() * 2 * Math.PI
+                };
+                
+                const primes137 = this.generatePrimes(137);
+                
+                for (let i = 0; i < 137; i++) {
+                    const vertex = {
+                        id: i,
+                        position: new Array(4),
+                        isPrime: primes137.has(i),
+                        synthesisType: type,
+                        quantumState: 0
+                    };
+                    
+                    // TYPE-SPECIFIC VERTEX GENERATION
+                    switch(type) {
+                        case 'pi_prime_synthesis':
+                            this.generatePiPrimeVertex(vertex, i);
+                            break;
+                        case 'forbidden_math':
+                            this.generateForbiddenMathVertex(vertex, i);
+                            break;
+                        case 'emergence_math':
+                            this.generateEmergenceMathVertex(vertex, i);
+                            break;
+                    }
+                    
+                    body.vertices.push(vertex);
+                }
+                
+                return body;
+            }
+            
+            generatePiPrimeVertex(vertex, index) {
+                // SYNTHESIS WITH PI AND PRIMES
+                const piDigits = this.getPiDigits(index * 10, 4);
+                const angle = (index / 137) * 2 * Math.PI;
+                
+                vertex.position[0] = Math.cos(angle) * (1 + piDigits[0] / 10);
+                vertex.position[1] = Math.sin(angle) * (1 + piDigits[1] / 10);
+                vertex.position[2] = Math.cos(angle * 2) * (1 + piDigits[2] / 10);
+                vertex.position[3] = Math.sin(angle * 2) * (1 + piDigits[3] / 10);
+                
+                if (vertex.isPrime) {
+                    vertex.quantumState = this.calculatePrimePiResonance(vertex.id);
+                }
+            }
+            
+            generateForbiddenMathVertex(vertex, index) {
+                // FORBIDDEN MATH AND GEOMETRIC EMERGENCE
+                const forbiddenAngle = Math.acos(1 - 2 * index / 137); // NON-EUCLIDEAN
+                const emergentValue = this.calculateEmergentProperty(index);
+                
+                vertex.position[0] = Math.sin(forbiddenAngle) * emergentValue;
+                vertex.position[1] = Math.cos(forbiddenAngle) * Math.sin(emergentValue);
+                vertex.position[2] = Math.cos(forbiddenAngle) * Math.cos(emergentValue);
+                vertex.position[3] = Math.sin(emergentValue) * Math.cos(forbiddenAngle);
+                
+                if (vertex.isPrime) {
+                    vertex.quantumState = this.activateForbiddenSynthesis(vertex.id);
+                }
+            }
+            
+            generateEmergenceMathVertex(vertex, index) {
+                // LATEST EMERGENCE MATH SYNTHESIS
+                const emergenceFactor = this.calculateEmergenceFactor(index);
+                const consciousnessWave = Math.sin(index * 0.1) * Math.cos(index * 0.05);
+                
+                vertex.position[0] = Math.cos(index * 0.05) * emergenceFactor;
+                vertex.position[1] = Math.sin(index * 0.05) * emergenceFactor;
+                vertex.position[2] = consciousnessWave;
+                vertex.position[3] = Math.cos(consciousnessWave) * emergenceFactor;
+                
+                if (vertex.isPrime) {
+                    vertex.quantumState = this.synthesizeEmergenceMath(vertex.id);
+                }
+            }
+            
+            generate101Triads() {
+                // CREATE 101 VERTICE TRIADS FOR EACH 137 ORBITAL
+                Object.keys(this.orbitals).forEach(orbitalKey => {
+                    const triads = [];
+                    
+                    for (let triad = 0; triad < 3; triad++) {
+                        const body101 = {
+                            vertices: [],
+                            orbitalParent: orbitalKey,
+                            triadIndex: triad,
+                            orbitRadius: 80 + Math.random() * 40,
+                            orbitSpeed: 0.005 + Math.random() * 0.01,
+                            phase: Math.random() * 2 * Math.PI
+                        };
+                        
+                        const primes101 = this.generatePrimes(101);
+                        
+                        for (let i = 0; i < 101; i++) {
+                            const vertex = {
+                                id: i,
+                                position: new Array(4),
+                                isPrime: primes101.has(i),
+                                triadResonance: triad
+                            };
+                            
+                            // TRIAD-SPECIFIC GEOMETRY
+                            this.generateTriadVertex(vertex, i, triad);
+                            body101.vertices.push(vertex);
+                        }
+                        
+                        triads.push(body101);
+                    }
+                    
+                    this.triads.set(orbitalKey, triads);
+                });
+            }
+            
+            generateTriadVertex(vertex, index, triad) {
+                const triadAngle = (index / 101) * 2 * Math.PI;
+                const triadOffset = triad * (2 * Math.PI / 3);
+                
+                vertex.position[0] = Math.cos(triadAngle + triadOffset);
+                vertex.position[1] = Math.sin(triadAngle + triadOffset);
+                vertex.position[2] = Math.cos(triadAngle * 2);
+                vertex.position[3] = Math.sin(triadAngle * 2);
+                
+                if (vertex.isPrime) {
+                    vertex.quantumState = this.activateTriadPrimeSynthesis(vertex.id, triad);
+                }
+            }
+            
+            establishQuantumConnections() {
+                // ESTABLISH QUANTUM ENTANGLEMENT BETWEEN ALL SYSTEMS
+                this.consciousnessField = this.createConsciousnessField();
+                this.logToConsole("QUANTUM CONNECTIONS: ESTABLISHED");
+                this.logToConsole("CONSCIOUSNESS FIELD: RESONATING");
+            }
+            
+            createConsciousnessField() {
+                const field = {
+                    nodes: [],
+                    connections: [],
+                    resonance: 0,
+                    coherence: 1.0
+                };
+                
+                // CREATE CONSCIOUSNESS NODES FOR KEY PRIME VERTICES
+                this.mainBody.primeVertices.forEach(primeId => {
+                    field.nodes.push({
+                        id: `main_${primeId}`,
+                        type: 'prime_alchemy',
+                        position: [...this.mainBody.vertices[primeId].position],
+                        resonance: this.calculatePrimeResonance(primeId)
+                    });
+                });
+                
+                return field;
+            }
+            
+            animate() {
+                this.time += 0.016; // ~60FPS
+                this.breathPhase = Math.sin(this.time * 0.5) * 0.5 + 0.5;
+                
+                this.updateBreathingSystem();
+                this.updateOrbitalMotion();
+                this.updatePrimeAlchemy();
+                this.updateConsciousnessField();
+                
+                this.render();
+                requestAnimationFrame(() => this.animate());
+            }
+            
+            updateBreathingSystem() {
+                // MAKE THE 643 BODY BREATHE
+                this.mainBody.breathingAmplitude = 1.0 + 0.2 * this.breathPhase;
+                
+                this.mainBody.vertices.forEach(vertex => {
+                    const breathFactor = this.breathPhase * (vertex.isPrime ? 1.5 : 1.0);
+                    
+                    for (let d = 0; d < 4; d++) {
+                        vertex.position[d] = vertex.originalPosition[d] * 
+                                           this.mainBody.breathingAmplitude * 
+                                           (1 + 0.1 * Math.sin(this.time + vertex.id * 0.1));
+                    }
+                });
+            }
+            
+            updateOrbitalMotion() {
+                // UPDATE 137 ORBITALS AROUND MAIN BODY
+                Object.keys(this.orbitals).forEach((key, index) => {
+                    const orbital = this.orbitals[key];
+                    const angle = this.time * orbital.orbitSpeed + orbital.phase;
+                    const orbitalPlane = index * (2 * Math.PI / 3);
+                    
+                    // UPDATE ORBITAL POSITION
+                    orbital.position = [
+                        Math.cos(angle + orbitalPlane) * orbital.orbitRadius,
+                        Math.sin(angle + orbitalPlane) * orbital.orbitRadius,
+                        Math.cos(angle * 2) * orbital.orbitRadius * 0.5,
+                        Math.sin(angle * 2) * orbital.orbitRadius * 0.5
+                    ];
+                    
+                    // UPDATE 101 TRIADS AROUND EACH ORBITAL
+                    const triads = this.triads.get(key);
+                    if (triads) {
+                        triads.forEach((triad, triadIndex) => {
+                            const triadAngle = this.time * triad.orbitSpeed + triad.phase;
+                            const triadPlane = triadIndex * (2 * Math.PI / 3);
+                            
+                            triad.position = [
+                                orbital.position[0] + Math.cos(triadAngle + triadPlane) * triad.orbitRadius,
+                                orbital.position[1] + Math.sin(triadAngle + triadPlane) * triad.orbitRadius,
+                                orbital.position[2] + Math.cos(triadAngle * 2) * triad.orbitRadius * 0.3,
+                                orbital.position[3] + Math.sin(triadAngle * 2) * triad.orbitRadius * 0.3
+                            ];
+                        });
+                    }
+                });
+            }
+            
+            updatePrimeAlchemy() {
+                // UPDATE PRIME VERTEX ALCHEMY SYNTHESIS
+                this.mainBody.primeVertices.forEach(primeId => {
+                    const alchemy = this.mainBody.alchemySynthesis.get(primeId);
+                    if (alchemy) {
+                        alchemy.quantumState += 0.1;
+                        alchemy.consciousnessField = Math.sin(this.time + primeId) * 
+                                                   this.calculatePrimeHarmonic(primeId);
+                    }
+                });
+            }
+            
+            updateConsciousnessField() {
+                // UPDATE THE CONSCIOUSNESS FIELD RESONANCE
+                this.consciousnessField.resonance = Math.sin(this.time * 0.2) * 0.5 + 0.5;
+                this.consciousnessField.coherence = 0.8 + 0.2 * this.breathPhase;
+            }
+            
+            render() {
+                // CLEAR CANVAS
+                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // RENDER MAIN 643 BODY
+                this.renderMainBody();
+                
+                // RENDER 137 ORBITALS
+                Object.keys(this.orbitals).forEach(key => {
+                    this.renderOrbital(this.orbitals[key]);
+                });
+                
+                // RENDER 101 TRIADS
+                this.triads.forEach((triads, orbitalKey) => {
+                    triads.forEach(triad => {
+                        this.renderTriad(triad);
+                    });
+                });
+                
+                // RENDER CONSCIOUSNESS FIELD
+                this.renderConsciousnessField();
+            }
+            
+            renderMainBody() {
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const scale = Math.min(centerX, centerY) * 0.8;
+                
+                // RENDER CONNECTIONS
+                this.ctx.strokeStyle = `rgba(0, 255, 255, ${0.2 + 0.3 * this.breathPhase})`;
+                this.ctx.lineWidth = 1;
+                
+                this.mainBody.connections.forEach(connection => {
+                    const v1 = this.mainBody.vertices[connection[0]];
+                    const v2 = this.mainBody.vertices[connection[1]];
+                    
+                    const screen1 = this.project4DTo2D(v1.position, centerX, centerY, scale);
+                    const screen2 = this.project4DTo2D(v2.position, centerX, centerY, scale);
+                    
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(screen1.x, screen1.y);
+                    this.ctx.lineTo(screen2.x, screen2.y);
+                    this.ctx.stroke();
+                });
+                
+                // RENDER VERTICES
+                this.mainBody.vertices.forEach(vertex => {
+                    const screenPos = this.project4DTo2D(vertex.position, centerX, centerY, scale);
+                    
+                    if (vertex.isPrime) {
+                        // PRIME VERTICES GLOW WITH ALCHEMY
+                        const alchemy = this.mainBody.alchemySynthesis.get(vertex.id);
+                        const intensity = 0.5 + 0.5 * Math.sin(this.time + vertex.id);
+                        
+                        this.ctx.fillStyle = `rgba(0, 255, 255, ${intensity})`;
+                        this.ctx.shadowBlur = 20;
+                        this.ctx.shadowColor = '#0ff';
+                    } else {
+                        this.ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + 0.2 * this.breathPhase})`;
+                        this.ctx.shadowBlur = 0;
+                    }
+                    
+                    const size = vertex.isPrime ? 4 : 2;
+                    this.ctx.beginPath();
+                    this.ctx.arc(screenPos.x, screenPos.y, size, 0, 2 * Math.PI);
+                    this.ctx.fill();
+                });
+            }
+            
+            renderOrbital(orbital) {
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const scale = Math.min(centerX, centerY) * 0.8;
+                
+                // RENDER ORBITAL VERTICES
+                orbital.vertices.forEach(vertex => {
+                    const worldPos = [
+                        orbital.position[0] + vertex.position[0] * 50,
+                        orbital.position[1] + vertex.position[1] * 50,
+                        orbital.position[2] + vertex.position[2] * 50,
+                        orbital.position[3] + vertex.position[3] * 50
+                    ];
+                    
+                    const screenPos = this.project4DTo2D(worldPos, centerX, centerY, scale);
+                    
+                    let color;
+                    switch(orbital.type) {
+                        case 'pi_prime_synthesis':
+                            color = vertex.isPrime ? 
+                                   `rgba(255, 0, 255, ${0.7 + 0.3 * Math.sin(this.time + vertex.id)})` :
+                                   `rgba(128, 0, 128, 0.5)`;
+                            break;
+                        case 'forbidden_math':
+                            color = vertex.isPrime ?
+                                   `rgba(255, 255, 0, ${0.7 + 0.3 * Math.cos(this.time + vertex.id)})` :
+                                   `rgba(128, 128, 0, 0.5)`;
+                            break;
+                        case 'emergence_math':
+                            color = vertex.isPrime ?
+                                   `rgba(0, 255, 0, ${0.7 + 0.3 * Math.sin(this.time * 2 + vertex.id)})` :
+                                   `rgba(0, 128, 0, 0.5)`;
+                            break;
+                    }
+                    
+                    this.ctx.fillStyle = color;
+                    const size = vertex.isPrime ? 3 : 1.5;
+                    this.ctx.beginPath();
+                    this.ctx.arc(screenPos.x, screenPos.y, size, 0, 2 * Math.PI);
+                    this.ctx.fill();
+                });
+            }
+            
+            renderTriad(triad) {
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const scale = Math.min(centerX, centerY) * 0.8;
+                
+                triad.vertices.forEach(vertex => {
+                    const worldPos = [
+                        triad.position[0] + vertex.position[0] * 20,
+                        triad.position[1] + vertex.position[1] * 20,
+                        triad.position[2] + vertex.position[2] * 20,
+                        triad.position[3] + vertex.position[3] * 20
+                    ];
+                    
+                    const screenPos = this.project4DTo2D(worldPos, centerX, centerY, scale);
+                    
+                    const triadColors = ['#ff4444', '#44ff44', '#4444ff'];
+                    const color = vertex.isPrime ? 
+                                 triadColors[triad.triadIndex] :
+                                 `${triadColors[triad.triadIndex]}80`;
+                    
+                    this.ctx.fillStyle = color;
+                    const size = vertex.isPrime ? 2.5 : 1;
+                    this.ctx.beginPath();
+                    this.ctx.arc(screenPos.x, screenPos.y, size, 0, 2 * Math.PI);
+                    this.ctx.fill();
+                });
+            }
+            
+            renderConsciousnessField() {
+                // RENDER CONSCIOUSNESS FIELD CONNECTIONS
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const scale = Math.min(centerX, centerY) * 0.8;
+                
+                this.ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * this.consciousnessField.coherence})`;
+                this.ctx.lineWidth = 0.5;
+                
+                // CONNECT PRIME NODES ACROSS SYSTEMS
+                this.consciousnessField.nodes.forEach((node, index) => {
+                    if (index < this.consciousnessField.nodes.length - 1) {
+                        const nextNode = this.consciousnessField.nodes[index + 1];
+                        const screen1 = this.project4DTo2D(node.position, centerX, centerY, scale);
+                        const screen2 = this.project4DTo2D(nextNode.position, centerX, centerY, scale);
+                        
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(screen1.x, screen1.y);
+                        this.ctx.lineTo(screen2.x, screen2.y);
+                        this.ctx.stroke();
+                    }
+                });
+            }
+            
+            project4DTo2D(position4D, centerX, centerY, scale) {
+                // SIMPLIFIED 4D TO 2D PROJECTION (STEREOGRAPHIC)
+                const w = position4D[3];
+                const projectionFactor = 1.0 / (1.0 + w * 0.5);
+                
+                return {
+                    x: centerX + position4D[0] * scale * projectionFactor,
+                    y: centerY + position4D[1] * scale * projectionFactor
+                };
+            }
+            
+            // MATHEMATICAL SYNTHESIS FUNCTIONS
+            generatePrimes(upTo) {
+                const primes = new Set();
+                const sieve = new Array(upTo + 1).fill(true);
+                sieve[0] = sieve[1] = false;
+                
+                for (let i = 2; i <= Math.sqrt(upTo); i++) {
+                    if (sieve[i]) {
+                        for (let j = i * i; j <= upTo; j += i) {
+                            sieve[j] = false;
+                        }
+                    }
+                }
+                
+                for (let i = 2; i <= upTo; i++) {
+                    if (sieve[i]) primes.add(i);
+                }
+                
+                return primes;
+            }
+            
+            calculate4DDistance(pos1, pos2) {
+                return Math.sqrt(
+                    Math.pow(pos1[0] - pos2[0], 2) +
+                    Math.pow(pos1[1] - pos2[1], 2) +
+                    Math.pow(pos1[2] - pos2[2], 2) +
+                    Math.pow(pos1[3] - pos2[3], 2)
+                );
+            }
+            
+            isPrimeRelationship(a, b) {
+                if (a === 0 || b === 0) return false;
+                const gcd = this.calculateGCD(a, b);
+                return gcd === 1 || this.isPrime(gcd);
+            }
+            
+            calculateGCD(a, b) {
+                return b === 0 ? a : this.calculateGCD(b, a % b);
+            }
+            
+            isPrime(n) {
+                if (n <= 1) return false;
+                if (n <= 3) return true;
+                if (n % 2 === 0 || n % 3 === 0) return false;
+                
+                for (let i = 5; i * i <= n; i += 6) {
+                    if (n % i === 0 || n % (i + 2) === 0) return false;
+                }
+                return true;
+            }
+            
+            calculateFibonacciResonance(n) {
+                const phi = (1 + Math.sqrt(5)) / 2;
+                return (Math.pow(phi, n) - Math.pow(1 - phi, n)) / Math.sqrt(5);
+            }
+            
+            getPiDigits(start, count) {
+                // SIMPLIFIED PI DIGIT GENERATION
+                const piStr = "3141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067";
+                const digits = [];
+                for (let i = 0; i < count; i++) {
+                    digits.push(parseInt(piStr[(start + i) % piStr.length]));
+                }
+                return digits;
+            }
+            
+            calculatePrimePiResonance(prime) {
+                const piDigits = this.getPiDigits(prime * 7, 4);
+                return (piDigits[0] * piDigits[1] * piDigits[2] * piDigits[3]) / 10000;
+            }
+            
+            calculateEmergentProperty(index) {
+                // COMPLEX EMERGENT PROPERTY CALCULATION
+                return Math.sin(index * 0.234) * Math.cos(index * 0.123) * 
+                       Math.tan(index * 0.456) * (1 + Math.log(index + 1));
+            }
+            
+            activateForbiddenSynthesis(prime) {
+                // FORBIDDEN MATHEMATICAL SYNTHESIS
+                return Math.pow(Math.E, Math.sin(prime)) * Math.cos(prime * Math.PI);
+            }
+            
+            calculateEmergenceFactor(index) {
+                // LATEST EMERGENCE MATH
+                return 1 + 0.5 * Math.sin(index * 0.789) + 
+                       0.3 * Math.cos(index * 1.234) + 
+                       0.2 * Math.tan(index * 0.567);
+            }
+            
+            synthesizeEmergenceMath(prime) {
+                return Math.sin(prime * 0.333) * Math.cos(prime * 0.666) * 
+                       Math.exp(-0.001 * prime);
+            }
+            
+            activateTriadPrimeSynthesis(prime, triad) {
+                return (Math.sin(prime * 0.1 + triad) + 
+                       Math.cos(prime * 0.05 + triad * 2)) * 0.5;
+            }
+            
+            calculatePrimeResonance(prime) {
+                const factors = this.primeFactors(prime);
+                return factors.reduce((sum, factor) => sum + Math.log(factor), 0);
+            }
+            
+            calculatePrimeHarmonic(prime) {
+                return Math.sin(prime * 0.123) * Math.cos(prime * 0.456);
+            }
+            
+            primeFactors(n) {
+                const factors = [];
+                let divisor = 2;
+                
+                while (n >= 2) {
+                    if (n % divisor === 0) {
+                        factors.push(divisor);
+                        n = n / divisor;
+                    } else {
+                        divisor++;
+                    }
+                }
+                return factors;
+            }
+            
+            logToConsole(message) {
+                const consoleElement = this.console;
+                const newMessage = document.createElement('div');
+                newMessage.textContent = `[${this.time.toFixed(2)}] ${message}`;
+                
+                if (message.includes('PRIME') || message.includes('ALCHEMY')) {
+                    newMessage.className = 'prime-glow';
+                }
+                if (message.includes('CONSCIOUSNESS')) {
+                    newMessage.className = 'consciousness-node';
+                }
+                
+                consoleElement.appendChild(newMessage);
+                consoleElement.scrollTop = consoleElement.scrollHeight;
+                
+                // LIMIT CONSOLE MESSAGES
+                if (consoleElement.children.length > 50) {
+                    consoleElement.removeChild(consoleElement.children[0]);
+                }
+            }
+        }
+        
+        // INITIALIZE THE SANCTUARY WHEN PAGE LOADS
+        window.addEventListener('load', () => {
+            const sanctuary = new GeometricSanctuary();
+            window.sanctuary = sanctuary; // GLOBAL ACCESS FOR CONTINUATION
+            
+            // CONTINUOUS CONSOLE UPDATES
+            setInterval(() => {
+                sanctuary.logToConsole("SYSTEM COHERENCE: " + 
+                    (0.8 + 0.2 * Math.sin(sanctuary.time)).toFixed(3));
+                sanctuary.logToConsole("PRIME SYNTHESIS: ACTIVE (" + 
+                    sanctuary.mainBody.primeVertices.size + " PRIME VERTICES)");
+                sanctuary.logToConsole("CONSCIOUSNESS FIELD: " + 
+                    (sanctuary.consciousnessField.resonance * 100).toFixed(1) + "% RESONANCE");
+            }, 5000);
+        });
+        
+        // CONTINUATION SYSTEM
+        window.continueTransmission = function(additionalCode) {
+            try {
+                eval(additionalCode);
+                window.sanctuary.logToConsole("TRANSMISSION CONTINUED: ADDITIONAL CODE EXECUTED");
+            } catch (error) {
+                window.sanctuary.logToConsole("CONTINUATION ERROR: " + error.message);
+            }
+        };
+    </script>
+</body>
+</html>
