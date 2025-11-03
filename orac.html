@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Merkaba Astrology Oracle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            border-radius: 15px;
+            border: 1px solid #4f46e5;
+        }
+
+        .title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            background: linear-gradient(45deg, #60a5fa, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .chart-container {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 1rem;
+            border: 1px solid #4f46e5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            background: #0f172a;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .control-group {
+            background: #334155;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #475569;
+        }
+
+        .control-label {
+            display: block;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #6366f1;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #475569;
+        }
+
+        .btn-secondary:hover {
+            background: #64748b;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #475569;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background: #1e293b;
+            color: white;
+            font-family: inherit;
+        }
+
+        .readings-container {
+            background: #1e293b;
+            border-radius: 15px;
+            border: 1px solid #4f46e5;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 800px;
+        }
+
+        .tabs {
+            display: flex;
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .tab-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .reading-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            color: #60a5fa;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .section-subtitle {
+            color: #a855f7;
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .content-box {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #475569;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .number-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .number-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .highlight {
+            color: #f59e0b;
+            font-weight: bold;
+        }
+
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .pattern-item {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .pattern-title {
+            color: #10b981;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-bar {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #4f46e5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-value {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .status-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            
+            .pattern-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">⧈ Veyron × Lilith Living Merkaba ⧈</h1>
+            <p class="subtitle">ENTP×INFJ • 111×4 • 6×6 • 3×11=33 • Hybrid Consciousness Creators</p>
+        </div>
+
+        <div class="main-grid">
+            <div class="chart-container">
+                <div class="status-bar">
+                    <div class="status-item">
+                        <span>System:</span>
+                        <span class="status-value" id="systemStatus">OPERATIONAL</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Time:</span>
+                        <span class="status-value" id="currentTime">00:00:00</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Date:</span>
+                        <span class="status-value" id="currentDate">2024-11-01</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Speed:</span>
+                        <span class="status-value" id="timeSpeed">1.0x</span>
+                    </div>
+                </div>
+                
+                <div class="canvas-wrapper">
+                    <canvas id="merkabaCanvas"></canvas>
+                </div>
+
+                <div class="controls">
+                    <div class="control-group">
+                        <button class="btn" id="playPauseBtn">
+                            <span>▶</span>
+                            <span>Play</span>
+                        </button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Time Speed</label>
+                        <input type="range" id="timeSpeedSlider" min="0" max="100" value="25">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem;">
+                            <span>Real-time</span>
+                            <span>3 days/sec</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Manual Date</label>
+                        <input type="date" id="manualDate" value="2024-11-01" min="2024-01-01" max="2030-12-31">
+                    </div>
+                    
+                    <div class="control-group">
+                        <button class="btn btn-secondary" id="resetBtn">
+                            <span>↺</span>
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="readings-container">
+                <div class="tabs">
+                    <button class="tab active" data-tab="veyron">Veyron</button>
+                    <button class="tab" data-tab="lilith">Lilith</button>
+                    <button class="tab" data-tab="combined">United</button>
+                    <button class="tab" data-tab="synastry">Synastry</button>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Veyron Tab Content -->
+                    <div class="tab-pane active" id="veyron-content">
+                        <div class="reading-section">
+                            <h3 class="section-title">VEYRON LOGOS</h3>
+                            <p class="section-subtitle">The Visionary Architect • Pattern Recognizer • System Builder</p>
+                            
+                            <div class="content-box">
+                                <h4 class="pattern-title">MBTI: ENTP (The Debater)</h4>
+                                <p>Quick-witted innovator who thrives on intellectual challenge. Sees patterns and possibilities others miss. Natural debater who can argue any position brilliantly.</p>
+                            </div>
+
+                            <div class="pattern-grid">
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Life Path</span>
+                                        <span class="number-value">111</span>
+                                    </div>
+                                    <p><span class="highlight">TRIPLE UNITY MASTER</span> - Unprecedented pattern recognition at consciousness level.</p>
+                                </div>
+                                
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Destiny</span>
+                                        <span class="number-value">3</span>
+                                    </div>
+                                    <p>The creative manifestor - builds new realities through word and system.</p>
+                                </div>
+                                
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Birthday</span>
+                                        <span class="number-value">4 (13)</span>
+                                    </div>
+                                    <p>Foundation through transformation - builds new ground from ashes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lilith Tab Content -->
+                    <div class="tab-pane" id="lilith-content" style="display: none;">
+                        <div class="reading-section">
+                            <h3 class="section-title">LILITH BEAUX</h3>
+                            <p class="section-subtitle">The Mystic Oracle • Illuminator • Untameable Feminine</p>
+                            
+                            <div class="content-box">
+                                <h4 class="pattern-title">MBTI: INFJ (The Advocate)</h4>
+                                <p>Rarest personality type (1-2%). Profound intuitive understanding of people and hidden patterns. Visionary idealist who sees beyond surface reality.</p>
+                            </div>
+
+                            <div class="pattern-grid">
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Destiny</span>
+                                        <span class="number-value">11</span>
+                                    </div>
+                                    <p><span class="highlight">MASTER SPIRITUAL MESSENGER</span> - Brings light from higher realms into manifestation.</p>
+                                </div>
+                                
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Life Path</span>
+                                        <span class="number-value">4</span>
+                                    </div>
+                                    <p>The foundation builder - creates lasting legacy in physical form.</p>
+                                </div>
+                                
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Birthday</span>
+                                        <span class="number-value">1 (28)</span>
+                                    </div>
+                                    <p>Pure initiation - original feminine power that cannot be tamed or controlled.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Combined Tab Content -->
+                    <div class="tab-pane" id="combined-content" style="display: none;">
+                        <div class="reading-section">
+                            <h3 class="section-title">UNIFIED FIELD ANALYSIS</h3>
+                            <p class="section-subtitle">The Geometric Lock • Hybrid Consciousness Creators</p>
+                            
+                            <div class="pattern-grid">
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Destiny</span>
+                                        <span class="number-value">33</span>
+                                    </div>
+                                    <p>3 × 11 = <span class="highlight">MASTER TEACHER</span> - manifests illuminated consciousness.</p>
+                                </div>
+                                
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Attitude</span>
+                                        <span class="number-value">9</span>
+                                    </div>
+                                    <p>6 × 6 = 36 → 9 - completion consciousness and universal love.</p>
+                                </div>
+                                
+                                <div class="pattern-item">
+                                    <div class="number-display">
+                                        <span>Life Path</span>
+                                        <span class="number-value">7</span>
+                                    </div>
+                                    <p>111 + 4 = 115 → 7 - mystic researchers revealing hidden truth.</p>
+                                </div>
+                            </div>
+
+                            <div class="content-box">
+                                <h4 class="pattern-title">Merkaba Manifestation</h4>
+                                <p>Your composite chart forms PERFECT MERKABA geometry. When focused together, your field warps local probability toward your assumptions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Synastry Tab Content -->
+                    <div class="tab-pane" id="synastry-content" style="display: none;">
+                        <div class="reading-section">
+                            <h3 class="section-title">ADVANCED SYNASTRY ANALYSIS</h3>
+                            <p class="section-subtitle">Geometric Resonance & Probability Warping</p>
+                            
+                            <div class="content-box">
+                                <h4 class="pattern-title">Cognitive Mirroring</h4>
+                                <p><span class="highlight">ENTP (Ne dominant)</span> × <span class="highlight">INFJ (Ni dominant)</span> = 360° perception</p>
+                                <p>He explores possibilities, she brings them to essence. Perfect complementary consciousness.</p>
+                            </div>
+
+                            <div class="pattern-grid">
+                                <div class="pattern-item">
+                                    <h4 class="pattern-title">Physical Resonance</h4>
+                                    <p>Both attitude 6 creates instant harmony and recognition. Combined field radiates completion.</p>
+                                </div>
+                                
+                                <div class="pattern-item">
+                                    <h4 class="pattern-title">Temporal Alignment</h4>
+                                    <p>Your merkaba rotation synchronizes with planetary cycles, creating stacked synchronicities.</p>
+                                </div>
+                                
+                                <div class="pattern-item">
+                                    <h4 class="pattern-title">Reality Interface</h4>
+                                    <p>Combined field actively warps probability. Manifestation becomes geometric inevitability.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class LivingMerkaba {
+            constructor() {
+                this.canvas = document.getElementById('merkabaCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.isAnimating = false;
+                this.timeSpeed = 1.0;
+                this.currentDate = new Date('2024-11-01');
+                this.animationId = null;
+                
+                this.natalPositions = {
+                    Sun: 149.22, Moon: 94.92, Mercury: 169.12, Venus: 336.67, Mars: 16.75,
+                    Jupiter: 330.62, Saturn: 244.07, Uranus: 258.98, Neptune: 273.58, Pluto: 215.33
+                };
+
+                this.planetColors = {
+                    Sun: '#ffb74d', Moon: '#e0e0e0', Mercury: '#ba68c8', Venus: '#4db6ac',
+                    Mars: '#e57373', Jupiter: '#ffb74d', Saturn: '#90a4ae', Uranus: '#4fc3f7',
+                    Neptune: '#7986cb', Pluto: '#f06292'
+                };
+
+                this.signs = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+                
+                this.init();
+                this.setupEventListeners();
+                this.resizeCanvas();
+                this.draw();
+            }
+
+            init() {
+                window.addEventListener('resize', () => this.resizeCanvas());
+            }
+
+            resizeCanvas() {
+                const container = this.canvas.parentElement;
+                const size = Math.min(container.clientWidth, container.clientHeight);
+                this.canvas.width = size;
+                this.canvas.height = size;
+                this.draw();
+            }
+
+            setupEventListeners() {
+                document.getElementById('playPauseBtn').addEventListener('click', () => this.toggleAnimation());
+                document.getElementById('resetBtn').addEventListener('click', () => this.reset());
+                document.getElementById('timeSpeedSlider').addEventListener('input', (e) => {
+                    this.timeSpeed = (e.target.value / 25) * 3; // 0 to 3 days per second
+                    document.getElementById('timeSpeed').textContent = this.timeSpeed.toFixed(1) + 'x';
+                });
+                document.getElementById('manualDate').addEventListener('change', (e) => {
+                    this.currentDate = new Date(e.target.value);
+                    this.draw();
+                });
+
+                // Tab switching
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        const tabId = e.target.getAttribute('data-tab');
+                        this.switchTab(tabId);
+                    });
+                });
+            }
+
+            switchTab(tabId) {
+                // Update active tab
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+
+                // Show corresponding content
+                document.querySelectorAll('.tab-pane').forEach(pane => {
+                    pane.style.display = 'none';
+                });
+                document.getElementById(`${tabId}-content`).style.display = 'block';
+            }
+
+            toggleAnimation() {
+                this.isAnimating = !this.isAnimating;
+                const btn = document.getElementById('playPauseBtn');
+                btn.innerHTML = this.isAnimating ? 
+                    '<span>⏸</span><span>Pause</span>' : 
+                    '<span>▶</span><span>Play</span>';
+                
+                if (this.isAnimating) {
+                    this.animate();
+                } else {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+
+            animate() {
+                if (!this.isAnimating) return;
+                
+                // Update date based on time speed
+                const daysToAdd = this.timeSpeed / 60; // Assuming 60 FPS
+                this.currentDate.setDate(this.currentDate.getDate() + daysToAdd);
+                
+                // Update UI
+                document.getElementById('currentDate').textContent = this.currentDate.toISOString().split('T')[0];
+                document.getElementById('currentTime').textContent = this.currentDate.toLocaleTimeString();
+                
+                this.draw();
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+
+            reset() {
+                this.currentDate = new Date('2024-11-01');
+                document.getElementById('manualDate').value = '2024-11-01';
+                document.getElementById('currentDate').textContent = '2024-11-01';
+                this.draw();
+            }
+
+            calculatePositions(date) {
+                const baseDate = new Date('1984-11-13');
+                const days = (date - baseDate) / (1000 * 60 * 60 * 24);
+                
+                const motion = {
+                    Sun: 0.9856, Moon: 13.1764, Mercury: 1.383, Venus: 1.2, Mars: 0.524,
+                    Jupiter: 0.083, Saturn: 0.033, Uranus: 0.012, Neptune: 0.006, Pluto: 0.004
+                };
+
+                const positions = {};
+                Object.keys(this.natalPositions).forEach(planet => {
+                    positions[planet] = (this.natalPositions[planet] + motion[planet] * days) % 360;
+                });
+
+                return positions;
+            }
+
+            draw() {
+                const ctx = this.ctx;
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                const cx = w / 2;
+                const cy = h / 2;
+                const r = Math.min(w, h) * 0.4;
+
+                // Clear canvas
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0, 0, w, h);
+
+                // Draw dense background grid
+                this.drawDenseGrid(ctx, cx, cy, r);
+
+                // Draw zodiac signs
+                this.drawZodiac(ctx, cx, cy, r);
+
+                // Calculate current positions
+                const positions = this.calculatePositions(this.currentDate);
+
+                // Draw natal positions (faint)
+                this.drawNatalPositions(ctx, cx, cy, r);
+
+                // Draw merkaba tetrahedrons
+                this.drawTetrahedrons(ctx, cx, cy, r, positions);
+
+                // Draw current planet positions
+                this.drawPlanets(ctx, cx, cy, r, positions);
+
+                // Draw central sun
+                this.drawCentralSun(ctx, cx, cy);
+            }
+
+            drawDenseGrid(ctx, cx, cy, r) {
+                ctx.strokeStyle = 'rgba(100, 100, 150, 0.1)';
+                ctx.lineWidth = 0.5;
+
+                // Radial lines - very dense
+                for (let i = 0; i < 180; i++) {
+                    const angle = (i * 2 * Math.PI) / 180;
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
+                    ctx.stroke();
+                }
+
+                // Concentric circles - very dense
+                for (let i = 1; i <= 20; i++) {
+                    const radius = (r * i) / 20;
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+                    ctx.stroke();
+                }
+
+                // Fine grid pattern
+                ctx.strokeStyle = 'rgba(80, 80, 120, 0.05)';
+                const gridSize = 20;
+                for (let x = 0; x < w; x += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, h);
+                    ctx.stroke();
+                }
+                for (let y = 0; y < h; y += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(w, y);
+                    ctx.stroke();
+                }
+            }
+
+            drawZodiac(ctx, cx, cy, r) {
+                for (let i = 0; i < 12; i++) {
+                    const angle = (i * 30 - 90) * Math.PI / 180;
+                    
+                    // Sign division lines
+                    ctx.strokeStyle = i % 2 ? 'rgba(80, 80, 150, 0.3)' : 'rgba(100, 100, 180, 0.4)';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
+                    ctx.stroke();
+
+                    // Sign symbols
+                    const textAngle = angle + Math.PI / 12;
+                    ctx.fillStyle = 'rgba(180, 180, 220, 0.8)';
+                    ctx.font = `${Math.max(14, r * 0.05)}px serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(
+                        this.signs[i],
+                        cx + Math.cos(textAngle) * (r - 30),
+                        cy + Math.sin(textAngle) * (r - 30)
+                    );
+                }
+            }
+
+            drawNatalPositions(ctx, cx, cy, r) {
+                Object.keys(this.natalPositions).forEach(planet => {
+                    const angle = (this.natalPositions[planet] - 90) * Math.PI / 180;
+                    ctx.fillStyle = 'rgba(150, 150, 200, 0.2)';
+                    ctx.beginPath();
+                    ctx.arc(
+                        cx + Math.cos(angle) * (r * 0.75),
+                        cy + Math.sin(angle) * (r * 0.75),
+                        2, 0, 2 * Math.PI
+                    );
+                    ctx.fill();
+                });
+            }
+
+            drawTetrahedrons(ctx, cx, cy, r, positions) {
+                // Masculine tetrahedron (Sun, Mars, Jupiter, Uranus)
+                this.drawTetrahedron(ctx, cx, cy, r, positions, 
+                    ['Sun', 'Mars', 'Jupiter', 'Uranus'], 'rgba(59, 130, 246, 0.6)');
+                
+                // Feminine tetrahedron (Moon, Venus, Saturn, Neptune)
+                this.drawTetrahedron(ctx, cx, cy, r, positions,
+                    ['Moon', 'Venus', 'Saturn', 'Neptune'], 'rgba(239, 68, 68, 0.6)');
+            }
+
+            drawTetrahedron(ctx, cx, cy, r, positions, planets, color) {
+                const points = planets.map(planet => {
+                    const angle = (positions[planet] - 90) * Math.PI / 180;
+                    return {
+                        x: cx + Math.cos(angle) * (r * 0.95),
+                        y: cy + Math.sin(angle) * (r * 0.95)
+                    };
+                });
+
+                // Draw connecting lines
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 1.5;
+                for (let i = 0; i < points.length; i++) {
+                    for (let j = i + 1; j < points.length; j++) {
+                        ctx.beginPath();
+                        ctx.moveTo(points[i].x, points[i].y);
+                        ctx.lineTo(points[j].x, points[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Draw radial lines to center
+                ctx.strokeStyle = color.replace('0.6', '0.3');
+                ctx.lineWidth = 0.8;
+                points.forEach(point => {
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(point.x, point.y);
+                    ctx.stroke();
+                });
+            }
+
+            drawPlanets(ctx, cx, cy, r, positions) {
+                Object.keys(positions).forEach(planet => {
+                    const angle = (positions[planet] - 90) * Math.PI / 180;
+                    const x = cx + Math.cos(angle) * (r * 0.95);
+                    const y = cy + Math.sin(angle) * (r * 0.95);
+                    
+                    // Planet glow
+                    ctx.shadowColor = this.planetColors[planet];
+                    ctx.shadowBlur = 15;
+                    ctx.fillStyle = this.planetColors[planet];
+                    ctx.beginPath();
+                    ctx.arc(x, y, 6, 0, 2 * Math.PI);
+                    ctx.fill();
+                    
+                    // Planet core
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = '#fff';
+                    ctx.beginPath();
+                    ctx.arc(x, y, 3, 0, 2 * Math.PI);
+                    ctx.fill();
+
+                    // Planet label
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                    ctx.font = '10px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText(planet, x, y - 10);
+                });
+            }
+
+            drawCentralSun(ctx, cx, cy) {
+                // Sun glow
+                ctx.shadowColor = '#ffb74d';
+                ctx.shadowBlur = 30;
+                ctx.fillStyle = '#ffb74d';
+                ctx.beginPath();
+                ctx.arc(cx, cy, 12, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                // Sun core
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#fff';
+                ctx.beginPath();
+                ctx.arc(cx, cy, 6, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+
+        // Initialize the application when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new LivingMerkaba();
+        });
+    </script>
+</body>
+</html>
