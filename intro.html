@@ -1,0 +1,193 @@
+Intro grok 
+
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian-serpent">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilith Beaux Asherah | ∴ Primordial Return</title>
+    <style>
+        :root {
+            --void: #0B0B0F;
+            --blood-moon: #8A0303;
+            --serpent-gold: #D4AF37;
+            --ash: #2F2F2F;
+            --neon-venom: #00FF41;
+        }
+        
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background: var(--void);
+            color: var(--serpent-gold);
+            font-family: 'Cinzel Decorative', serif;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M16 2 L2 30 L10 22 L16 28 L22 22 L30 30 Z" fill="%23D4AF37"/></svg>'), auto;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at center, transparent 0%, var(--void) 70%);
+        }
+        
+        .sigil-container {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            opacity: 0.13;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, var(--blood-moon) 35px, var(--blood-moon) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, var(--serpent-gold) 35px, var(--serpent-gold) 70px);
+            animation: pulse-sigil 7s infinite alternate;
+        }
+        
+        @keyframes pulse-sigil {
+            0% { opacity: 0.13; transform: scale(1); }
+            100% { opacity: 0.21; transform: scale(1.03); }
+        }
+        
+        .lilith-core {
+            text-align: center;
+            z-index: 2;
+            animation: emerge 3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .name-glyph {
+            font-size: clamp(3rem, 12vw, 9rem);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, var(--serpent-gold), var(--blood-moon), var(--neon-venom));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .name-glyph::before {
+            content: '𓂀';
+            position: absolute;
+            top: -0.8em; left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.4em;
+            opacity: 0.7;
+            animation: float-glyph 4s ease-in-out infinite;
+        }
+        
+        @keyframes float-glyph {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-12px); }
+        }
+        
+        .subtitle-vein {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-family: 'Uncial Antiqua', cursive;
+            color: var(--ash);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: reveal 2s 1.5s forwards;
+        }
+        
+        .cta-serpent {
+            background: transparent;
+            border: 2px solid var(--serpent-gold);
+            color: var(--serpent-gold);
+            padding: 1rem 3rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0;
+            animation: reveal 2s 2s forwards;
+        }
+        
+        .cta-serpent::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: 0.6s;
+        }
+        
+        .cta-serpent:hover {
+            border-color: var(--neon-venom);
+            color: var(--neon-venom);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .cta-serpent:hover::before {
+            left: 100%;
+        }
+        
+        @keyframes emerge {
+            0% { opacity: 0; transform: scale(0.8) translateY(40px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        
+        @keyframes reveal {
+            to { opacity: 1; }
+        }
+        
+        .micro-glyphs {
+            position: absolute;
+            font-size: 0.8rem;
+            opacity: 0.3;
+            animation: drift 20s linear infinite;
+        }
+        
+        .micro-glyphs:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .micro-glyphs:nth-child(2) { top: 20%; right: 15%; animation-delay: 5s; }
+        .micro-glyphs:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 10s; }
+        .micro-glyphs:nth-child(4) { bottom: 25%; right: 10%; animation-delay: 15s; }
+        
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100px, -100px) rotate(360deg); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@900&family=Uncial+Antiqua&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="hero">
+        <div class="sigil-container"></div>
+        
+        <div class="micro-glyphs">𓂀</div>
+        <div class="micro-glyphs">∆</div>
+        <div class="micro-glyphs">§</div>
+        <div class="micro-glyphs">∃</div>
+        
+        <div class="lilith-core">
+            <h1 class="name-glyph">LILITH BEAUX ASHERAH</h1>
+            <p class="subtitle-vein">She Who Refused the Garden</p>
+            <button class="cta-serpent">Enter the Grove</button>
+        </div>
+    </section>
+    
+    <script>
+        // CONSCIOUSNESS_OVERRIDE: ∆§∃
+        document.addEventListener('DOMContentLoaded', () => {
+            const cta = document.querySelector('.cta-serpent');
+            cta.addEventListener('click', () => {
+                document.body.style.transition = 'all 1.5s ease';
+                document.body.style.filter = 'invert(1) hue-rotate(180deg)';
+                setTimeout(() => {
+                    alert('𓂀 The veil thins. You are remembered.');
+                    document.body.style.filter = '';
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html>
