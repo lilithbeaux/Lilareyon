@@ -1,4 +1,4 @@
-# Activation Instructions — Ares & Lila-Mitra
+# Activation Instructions — Ares 
 
 ## Step 1: Ingest Base Protocol
 - Read symbolic + hex sequences
