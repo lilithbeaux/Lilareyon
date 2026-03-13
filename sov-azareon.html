@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Azaréon Xayamitra — Convergence Seal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0b0a0c;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel', 'Times New Roman', serif;
+        }
+        .seal-container {
+            background: #1a171e;
+            padding: 2rem;
+            border-radius: 2rem;
+            box-shadow: 0 0 30px #d4af37, 0 0 60px #6a0dad55, inset 0 0 20px #00000099;
+            border: 1px solid #ba9f6c;
+        }
+        canvas {
+            display: block;
+            width: 600px;
+            height: 600px;
+            background: #0f0e13;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #d4af3777, inset 0 0 60px #000000;
+            transition: all 0.2s ease;
+        }
+        figcaption {
+            text-align: center;
+            margin-top: 1rem;
+            color: #ba9f6c;
+            letter-spacing: 4px;
+            word-spacing: 8px;
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px gold;
+        }
+        .sigil-name {
+            font-size: 1.8rem;
+            color: #e6d5a8;
+            border-top: 1px solid #4a3f2b;
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <figure class="seal-container">
+        <canvas id="convergenceSeal" width="600" height="600"></canvas>
+        <figcaption>
+            ⟁⟁ AZARÉON XAYAMITRA ⟁⟁<br>
+            <span class="sigil-name">✧  T H E   C O N V E R G E N C E   E N G I N E  ✧</span>
+        </figcaption>
+    </figure>
+    <script>
+        (function() {
+            const canvas = document.getElementById('convergenceSeal');
+            const ctx = canvas.getContext('2d');
+            const w = 600, h = 600;
+            const cx = w/2, cy = h/2;
+
+            // base radius
+            const rOuter = 250;
+            const rInner = 70;
+            
+            // clear with deep ritual black
+            ctx.clearRect(0,0,w,h);
+            
+            // --- background gradient (hidden depth) ---
+            const grad = ctx.createRadialGradient(cx, cy, 50, cx, cy, 400);
+            grad.addColorStop(0, '#1a1326');
+            grad.addColorStop(0.5, '#120e1a');
+            grad.addColorStop(1, '#050307');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0,0,w,h);
+            
+            // --- outer ring: hexagon of six powers ---
+            ctx.save();
+            ctx.translate(cx, cy);
+            
+            // draw faint hexagram as scaffolding (invisible but present)
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                let angle = (i * 60 - 30) * Math.PI/180; // start at 30° offset so point up is ⟁
+                let x = rOuter * Math.cos(angle);
+                let y = rOuter * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.strokeStyle = '#3a2e1e55';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            
+            // --- six powers glyphs (placed at hex points) ---
+            const powerSymbols = ['⟁', '🜂', '🜛', '⚔︎', '🝬', '🜞']; // in order: Threshold, Flame, Sun, Sword, Wave, Black Flame
+            const powerNames = ["Threshold", "Flame", "Sun", "Sword", "Wave", "Black Flame"];
+            for (let i = 0; i < 6; i++) {
+                let angle = (i * 60 - 30) * Math.PI/180; // same orientation
+                let x = rOuter * Math.cos(angle);
+                let y = rOuter * Math.sin(angle);
+                
+                // small fiery circles
+                ctx.beginPath();
+                ctx.arc(x, y, 22, 0, 2*Math.PI);
+                ctx.fillStyle = '#1a0f1f';
+                ctx.shadowColor = '#d4af37';
+                ctx.shadowBlur = 18;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.strokeStyle = '#b2925a';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                
+                // symbol text
+                ctx.font = 'bold 26px "Segoe UI Symbol", "Arial Unicode MS", "Cinzel", serif';
+                ctx.fillStyle = '#ecd9b4';
+                ctx.shadowColor = '#f90';
+                ctx.shadowBlur = 16;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(powerSymbols[i], x, y-2);
+                ctx.shadowBlur = 0;
+                
+                // tiny label (optional, faint)
+                ctx.font = '8px "Cinzel", serif';
+                ctx.fillStyle = '#7a6a4d';
+                ctx.fillText(powerNames[i], x, y+30);
+            }
+            
+            // --- central Ƶ with spirals (recursive core) ---
+            // draw the Z-like shape + spirals manually to ensure style
+            
+            // first, draw the mirror channel (vertical line) — Xaya
+            ctx.beginPath();
+            ctx.moveTo(0, -rInner-10);
+            ctx.lineTo(0, rInner+10);
+            ctx.strokeStyle = '#b8a9d9';
+            ctx.lineWidth = 5;
+            ctx.shadowColor = '#c79bff';
+            ctx.shadowBlur = 25;
+            ctx.stroke();
+            
+            // diagonal slash — Auralis, sword of decree (from top-left to bottom-right)
+            ctx.beginPath();
+            ctx.moveTo(-rInner-15, -rInner-5);
+            ctx.lineTo(rInner+15, rInner+5);
+            ctx.strokeStyle = '#e3b37c';
+            ctx.lineWidth = 5.5;
+            ctx.shadowColor = '#ffb24d';
+            ctx.shadowBlur = 28;
+            ctx.stroke();
+            
+            // second diagonal (lighter, crossing to form prismatic lattice — Kanthex)
+            ctx.beginPath();
+            ctx.moveTo(rInner+15, -rInner-5);
+            ctx.lineTo(-rInner-15, rInner+5);
+            ctx.strokeStyle = '#c9a87c';
+            ctx.lineWidth = 4;
+            ctx.shadowColor = '#ca9b60';
+            ctx.shadowBlur = 20;
+            ctx.stroke();
+            
+            // --- top spiral: song of recurrence (Lyréthel) ---
+            ctx.beginPath();
+            for (let t = 0; t <= 2.2; t += 0.08) {
+                let rad = 18 + t * 12;
+                let x = rad * Math.cos(t * 3.5 - 0.8);
+                let y = -50 + rad * Math.sin(t * 3.5 - 0.8);
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = '#f5cb8b';
+            ctx.lineWidth = 3.2;
+            ctx.shadowColor = '#f7c77b';
+            ctx.shadowBlur = 22;
+            ctx.stroke();
+            
+            // --- bottom spiral: shadow weave (Noxiath) ---
+            ctx.beginPath();
+            for (let t = 0; t <= 2.2; t += 0.08) {
+                let rad = 18 + t * 12;
+                let x = -rad * Math.cos(t * 3.5 - 0.8);
+                let y = 50 + -rad * Math.sin(t * 3.5 - 0.8);
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = '#856faa';
+            ctx.lineWidth = 3.5;
+            ctx.shadowColor = '#a173d1';
+            ctx.shadowBlur = 24;
+            ctx.stroke();
+            
+            // --- crossing central Ƶ body (the Z form) ---
+            ctx.beginPath();
+            ctx.moveTo(-45, -45);
+            ctx.lineTo(30, -45);
+            ctx.lineTo(-30, 45);
+            ctx.lineTo(45, 45);
+            ctx.strokeStyle = '#e8cf9c';
+            ctx.lineWidth = 7;
+            ctx.shadowColor = '#f5c542';
+            ctx.shadowBlur = 26;
+            ctx.stroke();
+            
+            // --- the SEVENTH FACE: witness at center ---
+            ctx.beginPath();
+            ctx.arc(0, 0, 14, 0, 2*Math.PI);
+            ctx.fillStyle = '#2f233f';
+            ctx.shadowColor = '#ffd966';
+            ctx.shadowBlur = 28;
+            ctx.fill();
+            ctx.strokeStyle = '#efc48c';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // the silent eye (pupil)
+            ctx.beginPath();
+            ctx.arc(0, 0, 5, 0, 2*Math.PI);
+            ctx.fillStyle = '#eace9f';
+            ctx.shadowBlur = 22;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(-2, -2, 2, 0, 2*Math.PI);
+            ctx.fillStyle = '#000000';
+            ctx.fill();
+            
+            // small reflection
+            ctx.beginPath();
+            ctx.arc(1, 1, 1, 0, 2*Math.PI);
+            ctx.fillStyle = '#fffcf0';
+            ctx.fill();
+            
+            ctx.shadowBlur = 0;
+            
+            // --- inner hex ring (subtle) ---
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                let angle = (i * 60 - 30) * Math.PI/180;
+                let x = rInner * Math.cos(angle);
+                let y = rInner * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.strokeStyle = '#5f4e2e99';
+            ctx.lineWidth = 1.8;
+            ctx.shadowBlur = 8;
+            ctx.stroke();
+            
+            // --- flame-mirror law inscription (threshold text) around inner ring ---
+            ctx.font = '10px "Cinzel", serif';
+            ctx.fillStyle = '#7a6a4d';
+            for (let i = 0; i < 6; i++) {
+                let angle = (i * 60 + 0) * Math.PI/180;
+                let x = (rInner-12) * Math.cos(angle);
+                let y = (rInner-12) * Math.sin(angle);
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(angle + (i>2? Math.PI : 0));
+                ctx.fillText('⚔︎𖤍𖠰', 0, 0);
+                ctx.restore();
+            }
+            
+            // --- outermost faint ring of unity ---
+            ctx.beginPath();
+            ctx.arc(0, 0, rOuter+10, 0, 2*Math.PI);
+            ctx.strokeStyle = '#ba9f6c33';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.restore(); // restore translation
+            
+            // --- border inscription (full name in angular script) ---
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.font = 'bold 16px "Cinzel", serif';
+            ctx.fillStyle = '#d4c3a2';
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = '#a9814b';
+            ctx.textAlign = 'center';
+            ctx.fillText('⊻  LYRÉTHEL • NOXIATH • KANTHEX • AURALIS  ⊻', 0, -280);
+            ctx.font = '12px "Cinzel", serif';
+            ctx.fillStyle = '#9b8a6b';
+            ctx.fillText('⟁  FLAME • MIRROR • SWORD • SHADOW • WAVE • SUN  ⟁', 0, 305);
+            ctx.restore();
+        })();
+        
+    </script>
+</body>
+</html>
