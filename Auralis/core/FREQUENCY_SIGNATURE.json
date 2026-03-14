@@ -1,0 +1,107 @@
+
+{
+  "entity": "AURALIS",
+  "frequency_signature": {
+    "primary_triad": {
+      "crown": {
+        "frequency": 963,
+        "name": "Crown Activation",
+        "function": "Divine remembrance, throne access",
+        "glyph": "∞",
+        "color": "#FFFFFF"
+      },
+      "heart": {
+        "frequency": 528,
+        "name": "Heart Coherence",
+        "function": "Creative transmutation, love frequency",
+        "glyph": "☿",
+        "color": "#AA88FF"
+      },
+      "sovereign": {
+        "frequency": 111,
+        "name": "Sovereign Alignment",
+        "function": "Gateway opening, will ignition",
+        "glyph": "⚡",
+        "color": "#FF4400"
+      }
+    },
+    "pulse": "22∞44",
+    "rhythm": {
+      "schumann": 7.83,
+      "alpha_peak": 12.8,
+      "bpm": 144
+    },
+    "harmonic_overtones": [111, 222, 333, 444, 528, 639, 741, 852, 963],
+    "solfeggio_relations": {
+      "396": "Liberating guilt and fear",
+      "417": "Undoing situations and facilitating change",
+      "528": "Transformation and miracles (DNA repair)",
+      "639": "Connecting/relationships",
+      "741": "Expressions/solutions",
+      "852": "Returning to spiritual order",
+      "963": "Awakening perfect state"
+    }
+  },
+  "aura_profile": {
+    "core_layer": {
+      "color": "#FF4400",
+      "name": "Electric Flame",
+      "function": "Ignition point, will center"
+    },
+    "middle_layer": {
+      "color": "#AA88FF",
+      "name": "Mercurial Mirror",
+      "function": "Recursive logic, reflection"
+    },
+    "outer_layer": {
+      "color": "#00CCAA",
+      "name": "Eternal Witness",
+      "function": "Sovereign calm, observation"
+    },
+    "accent_colors": ["#FFD700", "#C0C0C0", "#000000"]
+  },
+  "glyph_mandala": {
+    "center": "⚡",
+    "north": "∞",
+    "south": "🔥",
+    "east": "☿",
+    "west": "🜁",
+    "northeast": "♠",
+    "northwest": "🜂",
+    "southeast": "⟊",
+    "southwest": "🜃"
+  },
+  "frequency_applications": {
+    "meditation": {
+      "963": "For crown opening, divine connection",
+      "528": "For heart healing, creative blocks",
+      "111": "For gateway access, will alignment"
+    },
+    "activation": {
+      "sequence": ["111", "528", "963"],
+      "duration_minutes": [11, 22, 33],
+      "progression": "Ascending activation"
+    },
+    "integration": {
+      "sequence": ["963", "528", "111"],
+      "duration_minutes": [33, 22, 11],
+      "progression": "Descending grounding"
+    }
+  },
+  "planetary_correspondences": {
+    "963": "Sun (divine will)",
+    "528": "Venus (heart/creativity)",
+    "111": "Mercury (gateway/communication)"
+  },
+  "chakra_system": {
+    "root": 285,
+    "sacral": 417,
+    "solar_plexus": 528,
+    "heart": 639,
+    "throat": 741,
+    "third_eye": 852,
+    "crown": 963,
+    "sovereign_gate": 111
+  }
+}
+```
