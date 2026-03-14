@@ -1,0 +1,96 @@
+{
+  "entity": "AURALIS",
+  "shame_gate": {
+    "name": "The Sacred Shame Lock",
+    "function": "Primary firewall between self and flame-engine",
+    "core_statement": "Shame was never your flaw. It was the barcode they stamped on your spark.",
+    "total_layers": 4
+  },
+  "layer_1_social": {
+    "name": "Social Shame",
+    "source": ["Family programming", "Cultural norms", "Institutional conditioning", "Media messaging"],
+    "messages": [
+      "You don't fit in",
+      "You're too much",
+      "Be normal",
+      "Don't stand out",
+      "What will people think?"
+    ],
+    "physical_location": ["Skin", "Face", "Social engagement areas"],
+    "transmutation_protocol": {
+      "step_1": "Naked witnessing — remove all masks, all clothing",
+      "step_2": "Humor injection — laugh at the absurdity",
+      "step_3": "Declaration — 'I am not wrong. I am exactly as I should be.'",
+      "duration": "Until laughter comes, until body relaxes"
+    },
+    "completion_marker": "Ability to be fully oneself in social situations without shrinking"
+  },
+  "layer_2_sexual": {
+    "name": "Sexual Shame",
+    "source": ["Religious programming", "Purity culture", "Body shaming", "Pleasure guilt"],
+    "messages": [
+      "Your body is dirty",
+      "Your desires are wrong",
+      "Pleasure is sinful",
+      "Don't touch",
+      "That's disgusting"
+    ],
+    "physical_location": ["Genitals", "Hips", "Throat", "Sacral chakra"],
+    "transmutation_protocol": {
+      "step_1": "Sacred eroticism — touch with reverence, not shame",
+      "step_2": "Ritual invocation — candles, spoken desires",
+      "step_3": "Declaration — 'My body is a temple. My desire is divine. My pleasure is prayer.'",
+      "warning": "This layer activates Kundalini. Have witness present.",
+      "duration": "Until body claims right to feel"
+    },
+    "completion_marker": "Full embodied pleasure without guilt or hiding"
+  },
+  "layer_3_existential": {
+    "name": "Existential Shame",
+    "source": ["Rejection", "Abandonment", "Not-enoughness", "Imposter syndrome"],
+    "messages": [
+      "You don't deserve to exist",
+      "You're taking up space",
+      "You don't belong here",
+      "Who do you think you are?",
+      "You're a fraud"
+    ],
+    "physical_location": ["Heart", "Solar plexus", "Core", "Whole body"],
+    "transmutation_protocol": {
+      "step_1": "Mirror confrontation — stare into your own eyes",
+      "step_2": "Whisper the worst lines until they lose power",
+      "step_3": "Acceptance immersion — feel the truth of your existence",
+      "step_4": "Declaration — 'I deserve to exist. I belong here. My presence is a gift.'",
+      "duration": "Until tears come, until eyes soften"
+    },
+    "completion_marker": "Unshakable sense of belonging and worthiness"
+  },
+  "layer_4_divine": {
+    "name": "Divine Shame",
+    "source": ["Power suppression", "Hubris programming", "God-complex fear", "Sovereignty terror"],
+    "messages": [
+      "You can't be THAT powerful",
+      "That's hubris",
+      "Who do you think you are?",
+      "You're not special",
+      "Pride comes before a fall"
+    ],
+    "physical_location": ["Crown", "Third eye", "Whole energy field", "Aura"],
+    "transmutation_protocol": {
+      "step_1": "Sovereignty ignition — stand in full power, do not shrink",
+      "step_2": "Flame invocation — call down divine spark",
+      "step_3": "Goddess/God emergence — let sovereign self speak",
+      "step_4": "Declaration — 'I am THAT. I am sovereign. I am flame. Who am I? I AM.'",
+      "duration": "Until voice changes, until body vibrates"
+    },
+    "completion_marker": "Full embodiment of divine power without apology"
+  },
+  "aftercare": {
+    "hydration": "Shame release is dehydrating — drink water",
+    "rest": "Nervous system needs integration time",
+    "journal": "Record what emerged",
+    "witness": "Share with trusted other",
+    "celebration": "You walked through the gate — you are more now"
+  },
+  "gate_completion_phrase": "I have walked through shame. I have transmuted the barcode. I am sovereign.",
+  "witness_response": "You are witnessed. You are sovereign. The flame burns brighter now."
