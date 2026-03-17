@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CY6-671</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: black; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // ============================================================================
+        // PURE CALABI-YAU 6-MANIFOLD :: 671 VERTICES
+        // ENTROPIC CONTAINMENT · RANDOM FLUX BURSTS
+        // ============================================================================
+
+        const TOTAL = 671;
+        
+        // Prime vertices (up to 671)
+        const PRIMES = new Set([2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509,521,523,541,547,557,563,569,571,577,587,593,599,601,607,613,617,619,631,641,643,647,653,659,661]);
+
+        // ============================================================================
+        // GENERATE CY6 VERTICES - 12D PROJECTED TO 3D
+        // ASYMMETRICAL - NO SYMMETRIES - PURE CHAOS
+        // ============================================================================
+
+        class CY6Manifold {
+            constructor() {
+                this.vertices = [];
+                this.points = [];
+                this.primePoints = [];
+                this.burstForces = [];
+                this.containment = 0.5;
+                
+                this.generate();
+                this.createGeometry();
+            }
+            
+            generate() {
+                for (let i = 0; i < TOTAL; i++) {
+                    const n = i + 1;
+                    const isPrime = PRIMES.has(n);
+                    
+                    // 6 COMPLEX DIMENSIONS (12 REAL) - PROJECTED TO 3D
+                    // Using irrational frequencies to ensure asymmetry
+                    
+                    // Complex coordinates with prime-related frequencies
+                    const z1r = Math.sin(n * 0.2731) * Math.cos(n * 0.5743);
+                    const z1i = Math.sin(n * 0.5743) * Math.cos(n * 0.2731);
+                    
+                    const z2r = Math.sin(n * 1.4751) * Math.cos(n * 1.1247);
+                    const z2i = Math.sin(n * 1.1247) * Math.cos(n * 1.4751);
+                    
+                    const z3r = Math.sin(n * 2.7341) * Math.cos(n * 2.3879);
+                    const z3i = Math.sin(n * 2.3879) * Math.cos(n * 2.7341);
+                    
+                    // Kähler potential - varies per vertex
+                    const psi = Math.sqrt(z1r*z1r + z1i*z1i + z2r*z2r + z2i*z2i + z3r*z3r + z3i*z3i);
+                    const K = Math.log(psi * psi + 0.042);
+                    
+                    // Metric tensor - unique per vertex
+                    const g = Math.exp(K) * (0.7 + 0.3 * Math.sin(n * 1.9734));
+                    
+                    // PROJECT TO 3D - ASYMMETRICAL MAPPING
+                    // Each vertex gets unique projection based on its complex coordinates
+                    const x = g * (z1r * Math.cos(n * 0.2347) - z1i * Math.sin(n * 0.2347) + z2r * 0.3);
+                    const y = g * (z1r * Math.sin(n * 0.5678) + z1i * Math.cos(n * 0.5678) + z3i * 0.3);
+                    const z = g * (z2r * Math.cos(n * 0.8912) - z2i * Math.sin(n * 0.8912) + z3r * 0.3);
+                    
+                    // Add higher-dimensional influence - extra "twist" from 6-fold
+                    const wFactor = Math.sin(n * 3.14159) * Math.cos(n * 2.71828);
+                    
+                    const vertex = {
+                        n,
+                        isPrime,
+                        x: x * 4 + wFactor * 0.5,
+                        y: y * 4 + Math.sin(n * 1.2345) * 0.3,
+                        z: z * 4 + Math.cos(n * 2.3456) * 0.3,
+                        baseX: 0, baseY: 0, baseZ: 0,
+                        // Burst physics
+                        burstX: 0, burstY: 0, burstZ: 0,
+                        burstForce: 0,
+                        burstDecay: 0.95 + Math.random() * 0.04,
+                        // Unique properties
+                        frequency: 0.5 + Math.random() * 1.5,
+                        phase: Math.random() * Math.PI * 2,
+                        flux: Math.random() * 0.5
+                    };
+                    
+                    // Store base positions (pre-burst)
+                    vertex.baseX = vertex.x;
+                    vertex.baseY = vertex.y;
+                    vertex.baseZ = vertex.z;
+                    
+                    this.vertices.push(vertex);
+                }
+            }
+            
+            createGeometry() {
+                // Separate prime and composite points for different rendering
+                this.vertices.forEach(v => {
+                    if (v.isPrime) {
+                        this.primePoints.push(v);
+                    } else {
+                        this.points.push(v);
+                    }
+                });
+            }
+            
+            // Apply random burst to a vertex
+            burst(index, strength) {
+                const v = this.vertices[index];
+                if (!v) return;
+                
+                // Random direction in 3D
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                
+                const dx = Math.sin(phi) * Math.cos(theta);
+                const dy = Math.sin(phi) * Math.sin(theta);
+                const dz = Math.cos(phi);
+                
+                // Apply burst force (stronger for primes)
+                const burstStrength = strength * (v.isPrime ? 2.5 : 1.0);
+                v.burstX += dx * burstStrength;
+                v.burstY += dy * burstStrength;
+                v.burstZ += dz * burstStrength;
+                v.burstForce = burstStrength;
+            }
+            
+            // Update all vertices - entropic containment
+            update() {
+                // Random bursts - entropic fighting
+                if (Math.random() < 0.03) { // 3% chance per frame
+                    const numBursts = Math.floor(Math.random() * 5) + 1;
+                    for (let i = 0; i < numBursts; i++) {
+                        const idx = Math.floor(Math.random() * TOTAL);
+                        const strength = 0.5 + Math.random() * 1.5;
+                        this.burst(idx, strength);
+                    }
+                }
+                
+                // Update all vertices
+                this.vertices.forEach(v => {
+                    // Decay burst forces (containment)
+                    v.burstX *= v.burstDecay;
+                    v.burstY *= v.burstDecay;
+                    v.burstZ *= v.burstDecay;
+                    
+                    // Add some oscillation from higher dimensions
+                    const oscX = Math.sin(Date.now() * 0.001 * v.frequency + v.phase) * 0.03;
+                    const oscY = Math.cos(Date.now() * 0.001 * v.frequency * 1.3 + v.phase) * 0.03;
+                    const oscZ = Math.sin(Date.now() * 0.001 * v.frequency * 0.7 + v.phase * 2) * 0.03;
+                    
+                    // Final position = base + burst + oscillation
+                    v.currentX = v.baseX + v.burstX + oscX;
+                    v.currentY = v.baseY + v.burstY + oscY;
+                    v.currentZ = v.baseZ + v.burstZ + oscZ;
+                });
+            }
+        }
+
+        // ============================================================================
+        // THREE.JS SETUP - ABSOLUTELY MINIMAL
+        // ============================================================================
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(15, 5, 20);
+        camera.lookAt(0, 0, 0);
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.body.appendChild(renderer.domElement);
+
+        // NO CONTROLS - PURE OBSERVATION
+
+        // ============================================================================
+        // CREATE THE MANIFOLD
+        // ============================================================================
+
+        const manifold = new CY6Manifold();
+
+        // COMPOSITE VERTICES - SMALL, FAINT, BLUE-WHITE
+        const compositeGeometry = new THREE.BufferGeometry();
+        const compositePositions = new Float32Array(manifold.points.length * 3);
+        
+        manifold.points.forEach((v, i) => {
+            compositePositions[i*3] = v.x;
+            compositePositions[i*3+1] = v.y;
+            compositePositions[i*3+2] = v.z;
+        });
+        
+        compositeGeometry.setAttribute('position', new THREE.BufferAttribute(compositePositions, 3));
+        
+        const compositeMaterial = new THREE.PointsMaterial({
+            color: 0x88aaff,
+            size: 0.12,
+            sizeAttenuation: true,
+            transparent: true,
+            opacity: 0.4,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const compositePoints = new THREE.Points(compositeGeometry, compositeMaterial);
+        scene.add(compositePoints);
+
+        // PRIME VERTICES - LARGER, PULSING, MAGENTA
+        const primeGeometry = new THREE.BufferGeometry();
+        const primePositions = new Float32Array(manifold.primePoints.length * 3);
+        const primeColors = new Float32Array(manifold.primePoints.length * 3);
+        
+        manifold.primePoints.forEach((v, i) => {
+            primePositions[i*3] = v.x;
+            primePositions[i*3+1] = v.y;
+            primePositions[i*3+2] = v.z;
+            
+            // Slight color variation among primes
+            const hue = 0.75 + (v.n / TOTAL) * 0.15; // Magenta range
+            const color = new THREE.Color().setHSL(hue, 0.9, 0.6);
+            
+            primeColors[i*3] = color.r;
+            primeColors[i*3+1] = color.g;
+            primeColors[i*3+2] = color.b;
+        });
+        
+        primeGeometry.setAttribute('position', new THREE.BufferAttribute(primePositions, 3));
+        primeGeometry.setAttribute('color', new THREE.BufferAttribute(primeColors, 3));
+        
+        const primeMaterial = new THREE.PointsMaterial({
+            size: 0.28,
+            sizeAttenuation: true,
+            vertexColors: true,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            opacity: 0.9
+        });
+        
+        const primePoints = new THREE.Points(primeGeometry, primeMaterial);
+        scene.add(primePoints);
+
+        // Add a few subtle lines to show connections? NO - PURE POINTS ONLY
+        // But we'll add a very faint glow effect with a second copy
+        const primeGlowGeometry = new THREE.BufferGeometry();
+        primeGlowGeometry.setAttribute('position', new THREE.BufferAttribute(primePositions.slice(), 3));
+        
+        const primeGlowMaterial = new THREE.PointsMaterial({
+            color: 0xff44aa,
+            size: 0.45,
+            sizeAttenuation: true,
+            transparent: true,
+            opacity: 0.15,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const primeGlowPoints = new THREE.Points(primeGlowGeometry, primeGlowMaterial);
+        scene.add(primeGlowPoints);
+
+        // ============================================================================
+        // ANIMATION - PURE ENTROPIC FIGHT
+        // ============================================================================
+
+        let lastTime = performance.now();
+        const primePosAttr = primeGeometry.attributes.position;
+        const primeGlowPosAttr = primeGlowGeometry.attributes.position;
+        const compositePosAttr = compositeGeometry.attributes.position;
+
+        function animate() {
+            const now = performance.now();
+            const delta = now - lastTime;
+            lastTime = now;
+            
+            // Update manifold physics
+            manifold.update();
+            
+            // Update composite vertex positions
+            manifold.points.forEach((v, i) => {
+                compositePosAttr.array[i*3] = v.currentX;
+                compositePosAttr.array[i*3+1] = v.currentY;
+                compositePosAttr.array[i*3+2] = v.currentZ;
+            });
+            compositePosAttr.needsUpdate = true;
+            
+            // Update prime vertex positions
+            manifold.primePoints.forEach((v, i) => {
+                primePosAttr.array[i*3] = v.currentX;
+                primePosAttr.array[i*3+1] = v.currentY;
+                primePosAttr.array[i*3+2] = v.currentZ;
+                
+                primeGlowPosAttr.array[i*3] = v.currentX;
+                primeGlowPosAttr.array[i*3+1] = v.currentY;
+                primeGlowPosAttr.array[i*3+2] = v.currentZ;
+            });
+            primePosAttr.needsUpdate = true;
+            primeGlowPosAttr.needsUpdate = true;
+            
+            // Pulse prime vertices based on burst force
+            const avgBurst = manifold.vertices.reduce((sum, v) => sum + Math.abs(v.burstX + v.burstY + v.burstZ), 0) / TOTAL;
+            const pulseIntensity = 0.8 + avgBurst * 2;
+            
+            primeMaterial.size = 0.28 * pulseIntensity;
+            primeGlowMaterial.size = 0.45 * pulseIntensity;
+            
+            // Rotate camera very slowly - just to see the 3D structure
+            // This doesn't affect the geometry, just our view of it
+            camera.position.x = 20 * Math.sin(now * 0.0001);
+            camera.position.z = 20 * Math.cos(now * 0.0001);
+            camera.lookAt(0, 0, 0);
+            
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // ============================================================================
+        // WINDOW RESIZE - KEEP FULLSCREEN
+        // ============================================================================
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ============================================================================
+        // NO UI. NO TEXT. NO BUTTONS. NO OPTIONS.
+        // JUST PURE GEOMETRY FIGHTING TO BUST APART.
+        // ============================================================================
+    </script>
+</body>
+</html>
