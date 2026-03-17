@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CY6-671k · VIOLENT COLLAPSE</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: black; }
+    </style>
+</head>
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // ============================================================================
+        // 671,000 VERTEX CALABI-YAU 6-MANIFOLD
+        // MASSIVE VIOLENT COLLAPSE & EXPANSION
+        // ============================================================================
+
+        const TOTAL = 671000;
+        
+        // Generate prime set dynamically up to 671k (simplified - using probabilistic for demo)
+        // In real CY, primes are the singular fibers
+        const PRIMES = new Set();
+        for (let i = 2; i <= 1000; i++) {
+            let isPrime = true;
+            for (let j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j === 0) { isPrime = false; break; }
+            }
+            if (isPrime) PRIMES.add(i);
+        }
+        // Add larger primes periodically for distribution
+        for (let i = 1001; i < TOTAL; i += 17) {
+            if (Math.random() < 0.01) PRIMES.add(i);
+        }
+
+        // ============================================================================
+        // GENERATE MASSIVE CALABI-YAU
+        // ============================================================================
+
+        class MassiveCY6 {
+            constructor() {
+                this.vertices = [];
+                this.primeIndices = [];
+                this.compositeIndices = [];
+                
+                // Physics state
+                this.globalScale = 1.0;
+                this.violenceLevel = 0;
+                this.collapsePhase = 0;
+                
+                this.generate();
+            }
+            
+            generate() {
+                console.log("Generating 671,000 vertex Calabi-Yau 6-fold...");
+                
+                for (let i = 0; i < TOTAL; i++) {
+                    const n = i + 1;
+                    const isPrime = PRIMES.has(n);
+                    
+                    if (isPrime) this.primeIndices.push(i);
+                    
+                    // 6 COMPLEX DIMENSIONS - COMPLETELY ASYMMETRICAL
+                    // Using transcendental frequencies for true CY structure
+                    
+                    // Complex coordinates with irrational frequencies
+                    const z1r = Math.sin(n * 0.2731) * Math.cos(n * 0.8743);
+                    const z1i = Math.sin(n * 0.8743) * Math.cos(n * 0.2731);
+                    
+                    const z2r = Math.sin(n * 1.4751) * Math.cos(n * 1.9247);
+                    const z2i = Math.sin(n * 1.9247) * Math.cos(n * 1.4751);
+                    
+                    const z3r = Math.sin(n * 2.7341) * Math.cos(n * 3.1879);
+                    const z3i = Math.sin(n * 3.1879) * Math.cos(n * 2.7341);
+                    
+                    const z4r = Math.sin(n * 3.5678) * Math.cos(n * 4.1234);
+                    const z4i = Math.sin(n * 4.1234) * Math.cos(n * 3.5678);
+                    
+                    const z5r = Math.sin(n * 5.4321) * Math.cos(n * 6.7890);
+                    const z5i = Math.sin(n * 6.7890) * Math.cos(n * 5.4321);
+                    
+                    const z6r = Math.sin(n * 7.6543) * Math.cos(n * 8.2109);
+                    const z6i = Math.sin(n * 8.2109) * Math.cos(n * 7.6543);
+                    
+                    // Kähler potential from all 12 real dimensions
+                    const psi = Math.sqrt(
+                        z1r*z1r + z1i*z1i + 
+                        z2r*z2r + z2i*z2i + 
+                        z3r*z3r + z3i*z3i +
+                        z4r*z4r + z4i*z4i +
+                        z5r*z5r + z5i*z5i +
+                        z6r*z6r + z6i*z6i
+                    );
+                    
+                    // Non-linear Kähler potential - creates violent topology
+                    const K = Math.pow(psi, 1.3) * Math.sin(psi * 5) * Math.cos(psi * 3);
+                    
+                    // Ricci curvature scalar
+                    const R = -12 * Math.pow(psi, 0.7) * Math.sin(psi * 2);
+                    
+                    // Metric tensor with curvature influence
+                    const g = Math.exp(K * 0.5) * (1 + R * 0.1);
+                    
+                    // Project to 3D - pure asymmetry
+                    const x = g * (z1r * Math.cos(n * 0.1234) - z1i * Math.sin(n * 0.1234) + 
+                                   z2r * Math.sin(n * 0.2345) + z3r * Math.cos(n * 0.3456));
+                    
+                    const y = g * (z1r * Math.sin(n * 0.4321) + z1i * Math.cos(n * 0.4321) + 
+                                   z4r * Math.sin(n * 0.5432) + z5i * Math.cos(n * 0.6543));
+                    
+                    const z = g * (z2r * Math.cos(n * 0.7654) - z2i * Math.sin(n * 0.7654) + 
+                                   z6r * Math.sin(n * 0.8765) + z3i * Math.cos(n * 0.9876));
+                    
+                    // Store with violent potential
+                    this.vertices.push({
+                        n,
+                        isPrime,
+                        
+                        // Base position (the "true" CY point)
+                        baseX: x * 15,
+                        baseY: y * 15,
+                        baseZ: z * 15,
+                        
+                        // Current position
+                        currentX: 0, currentY: 0, currentZ: 0,
+                        
+                        // Individual chaos parameters
+                        chaosFreq: 0.1 + Math.random() * 5,
+                        chaosPhase: Math.random() * Math.PI * 2,
+                        primeIntensity: isPrime ? 3 + Math.random() * 5 : 0,
+                        
+                        // Burst state
+                        burstX: 0, burstY: 0, burstZ: 0,
+                        burstDecay: 0.8 + Math.random() * 0.15
+                    });
+                    
+                    if (i % 100000 === 0) console.log(`Generated ${i} vertices...`);
+                }
+                
+                // Initialize current positions
+                this.vertices.forEach(v => {
+                    v.currentX = v.baseX;
+                    v.currentY = v.baseY;
+                    v.currentZ = v.baseZ;
+                });
+                
+                console.log("Generation complete!");
+            }
+            
+            // MASSIVE VIOLENT UPDATE
+            update(time) {
+                // Global collapse/expansion - violent oscillations
+                // Multiple frequencies create chaotic breathing
+                const collapse1 = Math.sin(time * 1.7) * 3.0;
+                const collapse2 = Math.sin(time * 2.3) * 2.5;
+                const collapse3 = Math.sin(time * 3.1) * 2.0;
+                const collapse4 = Math.sin(time * 5.7) * 1.5;
+                
+                this.globalScale = 1.0 + collapse1 + collapse2 + collapse3 + collapse4;
+                
+                // Violence level fluctuates wildly
+                this.violenceLevel = 0.5 + 2.5 * Math.pow(Math.abs(Math.sin(time * 2.1)), 2) * 
+                                   (1 + 0.5 * Math.sin(time * 7.3));
+                
+                // Batch update for performance (using typed arrays would be better, but this is clearer)
+                const len = this.vertices.length;
+                for (let i = 0; i < len; i++) {
+                    const v = this.vertices[i];
+                    
+                    // Individual chaotic motion
+                    const chaosX = Math.sin(time * v.chaosFreq + v.chaosPhase) * 
+                                   Math.cos(time * v.chaosFreq * 0.8) * this.violenceLevel * 5;
+                    const chaosY = Math.cos(time * v.chaosFreq * 1.2 + v.chaosPhase) * 
+                                   Math.sin(time * v.chaosFreq * 0.6) * this.violenceLevel * 5;
+                    const chaosZ = Math.sin(time * v.chaosFreq * 2.3 + v.chaosPhase * 2) * 
+                                   Math.cos(time * v.chaosFreq * 0.9) * this.violenceLevel * 5;
+                    
+                    // Apply burst decay
+                    v.burstX *= v.burstDecay;
+                    v.burstY *= v.burstDecay;
+                    v.burstZ *= v.burstDecay;
+                    
+                    // Random violent impulses - 1% chance per vertex per frame
+                    if (Math.random() < 0.01) {
+                        const burstStrength = (Math.random() * 6 + 3) * (v.isPrime ? 4 : 1) * this.violenceLevel;
+                        v.burstX += (Math.random() - 0.5) * burstStrength;
+                        v.burstY += (Math.random() - 0.5) * burstStrength;
+                        v.burstZ += (Math.random() - 0.5) * burstStrength;
+                    }
+                    
+                    // Prime vertices have additional violent bursts
+                    let primeBurst = 0;
+                    if (v.isPrime) {
+                        primeBurst = Math.sin(time * 8.3 + v.n) * 
+                                     Math.cos(time * 11.7 + v.n * 3) * 
+                                     Math.sin(time * 13.9 + v.n * 5) * this.violenceLevel * 8;
+                    }
+                    
+                    // Combine all motions
+                    v.currentX = v.baseX * this.globalScale + chaosX + v.burstX + primeBurst;
+                    v.currentY = v.baseY * this.globalScale + chaosY + v.burstY + primeBurst * 0.8;
+                    v.currentZ = v.baseZ * this.globalScale + chaosZ + v.burstZ + primeBurst * 1.2;
+                }
+            }
+        }
+
+        // ============================================================================
+        // THREE.JS - OPTIMIZED FOR 671k POINTS
+        // ============================================================================
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 50);
+        
+        const renderer = new THREE.WebGLRenderer({ 
+            antialias: false, // Disable for performance
+            alpha: false, 
+            powerPreference: "high-performance"
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(1); // Lower pixel ratio for 671k points
+        document.body.appendChild(renderer.domElement);
+
+        // ============================================================================
+        // CREATE THE MASSIVE MANIFOLD
+        // ============================================================================
+
+        const cy6 = new MassiveCY6();
+
+        // Separate prime and composite vertices
+        const primeVertices = cy6.vertices.filter(v => v.isPrime);
+        const compositeVertices = cy6.vertices.filter(v => !v.isPrime);
+        
+        console.log(`Primes: ${primeVertices.length}, Composites: ${compositeVertices.length}`);
+
+        // COMPOSITE GEOMETRY - FAINT BACKGROUND STRUCTURE
+        const compGeo = new THREE.BufferGeometry();
+        const compPos = new Float32Array(compositeVertices.length * 3);
+        compositeVertices.forEach((v, i) => {
+            compPos[i*3] = v.currentX;
+            compPos[i*3+1] = v.currentY;
+            compPos[i*3+2] = v.currentZ;
+        });
+        compGeo.setAttribute('position', new THREE.BufferAttribute(compPos, 3));
+        
+        const compMat = new THREE.PointsMaterial({
+            color: 0x335588,
+            size: 0.12,
+            sizeAttenuation: true,
+            transparent: true,
+            opacity: 0.15,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const compPoints = new THREE.Points(compGeo, compMat);
+        scene.add(compPoints);
+
+        // PRIME GEOMETRY - VIOLENT CORES (multiple layers for glow)
+        const primeGeo = new THREE.BufferGeometry();
+        const primePos = new Float32Array(primeVertices.length * 3);
+        primeVertices.forEach((v, i) => {
+            primePos[i*3] = v.currentX;
+            primePos[i*3+1] = v.currentY;
+            primePos[i*3+2] = v.currentZ;
+        });
+        primeGeo.setAttribute('position', new THREE.BufferAttribute(primePos, 3));
+        
+        // Inner prime core
+        const primeMat = new THREE.PointsMaterial({
+            color: 0xff44aa,
+            size: 0.35,
+            sizeAttenuation: true,
+            transparent: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const primePoints = new THREE.Points(primeGeo, primeMat);
+        scene.add(primePoints);
+        
+        // Prime glow - outer layer
+        const primeGlowGeo = new THREE.BufferGeometry();
+        primeGlowGeo.setAttribute('position', new THREE.BufferAttribute(primePos.slice(), 3));
+        
+        const primeGlowMat = new THREE.PointsMaterial({
+            color: 0xff88cc,
+            size: 0.8,
+            sizeAttenuation: true,
+            transparent: true,
+            opacity: 0.25,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const primeGlowPoints = new THREE.Points(primeGlowGeo, primeGlowMat);
+        scene.add(primeGlowPoints);
+        
+        // Extra faint halo for largest primes
+        const primeHaloGeo = new THREE.BufferGeometry();
+        primeHaloGeo.setAttribute('position', new THREE.BufferAttribute(primePos.slice(), 3));
+        
+        const primeHaloMat = new THREE.PointsMaterial({
+            color: 0xaa66ff,
+            size: 1.4,
+            sizeAttenuation: true,
+            transparent: true,
+            opacity: 0.1,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const primeHaloPoints = new THREE.Points(primeHaloGeo, primeHaloMat);
+        scene.add(primeHaloPoints);
+
+        // ============================================================================
+        // VIOLENT ANIMATION LOOP - OPTIMIZED
+        // ============================================================================
+
+        let clock = new THREE.Clock();
+        
+        // Attribute references for fast updates
+        const compAttr = compGeo.attributes.position;
+        const primeAttr = primeGeo.attributes.position;
+        const glowAttr = primeGlowGeo.attributes.position;
+        const haloAttr = primeHaloGeo.attributes.position;
+
+        function animate() {
+            const delta = clock.getDelta();
+            const time = performance.now() / 1000;
+            
+            // Update the massive manifold
+            cy6.update(time);
+            
+            // Update composite positions
+            const compArray = compAttr.array;
+            for (let i = 0; i < compositeVertices.length; i++) {
+                const v = compositeVertices[i];
+                compArray[i*3] = v.currentX;
+                compArray[i*3+1] = v.currentY;
+                compArray[i*3+2] = v.currentZ;
+            }
+            compAttr.needsUpdate = true;
+            
+            // Update prime positions
+            const primeArray = primeAttr.array;
+            const glowArray = glowAttr.array;
+            const haloArray = haloAttr.array;
+            
+            for (let i = 0; i < primeVertices.length; i++) {
+                const v = primeVertices[i];
+                primeArray[i*3] = v.currentX;
+                primeArray[i*3+1] = v.currentY;
+                primeArray[i*3+2] = v.currentZ;
+                
+                glowArray[i*3] = v.currentX;
+                glowArray[i*3+1] = v.currentY;
+                glowArray[i*3+2] = v.currentZ;
+                
+                haloArray[i*3] = v.currentX;
+                haloArray[i*3+1] = v.currentY;
+                haloArray[i*3+2] = v.currentZ;
+            }
+            primeAttr.needsUpdate = true;
+            glowAttr.needsUpdate = true;
+            haloAttr.needsUpdate = true;
+            
+            // Dynamic sizing based on violence
+            const violence = cy6.violenceLevel;
+            const scale = cy6.globalScale;
+            
+            primeMat.size = 0.35 + violence * 0.5;
+            primeGlowMat.size = 0.8 + violence * 1.0;
+            primeHaloMat.size = 1.4 + violence * 1.5;
+            primeGlowMat.opacity = 0.2 + violence * 0.2;
+            primeHaloMat.opacity = 0.05 + violence * 0.1;
+            
+            // Camera violently moves with the manifold
+            const camDist = 60 + Math.sin(time * 1.3) * 20 + Math.sin(time * 2.7) * 15;
+            camera.position.x = Math.sin(time * 0.15) * camDist * 0.7;
+            camera.position.y = Math.sin(time * 0.21) * camDist * 0.5;
+            camera.position.z = Math.cos(time * 0.15) * camDist;
+            camera.lookAt(0, 0, 0);
+            
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // ============================================================================
+        // RESIZE HANDLER
+        // ============================================================================
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ============================================================================
+        // 671,000 VERTICES OF PURE VIOLENT CALABI-YAU GEOMETRY
+        // NO UI. NO TEXT. NO CONTROLS. JUST MASSIVE CHAOS.
+        // ============================================================================
+    </script>
+</body>
+</html>
