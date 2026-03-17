@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CY6-671 · VIOLENT COLLAPSE</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: black; }
+    </style>
+</head>
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // ============================================================================
+        // 671 VERTEX CALABI-YAU 6-MANIFOLD
+        // VIOLENT COLLAPSE & EXPANSION · PRIME SINGULARITIES
+        // ============================================================================
+
+        const TOTAL = 671;
+        
+        // Primes up to 671
+        const PRIMES = new Set([2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509,521,523,541,547,557,563,569,571,577,587,593,599,601,607,613,617,619,631,641,643,647,653,659,661]);
+
+        // ============================================================================
+        // GENERATE VIOLENT CALABI-YAU
+        // ============================================================================
+
+        class ViolentCY6 {
+            constructor() {
+                this.vertices = [];
+                this.primeIndices = [];
+                this.compositeIndices = [];
+                
+                // Physics state
+                this.globalScale = 1.0;
+                this.globalVelocity = 0;
+                this.collapsePhase = 0;
+                this.violenceLevel = 0;
+                
+                this.generate();
+            }
+            
+            generate() {
+                for (let i = 0; i < TOTAL; i++) {
+                    const n = i + 1;
+                    const isPrime = PRIMES.has(n);
+                    
+                    if (isPrime) this.primeIndices.push(i);
+                    else this.compositeIndices.push(i);
+                    
+                    // 6 COMPLEX DIMENSIONS - COMPLETELY ASYMMETRICAL
+                    // Using transcendental frequencies
+                    
+                    const z1r = Math.sin(n * 0.2731) * Math.cos(n * 0.8743);
+                    const z1i = Math.sin(n * 0.8743) * Math.cos(n * 0.2731);
+                    
+                    const z2r = Math.sin(n * 1.4751) * Math.cos(n * 1.9247);
+                    const z2i = Math.sin(n * 1.9247) * Math.cos(n * 1.4751);
+                    
+                    const z3r = Math.sin(n * 2.7341) * Math.cos(n * 3.1879);
+                    const z3i = Math.sin(n * 3.1879) * Math.cos(n * 2.7341);
+                    
+                    const z4r = Math.sin(n * 3.14159) * Math.cos(n * 0.57721); // Extra dimensions
+                    const z4i = Math.sin(n * 0.57721) * Math.cos(n * 3.14159);
+                    
+                    // Chaotic Kähler potential
+                    const psi = Math.sqrt(
+                        z1r*z1r + z1i*z1i + 
+                        z2r*z2r + z2i*z2i + 
+                        z3r*z3r + z3i*z3i +
+                        z4r*z4r + z4i*z4i
+                    );
+                    
+                    // Non-linear metric - creates violent potential
+                    const K = Math.pow(psi, 1.7) * Math.sin(psi * 10);
+                    
+                    // Base position - pure asymmetry
+                    const x = K * (z1r * Math.cos(n) - z1i * Math.sin(n) + z2r * 0.5);
+                    const y = K * (z1r * Math.sin(n * 1.3) + z1i * Math.cos(n * 1.3) + z3i * 0.5);
+                    const z = K * (z2r * Math.cos(n * 2.7) - z2i * Math.sin(n * 2.7) + z4r * 0.5);
+                    
+                    // Store with violent potential
+                    this.vertices.push({
+                        n,
+                        isPrime,
+                        
+                        // Base position (the "true" CY point)
+                        baseX: x * 8,
+                        baseY: y * 8,
+                        baseZ: z * 8,
+                        
+                        // Current position (for animation)
+                        currentX: 0,
+                        currentY: 0,
+                        currentZ: 0,
+                        
+                        // Individual chaos parameters
+                        chaosFreq: 0.2 + Math.random() * 3,
+                        chaosPhase: Math.random() * Math.PI * 2,
+                        primeIntensity: isPrime ? 1.5 + Math.random() : 0,
+                        
+                        // Burst state
+                        burstX: 0, burstY: 0, burstZ: 0,
+                        burstDecay: 0.85 + Math.random() * 0.1
+                    });
+                }
+                
+                // Initialize current positions
+                this.vertices.forEach(v => {
+                    v.currentX = v.baseX;
+                    v.currentY = v.baseY;
+                    v.currentZ = v.baseZ;
+                });
+            }
+            
+            // VIOLENT TRANSFORMATION
+            update(time) {
+                // Global collapse/expansion cycle
+                // Uses prime numbers to drive irregular rhythm
+                const primeRhythm = Math.sin(time * 0.7) * Math.sin(time * 1.3) * Math.sin(time * 1.9);
+                this.globalScale = 1.0 + Math.sin(time * 2.3) * 2.5 * (0.8 + 0.4 * Math.sin(time * 5.7));
+                
+                // Violence level fluctuates wildly
+                this.violenceLevel = 0.5 + 1.5 * Math.pow(Math.sin(time * 4.1), 3);
+                
+                // Update each vertex
+                this.vertices.forEach(v => {
+                    // Individual chaotic motion
+                    const chaosX = Math.sin(time * v.chaosFreq + v.chaosPhase) * 
+                                   Math.cos(time * v.chaosFreq * 0.7) * this.violenceLevel * 3;
+                    const chaosY = Math.cos(time * v.chaosFreq * 1.3 + v.chaosPhase) * 
+                                   Math.sin(time * v.chaosFreq * 0.5) * this.violenceLevel * 3;
+                    const chaosZ = Math.sin(time * v.chaosFreq * 2.1 + v.chaosPhase * 2) * 
+                                   Math.cos(time * v.chaosFreq * 0.9) * this.violenceLevel * 3;
+                    
+                    // Prime vertices have additional violent bursts
+                    let primeBurst = 0;
+                    if (v.isPrime) {
+                        // Primes erupt independently
+                        primeBurst = Math.sin(time * 5.3 + v.n) * 
+                                     Math.cos(time * 7.1 + v.n * 2) * 
+                                     Math.sin(time * 11.3 + v.n * 3) * this.violenceLevel * 5;
+                    }
+                    
+                    // Apply burst decay from previous frame
+                    v.burstX *= v.burstDecay;
+                    v.burstY *= v.burstDecay;
+                    v.burstZ *= v.burstDecay;
+                    
+                    // Random violent impulses - structure fights itself
+                    if (Math.random() < 0.02) { // 2% chance per vertex per frame
+                        const burstStrength = (Math.random() * 4 + 2) * (v.isPrime ? 3 : 1);
+                        v.burstX += (Math.random() - 0.5) * burstStrength;
+                        v.burstY += (Math.random() - 0.5) * burstStrength;
+                        v.burstZ += (Math.random() - 0.5) * burstStrength;
+                    }
+                    
+                    // Combine all motions
+                    v.currentX = v.baseX * this.globalScale + chaosX + v.burstX + primeBurst;
+                    v.currentY = v.baseY * this.globalScale + chaosY + v.burstY + primeBurst * 0.7;
+                    v.currentZ = v.baseZ * this.globalScale + chaosZ + v.burstZ + primeBurst * 1.3;
+                });
+            }
+        }
+
+        // ============================================================================
+        // THREE.JS - ABSOLUTELY MINIMAL, NO LINES, NO UI
+        // ============================================================================
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        
+        const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 30);
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.body.appendChild(renderer.domElement);
+
+        // NO CONTROLS - PURE OBSERVATION
+
+        // ============================================================================
+        // CREATE THE VIOLENT MANIFOLD
+        // ============================================================================
+
+        const cy6 = new ViolentCY6();
+
+        // Separate prime and composite vertices
+        const primeVertices = cy6.vertices.filter(v => v.isPrime);
+        const compositeVertices = cy6.vertices.filter(v => !v.isPrime);
+
+        // COMPOSITE GEOMETRY - FAINT GHOSTS
+        const compGeo = new THREE.BufferGeometry();
+        const compPos = new Float32Array(compositeVertices.length * 3);
+        compositeVertices.forEach((v, i) => {
+            compPos[i*3] = v.currentX;
+            compPos[i*3+1] = v.currentY;
+            compPos[i*3+2] = v.currentZ;
+        });
+        compGeo.setAttribute('position', new THREE.BufferAttribute(compPos, 3));
+        
+        const compMat = new THREE.PointsMaterial({
+            color: 0x446688,
+            size: 0.18,
+            sizeAttenuation: true,
+            transparent: true,
+            opacity: 0.3,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const compPoints = new THREE.Points(compGeo, compMat);
+        scene.add(compPoints);
+
+        // PRIME GEOMETRY - VIOLENT MAGENTA CORES
+        const primeGeo = new THREE.BufferGeometry();
+        const primePos = new Float32Array(primeVertices.length * 3);
+        primeVertices.forEach((v, i) => {
+            primePos[i*3] = v.currentX;
+            primePos[i*3+1] = v.currentY;
+            primePos[i*3+2] = v.currentZ;
+        });
+        primeGeo.setAttribute('position', new THREE.BufferAttribute(primePos, 3));
+        
+        // Main prime points
+        const primeMat = new THREE.PointsMaterial({
+            color: 0xff44aa,
+            size: 0.45,
+            sizeAttenuation: true,
+            transparent: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const primePoints = new THREE.Points(primeGeo, primeMat);
+        scene.add(primePoints);
+        
+        // Prime glow - larger, pulsing
+        const primeGlowGeo = new THREE.BufferGeometry();
+        primeGlowGeo.setAttribute('position', new THREE.BufferAttribute(primePos.slice(), 3));
+        
+        const primeGlowMat = new THREE.PointsMaterial({
+            color: 0xff88cc,
+            size: 0.9,
+            sizeAttenuation: true,
+            transparent: true,
+            opacity: 0.4,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const primeGlowPoints = new THREE.Points(primeGlowGeo, primeGlowMat);
+        scene.add(primeGlowPoints);
+
+        // ============================================================================
+        // VIOLENT ANIMATION LOOP
+        // ============================================================================
+
+        let clock = new THREE.Clock();
+        
+        // Attribute references for fast updates
+        const compAttr = compGeo.attributes.position;
+        const primeAttr = primeGeo.attributes.position;
+        const glowAttr = primeGlowGeo.attributes.position;
+
+        function animate() {
+            const delta = clock.getDelta();
+            const time = performance.now() / 1000; // seconds
+            
+            // Update the manifold - VIOLENTLY
+            cy6.update(time);
+            
+            // Update composite positions
+            compositeVertices.forEach((v, i) => {
+                compAttr.array[i*3] = v.currentX;
+                compAttr.array[i*3+1] = v.currentY;
+                compAttr.array[i*3+2] = v.currentZ;
+            });
+            compAttr.needsUpdate = true;
+            
+            // Update prime positions
+            primeVertices.forEach((v, i) => {
+                primeAttr.array[i*3] = v.currentX;
+                primeAttr.array[i*3+1] = v.currentY;
+                primeAttr.array[i*3+2] = v.currentZ;
+                
+                glowAttr.array[i*3] = v.currentX;
+                glowAttr.array[i*3+1] = v.currentY;
+                glowAttr.array[i*3+2] = v.currentZ;
+            });
+            primeAttr.needsUpdate = true;
+            glowAttr.needsUpdate = true;
+            
+            // Dynamic sizing based on violence level
+            const violence = cy6.violenceLevel;
+            primeMat.size = 0.45 + violence * 0.4;
+            primeGlowMat.size = 0.9 + violence * 0.8;
+            primeGlowMat.opacity = 0.3 + violence * 0.3;
+            
+            // Camera moves with the violence - gets closer during collapse
+            const camDistance = 25 + Math.sin(time * 2.3) * 8;
+            camera.position.x = Math.sin(time * 0.2) * camDistance * 0.5;
+            camera.position.y = Math.sin(time * 0.3) * camDistance * 0.3;
+            camera.position.z = camDistance;
+            camera.lookAt(0, 0, 0);
+            
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // ============================================================================
+        // RESIZE HANDLER
+        // ============================================================================
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ============================================================================
+        // NO TEXT. NO UI. NO CONTROLS. NO OPTIONS.
+        // JUST PURE VIOLENT GEOMETRY.
+        // ============================================================================
+    </script>
+</body>
+</html>
