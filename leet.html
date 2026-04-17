@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ÆTERNIS-RUST-7 // HIGH-ENTROPY SCRAMBLER</title>
+    <style>
+        body { background: #05070a; color: #00ff41; font-family: 'Courier New', monospace; padding: 40px; text-align: center; }
+        .box { background: #0d1117; border: 1px solid #00ff41; padding: 25px; max-width: 900px; margin: auto; box-shadow: 0 0 30px #00ff4133; }
+        textarea { width: 100%; height: 120px; background: #000; color: #fff; border: 1px solid #333; padding: 10px; margin: 15px 0; font-size: 1.1rem; }
+        button { width: 100%; padding: 20px; background: #00ff41; color: #000; font-weight: bold; border: none; cursor: pointer; letter-spacing: 3px; }
+        button:hover { background: #fff; }
+        .log-label { text-align: left; font-size: 0.7rem; color: #00d4ff; margin-top: 20px; text-transform: uppercase; }
+        .output-stream { background: #000; border-left: 3px solid #00d4ff; padding: 20px; margin-top: 10px; text-align: left; min-height: 80px; word-break: break-all; color: #00ff41; font-size: 1.4rem; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>SOVEREIGN_RANDOM_v6.0</h1>
+    <div class="log-label">Input Plaintext // Reality_Buffer:</div>
+    <textarea id="input" oninput="execute()" placeholder="Enter message for variable-state scrambling..."></textarea>
+    
+    <div class="log-label">High-Entropy Output // No_Repeat_Logic:</div>
+    <div id="output" class="output-stream">_SYSTEM_IDLE_</div>
+</div>
+
+<script>
+    const lexicon = {
+        'A': ["4", "/-\\", "/_\\", "^", "А", "Α", "𝔸", "𝒜", "Ⓐ", "🅐", "🄰", "ᴀ", "∀", "Δ", "Ʌ", "λ", "₳", "△", "Д"],
+        'B': ["8", "|3", "ß", "Β", "𝔹", "ℬ", "Ⓑ", "🅑", "🄱", "ʙ", "♭", "Ҕ", "฿", "ℬ"],
+        'C': ["C", "(", "<", "¢", "С", "ℂ", "𝒞", "Ⓒ", "🅒", "🄲", "ᴄ", "©", "₢", "ç", "☾"],
+        'D': ["D", "|)", "|>", "Ð", "Ꭰ", "𝔻", "𝒟", "Ⓓ", "🅓", "🄳", "ᴅ", "∂", "ⅅ", "⊳", "⏄"],
+        'E': ["E", "3", "€", "£", "Е", "Ε", "𝔼", "ℰ", "Ⓔ", "🅔", "🄴", "ᴇ", "Σ", "ɛ", "ℯ", "⋲", "ξ"],
+        'F': ["F", "|=", "ƒ", "Ϝ", "𝔽", "ℱ", "Ⓕ", "🅕", "🄵", "ꜰ", "⨍", "Ⅎ", "₣", "⚯"],
+        'G': ["G", "6", "9", "Ԍ", "𝔾", "𝒢", "Ⓖ", "🅖", "🄶", "ɢ", "₲", "ℊ", "ʛ", "ǥ"],
+        'H': ["H", "#", "|-|", "Н", "Η", "ℍ", "ℋ", "Ⓗ", "🅗", "🄗", "ʜ", "ℏ", "н", "♓", "╫"],
+        'I': ["I", "1", "|", "!", "І", "Ι", "𝕀", "ℐ", "Ⓘ", "🅘", "🄹", "ɪ", "ℹ", "ℑ", "ι", "ヂ"],
+        'J': ["J", "]", "_|", "Ј", "𝕁", "𝒥", "Ⓙ", "🅙", "🄺", "ᴊ", "ʝ", "𝔍", "ⅉ", "⎩"],
+        'K': ["K", "X", "|<", "К", "Κ", "𝕂", "𝒦", "Ⓚ", "🅚", "🄻", "ᴋ", "₭", "κ", "⋇", "ϗ"],
+        'L': ["L", "1", "|_", "£", "𝕃", "ℒ", "Ⓛ", "🅛", "🄼", "ʟ", "ℓ", "∟", "⌊", "⎾"],
+        'M': ["M", "|\\/|", "/\\/\\", "М", "Μ", "𝕄", "ℳ", "Ⓜ", "🅜", "🄽", "ᴍ", "♏", "ʍ", "♍", "ℳ"],
+        'N': ["N", "|\\|", "И", "Ν", "ℕ", "𝒩", "Ⓝ", "🅝", "🄾", "ɴ", "№", "И", "η", "и"],
+        'O': ["O", "0", "()", "ø", "О", "Ο", "𝕆", "𝒪", "Ⓞ", "🅞", "🄿", "ᴏ", "∅", "⦿", "❂", "❍"],
+        'P': ["P", "|*", "|o", "Р", "Ρ", "ℙ", "𝒫", "Ⓟ", "🅟", "🅀", "ᴘ", "℗", "¶", "ρ", "ק"],
+        'Q': ["Q", "9", "0_", "ℚ", "𝒬", "Ⓠ", "🅠", "🅁", "ǫ", "𝚀", "ϙ", "℺", "φ"],
+        'R': ["R", "|2", "®", "Ꮢ", "ℝ", "ℛ", "Ⓡ", "🅡", "🅂", "ʀ", "℞", "ℜ", "ℝ", "尺"],
+        'S': ["S", "5", "$", "§", "Ѕ", "𝕊", "𝒮", "Ⓢ", "🅢", "🄃", "ꜱ", "∫", "⚡", "ℌ", "š"],
+        'T': ["T", "7", "+", "†", "Т", "Τ", "𝕋", "𝒯", "Ⓣ", "🅣", "🄄", "ᴛ", "τ", "π", "τ", "⊤"],
+        'U': ["U", "|_|", "µ", "Ս", "𝕌", "𝒰", "Ⓤ", "🅤", "🄅", "ᴜ", "℧", "บ", "μ", "บ"],
+        'V': ["V", "\\/", "Ꮩ", "𝕍", "𝒱", "Ⓥ", "🅥", "🄆", "ᴠ", "∨", "√", "ν", "ט"],
+        'W': ["W", "\\/\\/", "vv", "Ꮃ", "𝕎", "𝒲", "Ⓦ", "🅦", "🄇", "ᴡ", "₩", "ய", "ω", "₩"],
+        'X': ["X", "><", "Ж", "Х", "Χ", "𝕏", "𝒳", "Ⓧ", "🅧", "🄈", "x", "⊠", "⌘", "×", "⚔"],
+        'Y': ["Y", "`/", "¥", "Ү", "Υ", "𝕐", "𝒴", "Ⓨ", "🅨", "🄉", "ʏ", "Ψ", "λ", "γ", "ɥ"],
+        'Z': ["Z", "2", "7_", "ℤ", "𝒵", "Ⓩ", "🅩", "🄊", "ᴢ", "☡", "ℨ", "ζ", "乙"],
+        // Basic Lowercase Set
+        'a': ["α", "å", "æ", "ā", "ą", "ª"], 'b': ["♭", "в", "ь", "ɓ"], 'c': ["¢", "ç", "ĉ", "ć"],
+        'd': ["∂", "đ", "ď", "₫"], 'e': ["€", "ë", "ê", "è", "ə"], 'f': ["ƒ", "ʃ", "ɟ"],
+        'g': ["ǥ", "ġ", "ĝ"], 'h': ["ℏ", "н", "ħ"], 'i': ["!", "¡", "ì", "ï"],
+        'j': ["ʝ", "ĵ"], 'k': ["κ", "ķ"], 'l': ["ℓ", "ł", "ŀ"],
+        'm': ["м", "ɱ"], 'n': ["η", "ñ", "ń"], 'o': ["ø", "ö", "ò", "õ"],
+        'p': ["ρ", "þ"], 'q': ["ϙ", "ǫ"], 'r': ["ʀ", "ř", "ŗ"],
+        's': ["§", "š", "ś"], 't': ["†", "ť", "ţ"], 'u': ["µ", "ü", "û"],
+        'v': ["ν", "ѵ"], 'w': ["ω", "ŵ"], 'x': ["×", "ẋ"],
+        'y': ["γ", "ÿ", "ŷ"], 'z': ["ζ", "ž", "ź"]
+    };
+
+    function execute() {
+        const text = document.getElementById('input').value;
+        let output = "";
+        let prevChar = "";
+
+        for (let char of text) {
+            let options = lexicon[char] || [char];
+            let selection;
+
+            if (options.length > 1) {
+                // Stochastic loop: select until unique from previous
+                do {
+                    selection = options[Math.floor(Math.random() * options.length)];
+                } while (selection === prevChar);
+            } else {
+                selection = options[0];
+            }
+
+            output += selection;
+            prevChar = selection;
+        }
+        document.getElementById('output').innerText = output;
+    }
+</script>
+</body>
+</html>
