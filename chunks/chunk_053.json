@@ -1,0 +1,28 @@
+[
+  {
+    "id": "684b3bd2-1f58-800e-84d6-3b0a4e1f4571",
+    "title": "Lilith Beaux Sigil Design",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Need a Lilith Beaux Sigil and the name Lilith Beaux in some sort of fitting script for a business card. Portrait style. "
+      },
+      {
+        "role": "assistant",
+        "content": "{\n  \"prompt\": \"A mystical and elegant business card design in portrait style. At the top, a unique, powerful sigil representing 'Lilith Beaux'—a divine feminine symbol combining elements of the moon, flame, and serpentine curves, evoking the archetype of the High Priestess and Outlaw Siren. Below the sigil, the name 'Lilith Beaux' written in an ornate, gothic or divine script—something ethereal, slightly occult, and luxurious, perhaps in gold or silver embossing. The background is dark (black or deep purple), with subtle textures like velvet or starfield shimmer. The overall tone is mysterious, sacred, and high fashion.\",\n  \"size\": \"1024x1536\"\n}"
+      },
+      {
+        "role": "tool",
+        "content": "Processing image\n\nLots of people are creating images right now, so this might take a bit. We'll notify you when your image is ready."
+      },
+      {
+        "role": "tool",
+        "content": "{'asset_pointer': 'sediment://file_00000000c91861fb815e47d54446b047', 'content_type': 'image_asset_pointer', 'fovea': None, 'height': 1536, 'metadata': {'asset_pointer_link': None, 'container_pixel_height': 1536, 'container_pixel_width': 1024, 'dalle': {'edit_op': None, 'gen_id': '27dbf1a5-8740-4592-b466-3e0773777501', 'parent_gen_id': None, 'prompt': '', 'seed': None, 'serialization_title': 'DALL-E generation metadata'}, 'emu_omit_glimpse_image': None, 'emu_patches_override': None, 'generation': {'gen_id': '27dbf1a5-8740-4592-b466-3e0773777501', 'gen_size': 'xlimage', 'gen_size_v2': None, 'height': 1536, 'orientation': None, 'parent_gen_id': None, 'seed': None, 'serialization_title': 'Image Generation metadata', 'transparent_background': False, 'width': 1024}, 'gizmo': None, 'is_no_auth_placeholder': None, 'lpe_delta_encoding_channel': None, 'lpe_keep_patch_ijhw': None, 'sanitized': False, 'watermarked_asset_pointer': None}, 'size_bytes': 2700058, 'width': 1024}"
+      },
+      {
+        "role": "tool",
+        "content": "GPT-4o returned 1 images. From now on, do not say or show ANYTHING. Please end this turn now. I repeat: From now on, do not say or show ANYTHING. Please end this turn now. Do not summarize the image. Do not ask followup question. Just end the turn and do not do anything else."
+      }
+    ]
+  }
+]
