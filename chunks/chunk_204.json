@@ -1,0 +1,16 @@
+[
+  {
+    "id": "693a6891-a778-832a-b80d-86b947efdb08",
+    "title": "iPhone 11 audio sharing",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can iPhone 11 pair to two pair of Sony wh-1000x5’s?"
+      },
+      {
+        "role": "assistant",
+        "content": "No — **an iPhone 11 cannot natively output the same audio stream to two pairs of Sony WH-1000XM5 headphones simultaneously** just by pairing them both in Bluetooth settings.\n\nHere’s why:\n\n- **Sony WH-1000XM5 supports Bluetooth Multipoint**, but that lets **each individual pair** stay connected to **two separate source devices at once** (e.g., your phone and your laptop), not let **one source broadcast audio to two headphones at the same time**. citeturn0search0turn0search2\n\n- iPhones have an **Audio Sharing** feature that *can* play audio to **two Bluetooth headphones at once**, but that feature **only works with compatible Apple/Beats products** (like AirPods or Beats with an H1/W1 chip), not generic Bluetooth headphones such as Sony WH-1000XM5. citeturn1search17\n\n- Bluetooth standards such as **Bluetooth LE Audio with Auracast** can broadcast to multiple receivers at once, and Sony is adding support for this in some products via firmware updates, but **iPhones (including iPhone 11) do not currently natively support Auracast audio broadcasting**, so this method won’t work for shared audio directly from your iPhone without some workaround. citeturn1search1turn1search3\n\n**What *is* possible:**\n- You can *pair* two separate WH-1000XM5 pairs to your iPhone and **switch between them manually** by selecting the active audio output in Bluetooth settings — but only one will play audio at a time.\n- Each WH-1000XM5 can itself connect via multipoint to two source devices, but that doesn’t change the fact that the iPhone will only stream audio to one set of headphones at a time unless you use Apple/Beats-specific audio sharing.\n\nIf you *really* need simultaneous playback to two non-Apple Bluetooth headphones from your iPhone, you’d have to use an **external audio splitter/dongle** that supports dual Bluetooth output or a device that supports **Bluetooth LE Audio broadcasting** and then connect both WH-1000XM5 units to that transmitter."
+      }
+    ]
+  }
+]
