@@ -1,0 +1,16 @@
+[
+  {
+    "id": "6874a54a-a4bc-800e-abbe-e77eb2b0722b",
+    "title": "Accidental X Input",
+    "messages": [
+      {
+        "role": "user",
+        "content": "X"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Looks like you typed \"X\" — did you mean to start something, or was that accidental? Let me know how I can help."
+      }
+    ]
+  }
+]

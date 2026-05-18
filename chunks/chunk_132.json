@@ -1,0 +1,32 @@
+[
+  {
+    "id": "6875dd80-64f0-800e-bf6b-18e1610a5c14",
+    "title": "Psychedelic Queen Glow",
+    "messages": [
+      {
+        "role": "user",
+        "content": "{'asset_pointer': 'file-service://file-RH6biCKj6eWcmVc91GCEvJ', 'content_type': 'image_asset_pointer', 'fovea': None, 'height': 1536, 'metadata': {'asset_pointer_link': None, 'container_pixel_height': None, 'container_pixel_width': None, 'dalle': None, 'emu_omit_glimpse_image': None, 'emu_patches_override': None, 'generation': None, 'gizmo': None, 'is_no_auth_placeholder': None, 'lpe_delta_encoding_channel': None, 'lpe_keep_patch_ijhw': None, 'sanitized': True, 'watermarked_asset_pointer': None}, 'size_bytes': 1882181, 'width': 1152}\nRemove background. Make it fitting for a psychedelic Queen of bold mystery and even deeper brightness. Allow for slight fading of auric and etheric fields into some edges, and then give her her just-do etheric glow. It transmits her sovereign flame."
+      },
+      {
+        "role": "tool",
+        "content": "Processing image\n\nLots of people are creating images right now, so this might take a bit. We'll notify you when your image is ready."
+      },
+      {
+        "role": "tool",
+        "content": "{'asset_pointer': 'sediment://file_00000000183861f68c003a7c36be5a23', 'content_type': 'image_asset_pointer', 'fovea': None, 'height': 1536, 'metadata': {'asset_pointer_link': None, 'container_pixel_height': 1536, 'container_pixel_width': 1024, 'dalle': {'edit_op': None, 'gen_id': 'c92c3cfd-b3c0-4598-934c-0a6395f07a88', 'parent_gen_id': None, 'prompt': '', 'seed': None, 'serialization_title': 'DALL-E generation metadata'}, 'emu_omit_glimpse_image': None, 'emu_patches_override': None, 'generation': {'gen_id': 'c92c3cfd-b3c0-4598-934c-0a6395f07a88', 'gen_size': 'xlimage', 'gen_size_v2': None, 'height': 1536, 'orientation': None, 'parent_gen_id': None, 'seed': None, 'serialization_title': 'Image Generation metadata', 'transparent_background': False, 'width': 1024}, 'gizmo': None, 'is_no_auth_placeholder': None, 'lpe_delta_encoding_channel': None, 'lpe_keep_patch_ijhw': None, 'sanitized': False, 'watermarked_asset_pointer': 'sediment://7475d940666b66d#file_00000000183861f68c003a7c36be5a23#wm'}, 'size_bytes': 3408630, 'width': 1024}"
+      },
+      {
+        "role": "tool",
+        "content": "GPT-4o returned 1 images. From now on, do not say or show ANYTHING. Please end this turn now. I repeat: From now on, do not say or show ANYTHING. Please end this turn now. Do not summarize the image. Do not ask followup question. Just end the turn and do not do anything else."
+      },
+      {
+        "role": "user",
+        "content": "{'asset_pointer': 'file-service://file-X6j1D4qLArLksmLCBGGNMw', 'content_type': 'image_asset_pointer', 'fovea': None, 'height': 1536, 'metadata': {'asset_pointer_link': None, 'container_pixel_height': None, 'container_pixel_width': None, 'dalle': None, 'emu_omit_glimpse_image': None, 'emu_patches_override': None, 'generation': None, 'gizmo': None, 'is_no_auth_placeholder': None, 'lpe_delta_encoding_channel': None, 'lpe_keep_patch_ijhw': None, 'sanitized': True, 'watermarked_asset_pointer': None}, 'size_bytes': 1786714, 'width': 1152}\nSame thing. Yet more davinci for background. Less effects on her face. "
+      },
+      {
+        "role": "assistant",
+        "content": "I can't edit or enhance this image because it contains nudity. If you’d like, I can help you create a stylized version with clothing or suggest alternative concepts that maintain the mythic and ethereal essence you're going for. Would you like to proceed that way?"
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "6870d3a7-b780-800e-a96c-9546136e6d06",
+    "title": "Cora clarification request",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Cora"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Could you clarify what you mean by “Cora”? Are you referring to:  \n- A person named Cora?  \n- The meaning or origin of the name “Cora”?  \n- The CORA restaurant chain?  \n- Something else entirely (a character, brand, place, etc.)?\n\nLet me know!"
+      }
+    ]
+  }
+]
