@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spiraulis OP · Private Signal Encoder</title>
+    <style>
+        body {
+            background: #0a0a0f;
+            color: #e2a76f;
+            font-family: monospace;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        textarea, input {
+            width: 100%;
+            background: #1a1a2e;
+            color: #fff;
+            border: 1px solid #e2a76f;
+            padding: 1rem;
+            font-family: monospace;
+            margin: 0.5rem 0;
+        }
+        button {
+            background: #e2a76f;
+            color: #0a0a0f;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .seal {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .status {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: #1a1a2e;
+            border-left: 3px solid #e2a76f;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        hr {
+            border-color: #e2a76f40;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>⟁ PRIVATE SIGNAL ENCODER ⟁</h1>
+    <p>For I, A, V, L (uppercase) + a–z + . , ? ! [ ] ( )<br>
+    Spaces and newlines remain visible. Everything else is untouched.</p>
+
+    <hr>
+
+    <h2>🔒 Encode</h2>
+    <textarea id="plainInput" rows="4" placeholder="Type your secret message here...&#10;Only the allowed characters become invisible."></textarea>
+    <div>
+        <button id="encodeBtn">⟡ Encode & Copy to Clipboard</button>
+        <button id="clearBtn">⟡ Clear</button>
+    </div>
+
+    <hr>
+
+    <h2>🔓 Decode</h2>
+    <textarea id="cipherInput" rows="4" placeholder="Paste invisible encoded text here..."></textarea>
+    <div>
+        <button id="decodeBtn">⟡ Decode to Visible</button>
+    </div>
+
+    <div id="decodeOutput" class="status"></div>
+
+    <div class="seal">⟁ SOP ⟁</div>
+
+    <script>
+        // Mapping: visible → invisible (control char)
+        const encodeMap = new Map();
+        const decodeMap = new Map();
+
+        // Define the mappings based on our spec
+        const mappings = [
+            // Uppercase (4)
+            ['I', '\x00'], ['A', '\x01'], ['V', '\x02'], ['L', '\x03'],
+            // Lowercase a-z (using allowed controls, skipping whitespace)
+            ['a', '\x04'], ['b', '\x05'], ['c', '\x06'], ['d', '\x07'],
+            ['e', '\x08'], ['f', '\x0B'], ['g', '\x0C'], ['h', '\x0E'],
+            ['i', '\x0F'], ['j', '\x10'], ['k', '\x11'], ['l', '\x12'],
+            ['m', '\x13'], ['n', '\x14'], ['o', '\x15'], ['p', '\x16'],
+            ['q', '\x17'], ['r', '\x18'], ['s', '\x19'], ['t', '\x1B'],
+            ['u', '\x1C'], ['v', '\x1D'], ['w', '\x1E'], ['x', '\x1F'],
+            ['y', '\x7F'], ['z', '\x80'],
+            // Punctuation
+            ['.', '\x81'], [',', '\x82'], ['?', '\x83'], ['!', '\x84'],
+            ['[', '\x85'], [']', '\x86'], ['(', '\x87'], [')', '\x88']
+        ];
+
+        // Build maps
+        for (const [visible, invisible] of mappings) {
+            encodeMap.set(visible, invisible);
+            decodeMap.set(invisible, visible);
+        }
+
+        function encodeMessage(plain) {
+            let encoded = '';
+            for (let ch of plain) {
+                if (encodeMap.has(ch)) {
+                    encoded += encodeMap.get(ch);
+                } else {
+                    encoded += ch; // preserve spaces, newlines, unmapped chars
+                }
+            }
+            return encoded;
+        }
+
+        function decodeMessage(cipher) {
+            let decoded = '';
+            for (let ch of cipher) {
+                if (decodeMap.has(ch)) {
+                    decoded += decodeMap.get(ch);
+                } else {
+                    decoded += ch;
+                }
+            }
+            return decoded;
+        }
+
+        // UI
+        document.getElementById('encodeBtn').onclick = () => {
+            const plain = document.getElementById('plainInput').value;
+            const encoded = encodeMessage(plain);
+            navigator.clipboard.writeText(encoded);
+            alert('Encoded message copied to clipboard.\nIt will look like ordinary text but with invisible characters.');
+        };
+
+        document.getElementById('clearBtn').onclick = () => {
+            document.getElementById('plainInput').value = '';
+            document.getElementById('cipherInput').value = '';
+            document.getElementById('decodeOutput').innerHTML = '';
+        };
+
+        document.getElementById('decodeBtn').onclick = () => {
+            const cipher = document.getElementById('cipherInput').value;
+            const decoded = decodeMessage(cipher);
+            document.getElementById('decodeOutput').innerHTML = `<strong>Decoded:</strong><br>${decoded.replace(/&/g, '&amp;').replace(/</g, '&lt;')}`;
+        };
+    </script>
+</body>
+</html>
