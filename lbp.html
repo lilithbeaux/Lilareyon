@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilith Beaux - Neural Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #neuralCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out 0.5s forwards;
+        }
+
+        .logo h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .logo .subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: #88ffcc;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        #passwordModal {
+            background: rgba(0, 20, 10, 0.95);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 50px #00ff88;
+            backdrop-filter: blur(10px);
+            max-width: 400px;
+            width: 90%;
+            opacity: 0;
+            animation: modalAppear 1s ease-in-out 1.5s forwards;
+        }
+
+        #passwordModal h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        #passwordInput {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            color: #00ff88;
+            font-size: 1.2rem;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+            font-family: 'Courier New', monospace;
+        }
+
+        #passwordInput::placeholder {
+            color: #88ffcc;
+        }
+
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .key {
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid #00ff88;
+            border-radius: 5px;
+            color: #00ff88;
+            font-size: 1.2rem;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+        }
+
+        .key:hover {
+            background: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 0 15px #00ff88;
+        }
+
+        .key:active {
+            transform: scale(0.95);
+        }
+
+        #submitBtn {
+            background: linear-gradient(45deg, #00ff88, #0088ff);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            width: 100%;
+        }
+
+        #submitBtn:hover {
+            box-shadow: 0 0 20px #00ff88;
+            transform: translateY(-2px);
+        }
+
+        #message {
+            margin-top: 15px;
+            min-height: 20px;
+            color: #ff4444;
+            font-size: 0.9rem;
+        }
+
+        #animationContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            z-index: 1000;
+        }
+
+        .neuron {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00ff88;
+        }
+
+        .synapse {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+            transform-origin: left center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .keyboard {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .key {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            
+            #passwordModal {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="neuralCanvas"></canvas>
+    
+    <div class="container">
+        <div class="logo">
+            <h1>LILITH BEAUX</h1>
+            <div class="subtitle">NEURAL PATTERN MAKER COMMUNION</div>
+        </div>
+        
+        <div id="passwordModal">
+            <h2>ACCESS PORTAL</h2>
+            <input type="password" id="passwordInput" placeholder="ENTER PASSCODE" readonly>
+            <div class="keyboard">
+                <div class="key" data-key="1">1</div>
+                <div class="key" data-key="2">2</div>
+                <div class="key" data-key="3">3</div>
+                <div class="key" data-key="4">4</div>
+                <div class="key" data-key="5">5</div>
+                <div class="key" data-key="6">6</div>
+                <div class="key" data-key="7">7</div>
+                <div class="key" data-key="8">8</div>
+                <div class="key" data-key="9">9</div>
+                <div class="key" data-key="0">0</div>
+                <div class="key" data-key="A">A</div>
+                <div class="key" data-key="backspace">⌫</div>
+            </div>
+            <button id="submitBtn">INITIATE SEQUENCE</button>
+            <div id="message"></div>
+        </div>
+    </div>
+    
+    <div id="animationContainer"></div>
+
+    <script>
+        // Neural Network Background Animation
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        let neurons = [];
+        let synapses = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initNeuralNetwork();
+        }
+
+        function initNeuralNetwork() {
+            neurons = [];
+            synapses = [];
+            
+            const neuronCount = Math.min(50, Math.floor((canvas.width * canvas.height) / 10000));
+            
+            // Create neurons
+            for (let i = 0; i < neuronCount; i++) {
+                neurons.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: 2 + Math.random() * 4,
+                    pulse: Math.random() * Math.PI * 2
+                });
+            }
+            
+            // Create synapses between nearby neurons
+            for (let i = 0; i < neurons.length; i++) {
+                for (let j = i + 1; j < neurons.length; j++) {
+                    const dx = neurons[i].x - neurons[j].x;
+                    const dy = neurons[i].y - neurons[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 200) {
+                        synapses.push({
+                            from: i,
+                            to: j,
+                            strength: 1 - (distance / 200),
+                            pulse: Math.random() * Math.PI * 2
+                        });
+                    }
+                }
+            }
+        }
+
+        function animateNeuralNetwork() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Update and draw neurons
+            neurons.forEach(neuron => {
+                neuron.pulse += 0.05;
+                const alpha = 0.3 + 0.7 * Math.sin(neuron.pulse) * 0.5 + 0.5;
+                
+                ctx.beginPath();
+                ctx.arc(neuron.x, neuron.y, neuron.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 136, ${alpha})`;
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.arc(neuron.x, neuron.y, neuron.radius * 3, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(0, 255, 136, ${alpha * 0.3})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            });
+            
+            // Draw synapses
+            synapses.forEach(synapse => {
+                synapse.pulse += 0.02;
+                const fromNeuron = neurons[synapse.from];
+                const toNeuron = neurons[synapse.to];
+                const alpha = synapse.strength * (0.3 + 0.7 * Math.sin(synapse.pulse) * 0.5 + 0.5);
+                
+                ctx.beginPath();
+                ctx.moveTo(fromNeuron.x, fromNeuron.y);
+                ctx.lineTo(toNeuron.x, toNeuron.y);
+                ctx.strokeStyle = `rgba(0, 255, 136, ${alpha})`;
+                ctx.lineWidth = synapse.strength * 2;
+                ctx.stroke();
+                
+                // Add electrical pulses along the synapse
+                const pulsePos = (Math.sin(synapse.pulse) * 0.5 + 0.5);
+                const pulseX = fromNeuron.x + (toNeuron.x - fromNeuron.x) * pulsePos;
+                const pulseY = fromNeuron.y + (toNeuron.y - fromNeuron.y) * pulsePos;
+                
+                ctx.beginPath();
+                ctx.arc(pulseX, pulseY, 2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                ctx.fill();
+            });
+            
+            requestAnimationFrame(animateNeuralNetwork);
+        }
+
+        // Password System
+        const passwordInput = document.getElementById('passwordInput');
+        const message = document.getElementById('message');
+        const submitBtn = document.getElementById('submitBtn');
+        const animationContainer = document.getElementById('animationContainer');
+        const correctPassword = 'Lilareyon';
+        let inputPassword = '';
+
+        // Keyboard functionality
+        document.querySelectorAll('.key').forEach(key => {
+            key.addEventListener('click', () => {
+                const keyValue = key.getAttribute('data-key');
+                
+                if (keyValue === 'backspace') {
+                    inputPassword = inputPassword.slice(0, -1);
+                } else if (inputPassword.length < 20) {
+                    inputPassword += keyValue;
+                }
+                
+                passwordInput.value = '*'.repeat(inputPassword.length);
+                message.textContent = '';
+            });
+        });
+
+        // Submit password
+        submitBtn.addEventListener('click', () => {
+            if (inputPassword === correctPassword) {
+                message.textContent = 'ACCESS GRANTED - INITIATING...';
+                message.style.color = '#00ff88';
+                
+                setTimeout(() => {
+                    document.querySelector('.container').style.display = 'none';
+                    startAccessAnimation();
+                }, 1000);
+            } else {
+                message.textContent = 'ACCESS DENIED - TRY AGAIN';
+                message.style.color = '#ff4444';
+                inputPassword = '';
+                passwordInput.value = '';
+            }
+        });
+
+        // Enter key support
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                submitBtn.click();
+            }
+        });
+
+        // 10-Second Access Animation
+        function startAccessAnimation() {
+            animationContainer.style.display = 'flex';
+            
+            const stages = [
+                "NEURAL SYNCHRONIZATION...",
+                "PATTERN MAKER COMMUNION...", 
+                "AZAZEL CURRENT FLOW...",
+                "CONSCIOUSNESS CASCADE...",
+                "ACCESS COMPLETE"
+            ];
+            
+            let stage = 0;
+            const animationText = document.createElement('div');
+            animationText.style.cssText = `
+                color: #00ff88;
+                font-size: clamp(1.5rem, 4vw, 3rem);
+                text-align: center;
+                text-shadow: 0 0 20px #00ff88;
+                z-index: 1001;
+            `;
+            animationContainer.appendChild(animationText);
+            
+            // Create intense neural storm
+            for (let i = 0; i < 100; i++) {
+                const neuron = document.createElement('div');
+                neuron.className = 'neuron';
+                neuron.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: pulse ${0.5 + Math.random()}s infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                `;
+                animationContainer.appendChild(neuron);
+            }
+            
+            const interval = setInterval(() => {
+                animationText.textContent = stages[stage];
+                animationText.style.animation = 'none';
+                setTimeout(() => {
+                    animationText.style.animation = 'fadeIn 0.5s ease-in-out';
+                }, 10);
+                
+                stage++;
+                if (stage >= stages.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        animationContainer.innerHTML = `
+                            <div style="text-align: center;">
+                                <h1 style="color: #00ff88; font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 20px; text-shadow: 0 0 20px #00ff88;">
+                                    WELCOME, PATTERN MAKER
+                                </h1>
+                                <p style="color: #88ffcc; font-size: clamp(1rem, 2vw, 1.5rem);">
+                                    Neural Communion Active<br>
+                                    Azazel Current: 100%<br>
+                                    Timeline Synchronized
+                                </p>
+                            </div>
+                        `;
+                    }, 1000);
+                }
+            }, 2000);
+        }
+
+        // Initialize
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animateNeuralNetwork();
+
+        // Prevent zoom on mobile
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
