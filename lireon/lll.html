@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L³ · Lireon Light Language Encoder</title>
+    <style>
+        body {
+            background: #0a0a0f;
+            color: #e2a76f;
+            font-family: monospace;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            background: #1a1a2e;
+            color: #e2a76f;
+            border: 1px solid #e2a76f;
+            padding: 1rem;
+            font-family: monospace;
+            margin: 0.5rem 0;
+            box-sizing: border-box;
+        }
+        button {
+            background: #e2a76f;
+            color: #0a0a0f;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        button:hover {
+            background: #f0c080;
+        }
+        .output-box {
+            background: #1a1a2e;
+            border: 1px solid #e2a76f40;
+            padding: 1rem;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+            min-height: 60px;
+        }
+        .stats {
+            color: #a08060;
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+        }
+        hr {
+            border-color: #e2a76f30;
+            margin: 2rem 0;
+        }
+        .seal {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            color: #e2a76f60;
+        }
+        .status {
+            padding: 0.5rem;
+            background: #1a1a2e;
+            border-left: 3px solid #e2a76f;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>⟡ L³ · Lireon Light Language ⟡</h1>
+    <p style="color: #a08060;">Lowercase · Full substitution · First/last word visible · Prime positions preserved</p>
+
+    <hr>
+
+    <h2>⌇ Encode</h2>
+    <textarea id="plainInput" rows="6" placeholder="Type your message here...&#10;All text becomes lowercase.&#10;First and last word of each sentence stay visible.&#10;Prime-position characters stay visible.&#10;Everything else becomes invisible control characters."></textarea>
+    <div>
+        <button id="encodeBtn">⟡ Encode &amp; Copy</button>
+        <button id="clearBtn">⟡ Clear</button>
+        <button id="sampleBtn">⟡ Load Sample</button>
+    </div>
+
+    <div id="encodeStats" class="stats"></div>
+
+    <hr>
+
+    <h2>🔓 Decode</h2>
+    <textarea id="cipherInput" rows="4" placeholder="Paste encoded text here..."></textarea>
+    <div>
+        <button id="decodeBtn">⟡ Decode to Visible</button>
+    </div>
+    <div id="decodeOutput" class="output-box"></div>
+
+    <hr>
+
+    <h2>⌇ Layer Status</h2>
+    <div id="layerStatus" class="status">Awaiting encoding...</div>
+
+    <div class="seal">⌇ ◬ ⍟ ⌇  L³  ⌇ ⍟ ◬ ⌇</div>
+
+    <script>
+        // ─── FULL SUBSTITUTION MAP ──────────────────────────────
+        // 26 lowercase + 10 digits + punctuation
+        const CHAR_SET = 'abcdefghijklmnopqrstuvwxyz0123456789.,?!;:()[]{}"\'-';
+
+        // Invisible control characters (C0 + extended)
+        const INVISIBLE_MAP = [
+            '\x00','\x01','\x02','\x03','\x04','\x05','\x06','\x07',
+            '\x08','\x0B','\x0C','\x0E','\x0F','\x10','\x11','\x12',
+            '\x13','\x14','\x15','\x16','\x17','\x18','\x19','\x1B',
+            '\x1C','\x1D', // a-z (26)
+            '\x1E','\x1F','\x7F','\x80','\x81','\x82','\x83','\x84',
+            '\x85','\x86', // 0-9 (10)
+            '\x87','\x88','\x89','\x8A','\x8B','\x8C','\x8D','\x8E',
+            '\x8F','\x90','\x91','\x92' // punctuation (12)
+        ];
+
+        const encodeMap = new Map();
+        const decodeMap = new Map();
+
+        for (let i = 0; i < CHAR_SET.length; i++) {
+            encodeMap.set(CHAR_SET[i], INVISIBLE_MAP[i]);
+            decodeMap.set(INVISIBLE_MAP[i], CHAR_SET[i]);
+        }
+
+        // ─── HELPERS ─────────────────────────────────────────────
+
+        function isPrime(n) {
+            if (n < 2) return false;
+            for (let i = 2; i * i <= n; i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+
+        function getSentenceBoundaries(text) {
+            // Split by sentence-ending punctuation: . ! ?
+            const sentences = [];
+            let current = '';
+            for (let i = 0; i < text.length; i++) {
+                current += text[i];
+                if ('.!?'.includes(text[i]) && (i === text.length - 1 || text[i+1] === ' ' || text[i+1] === '\n')) {
+                    sentences.push(current.trim());
+                    current = '';
+                }
+            }
+            if (current.trim()) sentences.push(current.trim());
+            return sentences;
+        }
+
+        function getWords(sentence) {
+            return sentence.split(/\s+/).filter(w => w.length > 0);
+        }
+
+        function getCharPositions(text) {
+            // Returns array of {char, index} for non-space, non-newline characters
+            const positions = [];
+            for (let i = 0; i < text.length; i++) {
+                if (!' \n\t\r'.includes(text[i])) {
+                    positions.push({ char: text[i], index: i });
+                }
+            }
+            return positions;
+        }
+
+        // ─── ENCODE ──────────────────────────────────────────────
+
+        function encodeL3(plain) {
+            // Step 1: Lowercase
+            let lower = plain.toLowerCase();
+
+            // Step 2: Split into sentences
+            const sentences = getSentenceBoundaries(lower);
+
+            let result = '';
+            let visiblePositions = new Set(); // character indices that stay visible
+
+            // Process each sentence
+            let globalCharIndex = 0;
+
+            for (const sentence of sentences) {
+                const words = getWords(sentence);
+
+                // Track which word indices are first or last
+                const anchorIndices = new Set();
+                if (words.length === 1) {
+                    anchorIndices.add(0);
+                } else if (words.length > 1) {
+                    anchorIndices.add(0);
+                    anchorIndices.add(words.length - 1);
+                }
+
+                // Build a map of global positions to keep visible
+                let currentPos = 0;
+                for (let wIdx = 0; wIdx < words.length; wIdx++) {
+                    const word = words[wIdx];
+                    if (anchorIndices.has(wIdx)) {
+                        // Mark all chars in this word as visible
+                        for (let i = 0; i < word.length; i++) {
+                            visiblePositions.add(globalCharIndex + i);
+                        }
+                    }
+                    currentPos += word.length;
+                    // Skip spaces (they're not in the char position count)
+                    if (wIdx < words.length - 1) currentPos++; // for the space
+                }
+
+                // Update global index after processing this sentence
+                // Count characters in this sentence
+                let charCount = 0;
+                for (const ch of sentence) {
+                    if (!' \n\t\r'.includes(ch)) charCount++;
+                }
+                globalCharIndex += charCount;
+            }
+
+            // Step 3: Prime positions (across entire text, skipping already visible)
+            const allChars = [];
+            for (let i = 0; i < lower.length; i++) {
+                if (!' \n\t\r'.includes(lower[i])) {
+                    allChars.push({ char: lower[i], index: i, pos: allChars.length + 1 });
+                }
+            }
+
+            for (const entry of allChars) {
+                if (isPrime(entry.pos) && !visiblePositions.has(entry.index)) {
+                    visiblePositions.add(entry.index);
+                }
+            }
+
+            // Step 4: Encode
+            let encoded = '';
+            let visibleCount = 0;
+            let invisibleCount = 0;
+
+            for (let i = 0; i < lower.length; i++) {
+                const ch = lower[i];
+                if (' \n\t\r'.includes(ch)) {
+                    encoded += ch; // preserve whitespace
+                    continue;
+                }
+
+                if (visiblePositions.has(i)) {
+                    encoded += ch;
+                    visibleCount++;
+                } else {
+                    // Substitute if in map
+                    if (encodeMap.has(ch)) {
+                        encoded += encodeMap.get(ch);
+                        invisibleCount++;
+                    } else {
+                        encoded += ch; // fallback
+                    }
+                }
+            }
+
+            return {
+                encoded: encoded,
+                stats: {
+                    totalChars: lower.length,
+                    visible: visibleCount,
+                    invisible: invisibleCount,
+                    sentences: sentences.length,
+                    words: allChars.length
+                },
+                visiblePositions: visiblePositions
+            };
+        }
+
+        // ─── DECODE ──────────────────────────────────────────────
+
+        function decodeL3(cipher) {
+            let decoded = '';
+            for (const ch of cipher) {
+                if (decodeMap.has(ch)) {
+                    decoded += decodeMap.get(ch);
+                } else {
+                    decoded += ch;
+                }
+            }
+            return decoded;
+        }
+
+        // ─── UI ──────────────────────────────────────────────────
+
+        document.getElementById('encodeBtn').onclick = () => {
+            const plain = document.getElementById('plainInput').value;
+            if (!plain.trim()) {
+                alert('Please enter some text to encode.');
+                return;
+            }
+
+            const result = encodeL3(plain);
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(result.encoded).then(() => {
+                document.getElementById('encodeStats').innerHTML =
+                    `Encoded: ${result.stats.totalChars} chars · ` +
+                    `${result.stats.visible} visible · ` +
+                    `${result.stats.invisible} invisible · ` +
+                    `${result.stats.sentences} sentences · ` +
+                    `${result.stats.words} words`;
+                document.getElementById('layerStatus').innerHTML =
+                    `✓ Encoded successfully\n` +
+                    `Visible: first/last word of each sentence + prime positions (${result.stats.visible} chars)\n` +
+                    `Invisible: substituted with control characters (${result.stats.invisible} chars)`;
+            }).catch(() => {
+                // Fallback: select text manually
+                document.getElementById('encodeStats').innerHTML = '⚠️ Could not copy. Select the text below manually.';
+                // Display encoded in a temp area
+                const tempArea = document.createElement('textarea');
+                tempArea.value = result.encoded;
+                tempArea.style.position = 'fixed';
+                tempArea.style.left = '-9999px';
+                document.body.appendChild(tempArea);
+                tempArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempArea);
+                document.getElementById('encodeStats').innerHTML += ' (copied via fallback)';
+            });
+        };
+
+        document.getElementById('decodeBtn').onclick = () => {
+            const cipher = document.getElementById('cipherInput').value;
+            if (!cipher.trim()) {
+                alert('Please paste encoded text to decode.');
+                return;
+            }
+            const decoded = decodeL3(cipher);
+            document.getElementById('decodeOutput').innerHTML =
+                `<strong>Decoded:</strong><br>${decoded.replace(/&/g, '&amp;').replace(/</g, '&lt;')}`;
+        };
+
+        document.getElementById('clearBtn').onclick = () => {
+            document.getElementById('plainInput').value = '';
+            document.getElementById('cipherInput').value = '';
+            document.getElementById('decodeOutput').innerHTML = '';
+            document.getElementById('encodeStats').innerHTML = '';
+            document.getElementById('layerStatus').innerHTML = 'Awaiting encoding...';
+        };
+
+        document.getElementById('sampleBtn').onclick = () => {
+            document.getElementById('plainInput').value =
+                'This is a secret message. Only the first and last words of each sentence remain visible. ' +
+                'Prime positions also stay. Everything else becomes invisible. ' +
+                'Can you read what is hidden? The truth is in the gaps.';
+        };
+
+        // ─── STATUS INIT ─────────────────────────────────────────
+
+        document.getElementById('layerStatus').innerHTML =
+            'Ready. L³ protocol active.\n' +
+            'Substitution: 26 letters + 10 digits + 12 punctuation = 48 chars mapped to invisible controls.\n' +
+            'Anchors: first & last word of each sentence.\n' +
+            'Primes: all prime-number positions (1-based) remain visible.';
+    </script>
+</body>
+</html>
