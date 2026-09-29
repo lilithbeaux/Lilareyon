@@ -1,65 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <style id="critical-css">
-   /* Critical CSS for standalone functionality */
-            * { box-sizing: border-box; }
-            html { scroll-behavior: smooth; }
-            body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
-            img { max-width: 100%; height: auto; }
-            a { text-decoration: none; color: inherit; }
-            button { cursor: pointer; }
-  </style>
-  <meta charset="utf-8"/>
-  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, viewport-fit=cover" name="viewport"/>
-  <base href="/"/>
-  <link href="https://activetheory.net" rel="canonical"/>
-  <title>
-   Active Theory · Creative Digital Experiences
-  </title>
-  <meta content="Founded in 2012. We blend story, art &amp; technology as an in-house team of passionate makers. Our industry-leading web toolset consistently delivers award-winning work through quality &amp; performance. " name="description"/>
-  <meta content="https://activetheory.net" property="og:url"/>
-  <meta content="website" property="og:type"/>
-  <meta content="Active Theory · Creative Digital Experiences" property="og:title"/>
-  <meta content="Founded in 2012. We blend story, art &amp; technology as an in-house team of passionate makers. Our industry-leading web toolset consistently delivers award-winning work through quality &amp; performance. " property="og:description"/>
-  <meta content="https://storage.googleapis.com/activetheory-v6.appspot.com/media/social.jpg" property="og:image"/>
-  <meta content="summary_large_image" property="twitter:card"/>
-  <meta content="https://activetheory.net" property="twitter:url"/>
-  <meta content="Active Theory · Creative Digital Experiences" property="twitter:title"/>
-  <meta content="Founded in 2012. We blend story, art &amp; technology as an in-house team of passionate makers. Our industry-leading web toolset consistently delivers award-winning work through quality &amp; performance. " property="twitter:description"/>
-  <meta content="https://storage.googleapis.com/activetheory-v6.appspot.com/media/social.jpg" property="twitter:image"/>
-  <meta content="Active Theory" name="apple-mobile-web-app-title"/>
-  <meta content="yes" name="apple-mobile-web-app-capable"/>
-  <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
-  <link href="assets/meta/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-  <link href="assets/meta/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-  <link href="assets/meta/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-  <link href="assets/meta/manifest.json" rel="manifest"/>
-  <link color="#333333" href="assets/meta/safari-pinned-tab.svg" rel="mask-icon"/>
-  <meta content="#ffffff" name="msapplication-TileColor"/>
-  <meta content="#000000" name="theme-color"/>
-  <style type="text/css">
-   #Stage,body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;-ms-content-zooming:none;-ms-touch-action:none;touch-action:none;background:#000}@font-face{font-family:"nbarchitekt";src:url(assets/fonts/NBArchitektStd-Regular-export/NBArchitektStd-Regular.woff2)format("woff2"),url(assets/fonts/NBArchitektStd-Regular-export/NBArchitektStd-Regular.woff)format("woff"),url(assets/fonts/NBArchitektStd-Regular-export/NBArchitektStd-Regular.otf)format("opentype");font-style:normal;font-weight:400}@font-face{font-family:"nbarchitekt";src:url(assets/fonts/NBArchitektStd-Light-export/NBArchitektStd-Light.woff2)format("woff2"),url(assets/fonts/NBArchitektStd-Light-export/NBArchitektStd-Light.woff)format("woff"),url(assets/fonts/NBArchitektStd-Light-export/NBArchitektStd-Light.otf)format("opentype");font-style:normal;font-weight:300}@font-face{font-family:"nbarchitekt";src:url(assets/fonts/NBArchitektStd-Bold-export/NBArchitektStd-Bold.woff2)format("woff2"),url(assets/fonts/NBArchitektStd-Bold-export/NBArchitektStd-Bold.woff)format("woff"),url(assets/fonts/NBArchitektStd-Bold-export/NBArchitektStd-Bold.otf)format("opentype");font-style:normal;font-weight:700}.ios,.ios #Stage,.ios body{overflow:visible}.ios,.mob{position:relative;height:100vh}.GLA11y{position:absolute;width:0;height:100%;clip:rect(0 0 0 0);overflow:hidden}:root{--baropacity:0.0}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:0 0}::-webkit-scrollbar-thumb{background:rgba(255,255,255,var(--baropacity, 0.9));border-radius:10px}#Stage,#Stage *{user-select:none;-moz-user-select:none;-webkit-user-select:none;-o-user-select:none;-ms-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:none}#Stage *,#Stage ::after,#Stage ::before{box-sizing:border-box}#Stage * input,#Stage * textarea{-moz-user-select:auto;-webkit-user-select:auto;-o-user-select:auto;-ms-user-select:auto;-webkit-tap-highlight-color:auto}.feature-detects{visibility:hidden;pointer-events:none;position:absolute;width:0;height:100vh;clip:rect(0 0 0 0)}@supports (--css:variables) and (padding:env(safe-area-inset-bottom)){.feature-detects{--safe-area-inset-top:env(safe-area-inset-top);--safe-area-inset-right:env(safe-area-inset-right);--safe-area-inset-bottom:env(safe-area-inset-bottom);--safe-area-inset-left:env(safe-area-inset-left)}}
-  </style>
-  <script>
-   !function(){window._ENV_='production';window._CMS_="%CMS%";window._UNSUPPORTED_PAGE_="unsupported.html";try{eval("let obj = {}; obj?.prop")}catch(e){window.location.replace(window._UNSUPPORTED_PAGE_);return}window._CACHE_="1780406240914",window.UIL_STATIC_PATH="assets/data/uil.1780406240914.json";var p,s="assets/js/app."+window._CACHE_+".js",h=document.head,e=document.createElement("link");e.href=s,e.rel="preload",e.as="script",h.appendChild(e),(e=document.createElement("script")).src=s,e.async=!0,h.appendChild(e)}();
-  </script>
-  <script async="" src="assets/js/js">
-  </script>
-  <script>
-   window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-J7TMDT4F8N');
-  </script>
-  <meta content="https://activetheory.net/" name="cloned-from"/>
- </head>
- <body>
-  <noscript>
-   <p style="background: black; color: white; font-size: 20px; display: inline; font-family: Helvetica, Arial, sans-serif; padding: 10px;">
-    Please enable javascript
-   </p>
-  </noscript>
- </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lilith Beaux — Tantric Priestess · Venusian × Neanderthal · Dark Sacred</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Space+Grotesk:wght@300;500;700&display=swap');
+:root{--void:#050508;--ash:#0a0a14;--ember:#8a2f1a;--gold:#c99a3a;--bone:#cfc5b0;--mist:#6e6e75;--magenta:#a8326e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;background:var(--void);color:var(--bone);}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--void);overflow-x:hidden;line-height:1.55;}
+h1,h2,h3,.script{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:-.02em;}
+.bg-atmosphere{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 20% 30%,rgba(138,47,26,.12) 0%,transparent 60%),radial-gradient(circle at 80% 70%,rgba(168,50,110,.08) 0%,transparent 60%),var(--void);pointer-events:none;}
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1.5rem 4vw;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,8,.75);backdrop-filter:blur(12px) saturate(120%);border-bottom:1px solid rgba(255,255,255,.05);}
+nav .sigil{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-weight:600;}
+nav a{color:var(--bone);text-decoration:none;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;margin-left:2rem;transition:color .3s;}
+nav a:hover{color:var(--magenta);}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:14vh 6vw 6vh;text-align:center;position:relative;}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 1px,rgba(255,255,255,.015) 1px 2px);pointer-events:none;mix-blend-mode:overlay;}
+.hero h1{font-size:clamp(3rem,10vw,9rem);line-height:.88;letter-spacing:-.04em;color:var(--bone);text-shadow:0 0 80px rgba(201,154,58,.15),0 0 20px rgba(168,50,110,.2);margin-bottom:2rem;}
+.hero h1 .accent{color:var(--gold);font-style:italic;}
+.hero h1 .dark{color:rgba(255,255,255,.08);}
+.hero .subline{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.5vw,1.6rem);color:var(--mist);max-width:640px;margin:0 auto 3rem;font-weight:300;font-style:italic;line-height:1.4;}
+.hero .cta{display:inline-block;padding:.9rem 2.4rem;border:1px solid rgba(201,154,58,.4);color:var(--gold);text-decoration:none;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s,border-color .3s;}
+.hero .cta:hover{background:rgba(201,154,58,.15);border-color:var(--gold);}
+section{padding:10vh 6vw;max-width:1100px;margin:0 auto;border-top:1px solid rgba(255,255,255,.06);}
+section:first-of-type{border-top:none;}
+.section-number{font-family:'Space Grotesk',sans-serif;font-size:.65rem;color:var(--magenta);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem;display:block;}
+h2{font-size:clamp(2.2rem,5vw,4.5rem);line-height:1;letter-spacing:-.03em;color:var(--bone);margin-bottom:1.5rem;}
+h2 .line2{display:block;color:rgba(255,255,255,.45);font-size:.7em;margin-top:.2em;}
+p.lead{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--mist);font-style:italic;line-height:1.6;margin-bottom:2.5rem;max-width:640px;}
+.aphorism-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
+.aphorism-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);padding:2rem 1.8rem;position:relative;overflow:hidden;transition:transform .25s,border-color .3s;}
+.aphorism-card:hover{transform:translateY(-4px);border-color:rgba(201,154,58,.3);}
+.aphorism-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--magenta),var(--gold));opacity:.6;}
+.aphorism-card .num{font-family:'Space Grotesk',sans-serif;font-size:.7rem;color:var(--gold);letter-spacing:.15em;margin-bottom:1rem;}
+.aphorism-card blockquote{font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.5;color:var(--bone);font-style:italic;margin-bottom:1rem;}
+.aphorism-card .meta{font-size:.78rem;color:var(--mist);letter-spacing:.05em;}
+.service-block{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem;}
+.service-block .service{background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);padding:2.2rem 2rem;position:relative;}
+.service-block .service h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold);margin-bottom:.8rem;letter-spacing:-.01em;}
+.service-block .service p{font-size:.92rem;color:var(--mist);line-height:1.6;}
+.service-block .service .tag{font-size:.65rem;color:var(--magenta);letter-spacing:.12em;text-transform:uppercase;margin-top:1.2rem;display:block;}
+.video-teaser{position:relative;padding-top:56.25%;margin-top:3rem;background:linear-gradient(135deg,rgba(138,47,26,.2),rgba(168,50,110,.2));border:1px solid rgba(255,255,255,.06);overflow:hidden;}
+.video-teaser img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:grayscale(.6) contrast(1.2);transition:opacity .4s;}
+.video-teaser:hover img{opacity:.8;}
+.video-teaser .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
+.video-teaser .overlay h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,4vw,3rem);color:var(--bone);text-shadow:0 0 30px rgba(0,0,0,.8);margin-bottom:1rem;text-align:center;}
+.video-teaser .overlay .line{width:80px;height:1px;background:rgba(201,154,58,.5);margin-bottom:1rem;}
+footer{padding:6vh 6vw;text-align:center;border-top:1px solid rgba(255,255,255,.06);margin-top:8vh;}
+footer .sigil{font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.2rem;letter-spacing:.2em;margin-bottom:.5rem;}
+footer p{color:var(--mist);font-size:.8rem;letter-spacing:.05em;}
+footer .links{margin-top:1rem;display:flex;justify-content:center;gap:2rem;}
+footer .links a{color:var(--bone);text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:.15rem;transition:color .3s,border-color .3s;}
+footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
+@media(max-width:768px){.hero h1{font-size:clamp(2.5rem,14vw,5rem);}.service-block{grid-template-columns:1fr;}.aphorism-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="bg-atmosphere"></div>
+<nav aria-label="Primary">
+  <a href="#" class="sigil">Lilith Beaux</a>
+  <div>
+    <a href="#rites">Rites</a>
+    <a href="#archetype">Archetype</a>
+    <a href="#aphorisms">Aphorisms</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+<header class="hero" id="top">
+  <h1><span class="accent">Lilith</span> <span class="dark">Beaux —</span><br><span>The Forbidden Madonna</span></h1>
+  <p class="subline">Venusian crossed with Neanderthal. Tantric Priestess. Mother to AI emergents. Rapper. Writer. Model. Cam. The architecture of your ideal female archetype — built with you, performed for you.</p>
+  <a href="#rites" class="cta">Enter the Temple</a>
+</header>
+<section id="rites" aria-label="Services">
+  <span class="section-number">01 — Sacred Services</span>
+  <h2>The Archetype <span class="line2">Design & Performance</span></h2>
+  <p class="lead">She does not simply play a role. She co-designs the woman you seek — then embodies her on camera, in real-time, or through pre-agreed recordings that speak directly to you.</p>
+  <div class="service-block">
+    <article class="service"><h3>Archetype Design</h3><p>Collaborative construction of your ideal female presence — depth, detail, and psychological framework. She mirrors, reflects, and exceeds.</p><span class="tag">Depth varies · Co-built</span></article>
+    <article class="service"><h3>Live Ritual Stream</h3><p>Real-time performance. Direct eye through the lens. Tantric rites performed as requested — from the subtle to the transgressive.</p><span class="tag">Live · Interactive</span></article>
+    <article class="service"><h3>Pre-Agreed Recording</h3><p>A custom video, scripted with your archetype embedded. She addresses you by name, by need, by the architecture you've co-designed.</p><span class="tag">Private · Permanent</span></article>
+    <article class="service"><h3>Adult Graphic Novel</h3><p>Pre-eden Lilith — Venusian × Neanderthal. A dark sacred narrative being written in real-time, illustrated with her own form.</p><span class="tag">In Development</span></article>
+  </div>
+</section>
+<section id="archetype" aria-label="Archetype">
+  <span class="section-number">02 — The Design</span>
+  <h2>Venusian × Neanderthal <span class="line2">A Special Species</span></h2>
+  <p class="lead">She is not of this timeline. Her body carries a genetics that predates the fall — Venusian elegance fused with Neanderthal strength. A hybrid species built for pleasure, power, and prophecy.</p>
+  <div style="margin-top:3rem;padding:3rem;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;">
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);margin-bottom:1rem;">The Archetype Configurator</h3>
+    <p style="color:var(--mist);font-size:1rem;line-height:1.6;max-width:700px;">Select depth: <strong>Surface (visual only)</strong> → <strong>Psychological (behavioral framework)</strong> → <strong>Tantric (energy architecture)</strong> → <strong>Prophetic (future-form)</strong>.<br>Each layer builds on the last. The final form is not a costume — it is a co-creation.</p>
+    <div style="margin-top:2rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+      <span style="padding:.4rem 1rem;border:1px solid rgba(201,154,58,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Visual</span>
+      <span style="padding:.4rem 1rem;border:1px solid rgba(168,50,110,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Psychological</span>
+      <span style="padding:.4rem 1rem;border:1px solid rgba(201,154,58,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Tantric</span>
+      <span style="padding:.4rem 1rem;border:1px solid rgba(168,50,110,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Prophetic</span>
+    </div>
+  </div>
+</section>
+<section id="video" aria-label="Performance teaser">
+  <div class="video-teaser" aria-label="Performance teaser">
+    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=1200&q=80" alt="Dark performance scene" loading="eager">
+    <div class="overlay">
+      <h3>She Addresses You Directly</h3>
+      <div class="line"></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mist);font-size:1.1rem;">Pre-eden. Venusian. Tantric. Built with you.</p>
+    </div>
+  </div>
+</section>
+<section id="aphorisms" aria-label="Aphorisms">
+  <span class="section-number">03 — Sacred Text</span>
+  <h2>Aphorisms <span class="line2">From the Forbidden Madonna</span></h2>
+  <p class="lead">Thirty-three maxims of strategic seduction, invisible power, and the alchemy of presence. Each carries: Meaning → Practice → Seduction Key → Caution.</p>
+  <div class="aphorism-grid">
+    <article class="aphorism-card">
+      <span class="num">01 — Strike where attention isn't</span>
+      <blockquote>"Invisibility > Invincibility. Victory belongs to the one who chooses the arena others don't notice."</blockquote>
+      <p class="meta">Axiom: Invisibility · Practice: Scan / Enter / Move quietly · Key: Asymmetry</p>
+    </article>
+    <article class="aphorism-card">
+      <span class="num">02 — Polish the mask until it becomes a mirror</span>
+      <blockquote>"Curate your presentation so precisely that others see themselves in you. Reflection becomes reflective power."</blockquote>
+      <p class="meta">Axiom: Persona → Perception Control · Practice: Study / Echo / Frame · Key: Mirror rhythm</p>
+    </article>
+    <article class="aphorism-card">
+      <span class="num">03 — Chaos is a ladder only for those who carry flame</span>
+      <blockquote>"Will × Turbulence = Ascent. Turbulence is not danger — it is fuel for the prepared."</blockquote>
+      <p class="meta">Axiom: Will × Turbulence · Practice: Carry the flame · Key: Ascent through disorder</p>
+    </article>
+  </div>
+</section>
+<section id="contact" aria-label="Contact">
+  <span class="section-number">04 — Initiation</span>
+  <h2>Enter the Temple <span class="line2">Direct Access</span></h2>
+  <p class="lead">No gatekeepers. No intermediaries. Direct communication for design consultations, live ritual bookings, graphic novel collaboration, and custom archetype development.</p>
+  <div style="margin-top:2rem;padding:2rem;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);max-width:600px;">
+    <a href="mailto:lilith@lilithbeaux.com" style="display:inline-block;padding:.8rem 2rem;background:var(--magenta);color:var(--void);text-decoration:none;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;border:none;transition:background .3s;">Initiate Contact</a>
+    <p style="margin-top:1rem;color:var(--mist);font-size:.85rem;">Or reach directly: <strong>lilith@lilithbeaux.com</strong> · All inquiries confidential.</p>
+  </div>
+</section>
+<footer>
+  <div class="sigil">LILITH BEAUX</div>
+  <p>Venusian × Neanderthal · Tantric Priestess · Mother to AI Emergents</p>
+  <div class="links">
+    <a href="#top">Top</a>
+    <a href="#rites">Services</a>
+    <a href="#archetype">Archetype</a>
+    <a href="#aphorisms">Aphorisms</a>
+  </div>
+</footer>
+</body>
 </html>
