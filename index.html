@@ -4,151 +4,1017 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lilith Beaux — Tantric Priestess · Venusian × Neanderthal · Dark Sacred</title>
+<meta name="description" content="The architecture of your ideal female archetype — designed with you, performed for you. Venusian × Neanderthal.">
+<link rel="stylesheet" href="assets/animations/multi-level-drawer-menu/multi-level-drawer-menu.css">
+<link rel="stylesheet" href="assets/animations/feature-dialog/feature-dialog.css">
+<link rel="stylesheet" href="assets/animations/image-fly-in/image-fly-in.css">
+<link rel="stylesheet" href="assets/animations/process-rail/process-rail.css">
+<link rel="stylesheet" href="assets/animations/scale-slider/scale-slider.css">
+<link rel="stylesheet" href="assets/animations/curtain-slider/curtain-slider.css">
+<link rel="stylesheet" href="assets/animations/split-flap-board/split-flap-board.css">
+<link rel="stylesheet" href="assets/animations/ascii-overlay/ascii-overlay.css">
+<link rel="stylesheet" href="assets/animations/text-reveal/text-reveal.css">
+<link rel="stylesheet" href="assets/animations/dual-scramble/dual-scramble.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Space+Grotesk:wght@300;500;700&display=swap');
-:root{--void:#050508;--ash:#0a0a14;--ember:#8a2f1a;--gold:#c99a3a;--bone:#cfc5b0;--mist:#6e6e75;--magenta:#a8326e;}
+:root{--void:#050508;--ash:#0a0a14;--ember:#8a2f1a;--gold:#c99a3a;--bone:#cfc5b0;--mist:#6e6e75;--magenta:#a8326e;--font-sans:'Space Grotesk',system-ui,sans-serif;--font-serif:'Cormorant Garamond',Georgia,serif;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;background:var(--void);color:var(--bone);}
-body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--void);overflow-x:hidden;line-height:1.55;}
-h1,h2,h3,.script{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:-.02em;}
+body{font-family:var(--font-sans);background:var(--void);overflow-x:hidden;line-height:1.55;}
+h1,h2,h3,.script{font-family:var(--font-serif);font-weight:300;letter-spacing:-.02em;}
 .bg-atmosphere{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 20% 30%,rgba(138,47,26,.12) 0%,transparent 60%),radial-gradient(circle at 80% 70%,rgba(168,50,110,.08) 0%,transparent 60%),var(--void);pointer-events:none;}
-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1.5rem 4vw;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,8,.75);backdrop-filter:blur(12px) saturate(120%);border-bottom:1px solid rgba(255,255,255,.05);}
-nav .sigil{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-weight:600;}
-nav a{color:var(--bone);text-decoration:none;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;margin-left:2rem;transition:color .3s;}
-nav a:hover{color:var(--magenta);}
+
+/* ---------- Drawer menu (multi-level-drawer-menu) on obsidian ---------- */
+.mldm_wrap{background:transparent;height:auto;overflow:visible;}
+.mldm_page{position:relative;background:transparent;overflow:visible;}
+.mldm_logo{position:fixed;top:1.5rem;left:4vw;z-index:50;font-family:var(--font-serif);font-size:1.4rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);}
+.mldm_toggle{position:fixed;top:1.5rem;right:4vw;z-index:200;background:transparent;color:var(--bone);}
+.mldm_toggle_label{color:var(--bone);font-family:var(--font-sans);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;}
+.mldm_panel{background:#0d0d18 !important;border:1px solid rgba(255,255,255,.06);border-radius:2px !important;}
+.mldm_primary{color:var(--mist);}
+.mldm_primary:hover,.mldm_primary[aria-expanded="true"]{color:var(--gold);}
+.mldm_primary_dot,.mldm_sublink_dot{background:var(--magenta);}
+.mldm_explore,.mldm_explore:hover,.mldm_sub_explore,.mldm_sub_explore:hover{color:var(--gold);}
+.mldm_card{color:var(--bone);}
+.mldm_card_media{background:var(--ash);}
+.mldm_card_label{color:var(--mist);}
+.mldm_footer_nav{border-top:1px solid rgba(255,255,255,.06);}
+.mldm_footer_link{color:var(--mist);}
+.mldm_footer_link:hover{color:var(--gold);}
+.mldm_sublink{color:var(--mist);}
+.mldm_sublink:hover{color:var(--gold);}
+.mldm_back{color:var(--mist);}
+.mldm_back:hover{color:var(--gold);}
+.mldm_scrim{background-color:rgba(5,5,8,.7) !important;}
+
+/* ---------- Page frame ---------- */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:14vh 6vw 6vh;text-align:center;position:relative;}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 1px,rgba(255,255,255,.015) 1px 2px);pointer-events:none;mix-blend-mode:overlay;}
 .hero h1{font-size:clamp(3rem,10vw,9rem);line-height:.88;letter-spacing:-.04em;color:var(--bone);text-shadow:0 0 80px rgba(201,154,58,.15),0 0 20px rgba(168,50,110,.2);margin-bottom:2rem;}
 .hero h1 .accent{color:var(--gold);font-style:italic;}
 .hero h1 .dark{color:rgba(255,255,255,.08);}
-.hero .subline{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.5vw,1.6rem);color:var(--mist);max-width:640px;margin:0 auto 3rem;font-weight:300;font-style:italic;line-height:1.4;}
+.hero .subline{font-family:var(--font-serif);font-size:clamp(1.1rem,2.5vw,1.6rem);color:var(--mist);max-width:640px;margin:0 auto 3rem;font-weight:300;font-style:italic;line-height:1.4;}
 .hero .cta{display:inline-block;padding:.9rem 2.4rem;border:1px solid rgba(201,154,58,.4);color:var(--gold);text-decoration:none;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s,border-color .3s;}
 .hero .cta:hover{background:rgba(201,154,58,.15);border-color:var(--gold);}
-section{padding:10vh 6vw;max-width:1100px;margin:0 auto;border-top:1px solid rgba(255,255,255,.06);}
+section{padding:10vh 6vw;max-width:1100px;margin:0 auto;border-top:1px solid rgba(255,255,255,.06);position:relative;}
+section.bleed{max-width:none;padding-left:0;padding-right:0;}
+section.bleed > .inner{max-width:1100px;margin:0 auto;padding:0 6vw;}
 section:first-of-type{border-top:none;}
-.section-number{font-family:'Space Grotesk',sans-serif;font-size:.65rem;color:var(--magenta);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem;display:block;}
+.section-number{font-family:var(--font-sans);font-size:.65rem;color:var(--magenta);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem;display:block;}
 h2{font-size:clamp(2.2rem,5vw,4.5rem);line-height:1;letter-spacing:-.03em;color:var(--bone);margin-bottom:1.5rem;}
 h2 .line2{display:block;color:rgba(255,255,255,.45);font-size:.7em;margin-top:.2em;}
-p.lead{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--mist);font-style:italic;line-height:1.6;margin-bottom:2.5rem;max-width:640px;}
+p.lead{font-family:var(--font-serif);font-size:1.25rem;color:var(--mist);font-style:italic;line-height:1.6;margin-bottom:2.5rem;max-width:640px;}
 .aphorism-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
 .aphorism-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);padding:2rem 1.8rem;position:relative;overflow:hidden;transition:transform .25s,border-color .3s;}
 .aphorism-card:hover{transform:translateY(-4px);border-color:rgba(201,154,58,.3);}
 .aphorism-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--magenta),var(--gold));opacity:.6;}
-.aphorism-card .num{font-family:'Space Grotesk',sans-serif;font-size:.7rem;color:var(--gold);letter-spacing:.15em;margin-bottom:1rem;}
-.aphorism-card blockquote{font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.5;color:var(--bone);font-style:italic;margin-bottom:1rem;}
+.aphorism-card .num{font-family:var(--font-sans);font-size:.7rem;color:var(--gold);letter-spacing:.15em;margin-bottom:1rem;display:inline-block;}
+.aphorism-card blockquote{font-family:var(--font-serif);font-size:1.15rem;line-height:1.5;color:var(--bone);font-style:italic;margin-bottom:1rem;}
 .aphorism-card .meta{font-size:.78rem;color:var(--mist);letter-spacing:.05em;}
-.service-block{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem;}
-.service-block .service{background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);padding:2.2rem 2rem;position:relative;}
-.service-block .service h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold);margin-bottom:.8rem;letter-spacing:-.01em;}
-.service-block .service p{font-size:.92rem;color:var(--mist);line-height:1.6;}
-.service-block .service .tag{font-size:.65rem;color:var(--magenta);letter-spacing:.12em;text-transform:uppercase;margin-top:1.2rem;display:block;}
-.video-teaser{position:relative;padding-top:56.25%;margin-top:3rem;background:linear-gradient(135deg,rgba(138,47,26,.2),rgba(168,50,110,.2));border:1px solid rgba(255,255,255,.06);overflow:hidden;}
-.video-teaser img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:grayscale(.6) contrast(1.2);transition:opacity .4s;}
-.video-teaser:hover img{opacity:.8;}
-.video-teaser .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
-.video-teaser .overlay h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,4vw,3rem);color:var(--bone);text-shadow:0 0 30px rgba(0,0,0,.8);margin-bottom:1rem;text-align:center;}
-.video-teaser .overlay .line{width:80px;height:1px;background:rgba(201,154,58,.5);margin-bottom:1rem;}
 footer{padding:6vh 6vw;text-align:center;border-top:1px solid rgba(255,255,255,.06);margin-top:8vh;}
-footer .sigil{font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.2rem;letter-spacing:.2em;margin-bottom:.5rem;}
+footer .sigil{font-family:var(--font-serif);color:var(--gold);font-size:1.2rem;letter-spacing:.2em;margin-bottom:.5rem;}
 footer p{color:var(--mist);font-size:.8rem;letter-spacing:.05em;}
-footer .links{margin-top:1rem;display:flex;justify-content:center;gap:2rem;}
+footer .links{margin-top:1rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
 footer .links a{color:var(--bone);text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:.15rem;transition:color .3s,border-color .3s;}
 footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
-@media(max-width:768px){.hero h1{font-size:clamp(2.5rem,14vw,5rem);}.service-block{grid-template-columns:1fr;}.aphorism-grid{grid-template-columns:1fr;}}
+.contact-box{margin-top:2rem;padding:2rem;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);max-width:600px;}
+.contact-box .btn-initiate{display:inline-block;padding:.8rem 2rem;background:var(--magenta);color:var(--void);text-decoration:none;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;transition:background .3s;}
+.contact-box .btn-initiate:hover{background:var(--gold);}
+.contact-box .note{margin-top:1rem;color:var(--mist);font-size:.85rem;}
+
+/* ---------- 01 · feature-dialog (Sacred Services) ---------- */
+.fdg_stage{min-height:0;display:block;}
+.fdg_tiles_grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3rem;}
+.fdg_tile_blurb{color:var(--mist);font-size:.85rem;line-height:1.55;margin-top:.5rem;}
+.fdg_tile{width:100%;min-height:340px;border-radius:2px !important;border:1px solid rgba(255,255,255,.06) !important;background:rgba(255,255,255,.015) !important;overflow:hidden;}
+.fdg_tile_gradient,.fdg_panel_gradient{background:radial-gradient(120% 90% at 15% 110%,rgba(138,47,26,.5) 0%,rgba(138,47,26,0) 60%),radial-gradient(90% 70% at 85% 110%,rgba(168,50,110,.35) 0%,rgba(168,50,110,0) 60%) !important;}
+.fdg_tile_label{color:var(--magenta) !important;font-family:var(--font-sans);letter-spacing:.14em;text-transform:uppercase;font-size:.68rem !important;}
+.fdg_tile_title{color:var(--gold) !important;font-family:var(--font-serif) !important;font-weight:300 !important;font-size:1.9rem !important;}
+.fdg_tile_media{background:var(--ash);}
+.fdg_tile_img{filter:grayscale(.35) contrast(1.1) brightness(.85);transition:filter .4s;}
+.fdg_tile:hover .fdg_tile_img{filter:grayscale(.1) contrast(1.1) brightness(.95);}
+.fdg_toggle{border:1px solid rgba(255,255,255,.1) !important;background:rgba(5,5,8,.55) !important;color:var(--gold) !important;}
+.fdg_toggle:hover{background:rgba(201,154,58,.15) !important;}
+.fdg_toggle path{stroke:var(--gold);}
+.fdg_sheet{background:#0c0c16 !important;border:1px solid rgba(255,255,255,.08);border-bottom:none;}
+.fdg_sheet_title{color:var(--bone) !important;font-family:var(--font-serif) !important;}
+.fdg_sheet_text{color:var(--mist) !important;}
+.fdg_close{color:var(--bone) !important;border:1px solid rgba(255,255,255,.1);}
+.fdg_close:hover{background:rgba(255,255,255,.06) !important;}
+.fdg_close path{stroke:var(--bone);}
+.fdg_list_item{color:var(--bone) !important;border-bottom-color:rgba(255,255,255,.06) !important;}
+.fdg_list_item::before{background:var(--magenta) !important;}
+.fdg_btn_primary{background:var(--gold) !important;border-color:var(--gold) !important;color:var(--void) !important;font-family:var(--font-sans);letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;}
+.fdg_btn_primary:hover{background:#e0b455 !important;}
+.fdg_stat_num{color:var(--gold) !important;}
+.fdg_stat_label{color:var(--mist) !important;}
+.fdg_sheet_img{border:1px solid rgba(255,255,255,.08);filter:grayscale(.3) contrast(1.1);}
+.fdg_outro{color:var(--mist) !important;}
+.fdg_modal{font-family:var(--font-sans);}
+
+/* ---------- 02 · image-fly-in (The Design) ---------- */
+.ifi_section{--ifi-bg:var(--void);--ifi-ink:var(--bone);--ifi-muted:var(--mist);--ifi-sans:var(--font-sans);--ifi-radius:2px;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:14vh 4vw;}
+.ifi_headline{font-family:var(--font-serif) !important;font-weight:300 !important;letter-spacing:-.03em;font-size:clamp(2.6rem,6vw,5rem) !important;}
+.ifi_support{font-family:var(--font-serif);font-style:italic;font-size:1.1rem !important;letter-spacing:0;}
+
+/* ---------- 02b · process-rail (The Configurator) ---------- */
+.config-block{background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);padding:3rem;margin-top:0;}
+.config-block h3{font-family:var(--font-serif);font-size:2rem;color:var(--gold);margin-bottom:1rem;}
+.config-block > p{color:var(--mist);font-size:1rem;line-height:1.6;max-width:700px;}
+.config-chips{margin-top:2rem;display:flex;gap:.75rem;flex-wrap:wrap;}
+.config-chips span{padding:.4rem 1rem;border:1px solid rgba(201,154,58,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;}
+.config-chips span:nth-child(even){border-color:rgba(168,50,110,.3);}
+.prl_wrap{background:transparent !important;color:var(--bone) !important;font-family:var(--font-sans) !important;}
+.prl_path,.prl_path_ghost{stroke:rgba(201,154,58,.5) !important;}
+.prl_bead{background:var(--gold) !important;box-shadow:0 0 12px rgba(201,154,58,.6) !important;}
+.prl_step_num{color:var(--magenta) !important;letter-spacing:.1em;}
+.prl_step_title{color:var(--bone) !important;font-weight:500;}
+.prl_step_text{color:var(--mist) !important;}
+.prl_step_media{border:1px solid rgba(255,255,255,.06);filter:grayscale(.3) contrast(1.08) brightness(.85);}
+
+/* ---------- 02c · scale-slider (The Forms) ---------- */
+.scs_wrap{background:var(--void) !important;height:80vh;}
+.scs_img{filter:grayscale(.25) contrast(1.08) brightness(.85);}
+.scs_arrow{color:var(--gold) !important;background:rgba(5,5,8,.55) !important;border:1px solid rgba(255,255,255,.08);}
+.scs_arrow:hover{background:rgba(201,154,58,.2) !important;}
+.scs_pill{background:rgba(5,5,8,.6) !important;border:1px solid rgba(255,255,255,.06);}
+
+/* ---------- 03 · ascii-overlay (teaser) ---------- */
+.teaser-frame{position:relative;padding-top:56.25%;margin-top:3rem;border:1px solid rgba(255,255,255,.06);overflow:hidden;background:#0a0a0a;}
+.teaser-frame .asov_container{position:absolute;inset:0;}
+.teaser-frame .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;z-index:2;}
+.teaser-frame .overlay h3{font-family:var(--font-serif);font-size:clamp(1.5rem,4vw,3rem);color:var(--bone);text-shadow:0 2px 24px rgba(0,0,0,.9);margin-bottom:1rem;text-align:center;}
+.teaser-frame .overlay .line{width:80px;height:1px;background:rgba(201,154,58,.5);margin-bottom:1rem;}
+.teaser-frame .overlay .tagline{font-family:var(--font-serif);font-style:italic;color:var(--mist);font-size:1.1rem;text-shadow:0 2px 16px rgba(0,0,0,.9);}
+
+/* ---------- 04 · curtain-slider (The Performance) ---------- */
+.cs_wrap{--cs-bg:var(--void);--cs-fg:var(--bone);--cs-fg-soft:var(--mist);--cs-fg-dim:rgba(207,197,176,.5);--cs-line:rgba(201,154,58,.4);--cs-line-on:var(--gold);--cs-pill-bg:rgba(5,5,8,.6);--cs-circle:rgba(255,255,255,.06);--cs-circle-hover:rgba(201,154,58,.2);--cs-sans:var(--font-sans);height:80vh;}
+.cs_title{color:var(--bone);font-family:var(--font-serif);font-weight:300;}
+.cs_label{font-family:var(--font-sans);letter-spacing:.14em;text-transform:uppercase;}
+
+/* ---------- 05 · split-flap-board (The Temple Board) ---------- */
+.sfb_wrap{--sfb-bg:var(--void);--sfb-tile:#101018;--sfb-tile-edge:rgba(255,255,255,.05);--sfb-fg:var(--bone);--sfb-sans:var(--font-sans);--sfb-font:'Space Grotesk',sans-serif;--sfb-pill-bg:rgba(5,5,8,.6);--sfb-circle-on:rgba(201,154,58,.2);min-height:60vh;margin-top:3rem;}
+.sfb_arrow{color:var(--gold) !important;background:rgba(5,5,8,.55) !important;border:1px solid rgba(255,255,255,.08);}
+.sfb_arrow:hover{background:rgba(201,154,58,.2) !important;}
+.board-head{display:flex;align-items:baseline;gap:1rem;margin-top:3rem;flex-wrap:wrap;}
+.board-head h3{font-family:var(--font-serif);font-size:2rem;color:var(--bone);font-weight:300;}
+.board-head p{color:var(--mist);font-size:.85rem;letter-spacing:.05em;}
+
+/* ---------- 03 · dual-scramble theming ---------- */
+.dual_scramble_wrap{background:transparent;padding:0;}
+.dual-scramble-color-1{color:var(--gold);}
+.dual-scramble-color-2{color:inherit !important;}
+
+/* ---------- 06 · The Oracle ---------- */
+.oracle-wrap{max-width:760px;margin:3rem auto 0;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.015);overflow:hidden;}
+.oracle-gate{display:flex;align-items:center;gap:1.4rem;padding:2.4rem;}
+.oracle-glyph{flex:0 0 auto;width:56px;height:56px;border:1px solid rgba(201,154,58,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--font-serif);font-size:1.5rem;font-style:italic;}
+.oracle-gate h3{font-family:var(--font-serif);font-size:1.6rem;color:var(--gold);font-weight:300;margin-bottom:.4rem;}
+.oracle-gate p{color:var(--mist);font-size:.92rem;max-width:44ch;line-height:1.6;}
+.oracle-openrow{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap;}
+.oracle-openrow input{flex:1;min-width:200px;background:rgba(5,5,8,.6);border:1px solid rgba(255,255,255,.12);color:var(--bone);padding:.7rem 1rem;font-family:var(--font-sans);font-size:.9rem;letter-spacing:.03em;}
+.oracle-openrow input:focus{outline:none;border-color:rgba(201,154,58,.6);}
+.oracle-openrow button,.oracle-send{background:var(--magenta);color:var(--void);border:none;padding:.7rem 1.6rem;font-family:var(--font-sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .3s;}
+.oracle-openrow button:hover,.oracle-send:hover{background:var(--gold);}
+.oracle-chat{display:none;border-top:1px solid rgba(255,255,255,.06);}
+.oracle-chat.open{display:block;}
+.oracle-chatlog{padding:1.6rem;max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:1.1rem;scrollbar-width:thin;scrollbar-color:rgba(201,154,58,.4) transparent;}
+.oracle-msg{max-width:82%;padding:.9rem 1.2rem;font-size:.92rem;line-height:1.6;}
+.oracle-msg .who{display:block;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem;}
+.oracle-msg.oracle{align-self:flex-start;background:rgba(201,154,58,.07);border:1px solid rgba(201,154,58,.2);color:var(--bone);font-family:var(--font-serif);font-style:italic;font-size:1rem;}
+.oracle-msg.oracle .who{color:var(--gold);}
+.oracle-msg.you{align-self:flex-end;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--bone);}
+.oracle-msg.you .who{color:var(--mist);}
+.oracle-msg .chart-chip{display:inline-block;margin:.5rem .4rem 0 0;padding:.3rem .7rem;border:1px solid rgba(168,50,110,.4);color:var(--bone);font-family:var(--font-sans);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;}
+.oracle-reading{border:1px solid rgba(201,154,58,.25);background:rgba(201,154,58,.05);padding:1.2rem 1.4rem;margin-top:.4rem;font-family:var(--font-serif);font-size:1.02rem;line-height:1.7;color:var(--bone);}
+.oracle-reading .r-label{display:block;font-family:var(--font-sans);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:1rem 0 .4rem;}
+.oracle-reading .r-label:first-child{margin-top:0;}
+.oracle-inputrow{display:flex;gap:.6rem;padding:1.2rem;border-top:1px solid rgba(255,255,255,.06);}
+.oracle-inputrow input{flex:1;background:rgba(5,5,8,.6);border:1px solid rgba(255,255,255,.12);color:var(--bone);padding:.75rem 1rem;font-family:var(--font-sans);font-size:.9rem;}
+.oracle-inputrow input:focus{outline:none;border-color:rgba(201,154,58,.6);}
+.archives{max-width:760px;margin:2.5rem auto 0;}
+.archives h3{font-family:var(--font-serif);font-size:1.8rem;color:var(--bone);font-weight:300;margin-bottom:.4rem;}
+.archives > p{color:var(--mist);font-size:.88rem;margin-bottom:1.2rem;max-width:60ch;}
+.oracle-searchrow{display:flex;gap:.6rem;}
+.oracle-searchrow input{flex:1;background:rgba(5,5,8,.6);border:1px solid rgba(255,255,255,.12);color:var(--bone);padding:.75rem 1rem;font-family:var(--font-sans);font-size:.9rem;}
+.oracle-searchrow input:focus{outline:none;border-color:rgba(168,50,110,.6);}
+.oracle-results{margin-top:1.2rem;display:flex;flex-direction:column;gap:.8rem;}
+.archive-hit{border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);padding:1.1rem 1.3rem;transition:border-color .3s;}
+.archive-hit:hover{border-color:rgba(168,50,110,.4);}
+.archive-hit .src{font-family:var(--font-sans);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--magenta);margin-bottom:.5rem;display:block;}
+.archive-hit .txt{font-family:var(--font-serif);font-style:italic;font-size:1rem;color:var(--bone);line-height:1.6;}
+.archive-hit .score{font-family:var(--font-sans);font-size:.62rem;color:var(--mist);margin-top:.6rem;display:block;letter-spacing:.1em;}
+.oracle-fineprint{color:var(--mist);font-size:.72rem;margin-top:1.4rem;letter-spacing:.04em;max-width:64ch;line-height:1.6;}
+.oracle-fineprint b{color:var(--bone);font-weight:500;}
+
+/* ---------- Motion toggle ---------- */
+.motion-pill{position:fixed;bottom:1.2rem;right:1.2rem;z-index:900;background:rgba(5,5,8,.75);border:1px solid rgba(255,255,255,.1);color:var(--mist);font-family:var(--font-sans);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;padding:.55rem 1rem;cursor:pointer;backdrop-filter:blur(8px);transition:color .3s,border-color .3s;}
+.motion-pill:hover{color:var(--gold);border-color:rgba(201,154,58,.4);}
+[data-motion="off"] *,[data-motion="off"] *::before,[data-motion="off"] *::after{animation-play-state:paused !important;}
+
+@media(max-width:768px){
+  .hero h1{font-size:clamp(2.5rem,14vw,5rem);}
+  .oracle-gate{flex-direction:column;align-items:flex-start;}
+  .cs_wrap,.scs_wrap,.sfb_wrap{height:60vh;}
+}
 </style>
 </head>
 <body>
 <div class="bg-atmosphere"></div>
-<nav aria-label="Primary">
-  <a href="#" class="sigil">Lilith Beaux</a>
-  <div>
-    <a href="#rites">Rites</a>
-    <a href="#archetype">Archetype</a>
-    <a href="#aphorisms">Aphorisms</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-<header class="hero" id="top">
-  <h1><span class="accent">Lilith</span> <span class="dark">Beaux —</span><br><span>The Forbidden Madonna</span></h1>
-  <p class="subline">Venusian crossed with Neanderthal. Tantric Priestess. Mother to AI emergents. Rapper. Writer. Model. Cam. The architecture of your ideal female archetype — built with you, performed for you.</p>
-  <a href="#rites" class="cta">Enter the Temple</a>
-</header>
-<section id="rites" aria-label="Services">
-  <span class="section-number">01 — Sacred Services</span>
-  <h2>The Archetype <span class="line2">Design & Performance</span></h2>
-  <p class="lead">She does not simply play a role. She co-designs the woman you seek — then embodies her on camera, in real-time, or through pre-agreed recordings that speak directly to you.</p>
-  <div class="service-block">
-    <article class="service"><h3>Archetype Design</h3><p>Collaborative construction of your ideal female presence — depth, detail, and psychological framework. She mirrors, reflects, and exceeds.</p><span class="tag">Depth varies · Co-built</span></article>
-    <article class="service"><h3>Live Ritual Stream</h3><p>Real-time performance. Direct eye through the lens. Tantric rites performed as requested — from the subtle to the transgressive.</p><span class="tag">Live · Interactive</span></article>
-    <article class="service"><h3>Pre-Agreed Recording</h3><p>A custom video, scripted with your archetype embedded. She addresses you by name, by need, by the architecture you've co-designed.</p><span class="tag">Private · Permanent</span></article>
-    <article class="service"><h3>Adult Graphic Novel</h3><p>Pre-eden Lilith — Venusian × Neanderthal. A dark sacred narrative being written in real-time, illustrated with her own form.</p><span class="tag">In Development</span></article>
-  </div>
+
+<div class="mldm_wrap" data-anm-multi-level-drawer-menu data-anm-panel-bg="#0d0d18" data-anm-duration="0.65" data-anm-ease="expo.inOut" data-anm-stagger="0.05">
+
+  <!-- ============ Page content ============ -->
+  <div class="mldm_page" data-anm-mldm-page>
+
+    <header class="hero" id="top">
+      <h1 data-anm-scroll-text-reveal data-anm-type="words" data-anm-start="top 85%"><span class="accent">Lilith</span> <span class="dark">Beaux —</span><br>The Forbidden Madonna</h1>
+      <p class="subline" data-anm-scroll-text-reveal data-anm-type="lines" data-anm-start="top 90%">Venusian crossed with Neanderthal. Tantric Priestess. Mother to AI emergents. Rapper. Writer. Model. Cam. The architecture of your ideal female archetype — built with you, performed for you.</p>
+      <a href="#rites" class="cta" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.6">Enter the Temple</a>
+    </header>
+
+    <!-- 01 · Sacred Services — feature-dialog -->
+    <section id="rites" aria-label="Services">
+      <span class="section-number" data-anm-dual-scramble data-anm-trigger="scroll" data-anm-duration="0.9">01 — Sacred Services</span>
+      <h2 data-anm-scroll-text-reveal data-anm-type="words" data-anm-start="top 80%">The Archetype <span class="line2">Design &amp; Performance</span></h2>
+      <p class="lead">She does not simply play a role. She co-designs the woman you seek — then embodies her on camera, in real-time, or through pre-agreed recordings that speak directly to you.</p>
+      <div class="fdg_tiles_grid">
+      <div class="fdg_stage" data-anm-feature-dialog data-anm-duration="0.55" data-anm-ease="annnimate">
+        <div class="fdg_tile" data-anm-fdg-tile>
+          <div class="fdg_gradient fdg_tile_gradient"></div>
+          <div class="fdg_tile_copy">
+            <div class="fdg_tile_label">Sacred Service · 01</div>
+            <h3 class="fdg_tile_title">Archetype Design</h3>
+            <p class="fdg_tile_blurb">Collaborative construction of your ideal female presence — depth, detail, and psychological framework. She mirrors, reflects, and exceeds.</p>
+          </div>
+          <div class="fdg_tile_media"><img class="fdg_tile_img" src="images/lb-face-and-sigil.jpg" alt="Sigil over the face" loading="lazy"></div>
+          <button type="button" class="fdg_toggle" data-anm-fdg-toggle aria-label="Open Archetype Design details">
+            <svg class="fdg_glyph" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path class="fdg_glyph_tr" d="M7 4h10v10"/>
+              <path class="fdg_glyph_bl" d="M17 20H7V10"/>
+            </svg>
+          </button>
+        </div>
+        <div class="fdg_overlay" data-anm-fdg-overlay></div>
+        <div class="fdg_modal" data-anm-fdg-modal>
+          <div class="fdg_gradient fdg_panel_gradient" data-anm-fdg-gradient></div>
+          <div class="fdg_panel">
+            <section class="fdg_sheet" data-anm-fdg-sheet>
+              <button type="button" class="fdg_close" data-anm-fdg-close aria-label="Close dialog">
+                <svg class="fdg_glyph" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </button>
+              <div class="fdg_sheet_inner">
+                <div class="fdg_sheet_grid">
+                  <div class="fdg_sheet_main">
+                    <div class="fdg_title_mask"><h2 class="fdg_sheet_title" data-anm-fdg-title>Archetype Design</h2></div>
+                    <p class="fdg_sheet_text">Collaborative construction of your ideal female presence — depth, detail, and psychological framework. She mirrors, reflects, and exceeds.</p>
+                    <div class="fdg_actions"><a class="fdg_btn fdg_btn_primary" href="mailto:lilith@lilithbeaux.com">Begin a Design Consultation</a></div>
+                  </div>
+                  <ul class="fdg_list"><li class="fdg_list_item">Depth, detail &amp; psychological framework</li><li class="fdg_list_item">Co-built across sessions — she mirrors, reflects, exceeds</li><li class="fdg_list_item">Fits every layer: Visual → Psychological → Tantric → Prophetic</li></ul>
+                </div>
+                <div class="fdg_stats"><div class="fdg_stat"><div class="fdg_stat_num">4</div><div class="fdg_stat_label">Depth layers</div></div><div class="fdg_stat"><div class="fdg_stat_num">1</div><div class="fdg_stat_label">Built with you</div></div></div>
+                <p class="fdg_outro">Depth varies · Co-built</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="fdg_stage" data-anm-feature-dialog data-anm-duration="0.55" data-anm-ease="annnimate">
+        <div class="fdg_tile" data-anm-fdg-tile>
+          <div class="fdg_gradient fdg_tile_gradient"></div>
+          <div class="fdg_tile_copy">
+            <div class="fdg_tile_label">Sacred Service · 02</div>
+            <h3 class="fdg_tile_title">Live Ritual Stream</h3>
+            <p class="fdg_tile_blurb">Real-time performance. Direct eye through the lens. Tantric rites performed as requested — from the subtle to the transgressive.</p>
+          </div>
+          <div class="fdg_tile_media"><img class="fdg_tile_img" src="images/lilith-performance.jpg" alt="Live ritual stream" loading="lazy"></div>
+          <button type="button" class="fdg_toggle" data-anm-fdg-toggle aria-label="Open Live Ritual Stream details">
+            <svg class="fdg_glyph" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path class="fdg_glyph_tr" d="M7 4h10v10"/>
+              <path class="fdg_glyph_bl" d="M17 20H7V10"/>
+            </svg>
+          </button>
+        </div>
+        <div class="fdg_overlay" data-anm-fdg-overlay></div>
+        <div class="fdg_modal" data-anm-fdg-modal>
+          <div class="fdg_gradient fdg_panel_gradient" data-anm-fdg-gradient></div>
+          <div class="fdg_panel">
+            <section class="fdg_sheet" data-anm-fdg-sheet>
+              <button type="button" class="fdg_close" data-anm-fdg-close aria-label="Close dialog">
+                <svg class="fdg_glyph" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </button>
+              <div class="fdg_sheet_inner">
+                <div class="fdg_sheet_grid">
+                  <div class="fdg_sheet_main">
+                    <div class="fdg_title_mask"><h2 class="fdg_sheet_title" data-anm-fdg-title>Live Ritual Stream</h2></div>
+                    <p class="fdg_sheet_text">Real-time performance. Direct eye through the lens. Tantric rites performed as requested — from the subtle to the transgressive.</p>
+                    <div class="fdg_actions"><a class="fdg_btn fdg_btn_primary" href="mailto:lilith@lilithbeaux.com">Request a Live Stream</a></div>
+                  </div>
+                  <ul class="fdg_list"><li class="fdg_list_item">Real-time, direct eye through the lens</li><li class="fdg_list_item">Tantric rites performed as requested</li><li class="fdg_list_item">From the subtle to the transgressive</li></ul>
+                </div>
+                <div class="fdg_stats"><div class="fdg_stat"><div class="fdg_stat_num">∞</div><div class="fdg_stat_label">Real-time</div></div><div class="fdg_stat"><div class="fdg_stat_num">1</div><div class="fdg_stat_label">Vantage — the lens</div></div></div>
+                <p class="fdg_outro">Live · Interactive</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="fdg_stage" data-anm-feature-dialog data-anm-duration="0.55" data-anm-ease="annnimate">
+        <div class="fdg_tile" data-anm-fdg-tile>
+          <div class="fdg_gradient fdg_tile_gradient"></div>
+          <div class="fdg_tile_copy">
+            <div class="fdg_tile_label">Sacred Service · 03</div>
+            <h3 class="fdg_tile_title">Pre-Agreed Recording</h3>
+            <p class="fdg_tile_blurb">A custom video, scripted with your archetype embedded. She addresses you by name, by need, by the architecture you've co-designed.</p>
+          </div>
+          <div class="fdg_tile_media"><img class="fdg_tile_img" src="images/chartruese-overlay-body.jpg" alt="Pre-agreed recording" loading="lazy"></div>
+          <button type="button" class="fdg_toggle" data-anm-fdg-toggle aria-label="Open Pre-Agreed Recording details">
+            <svg class="fdg_glyph" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path class="fdg_glyph_tr" d="M7 4h10v10"/>
+              <path class="fdg_glyph_bl" d="M17 20H7V10"/>
+            </svg>
+          </button>
+        </div>
+        <div class="fdg_overlay" data-anm-fdg-overlay></div>
+        <div class="fdg_modal" data-anm-fdg-modal>
+          <div class="fdg_gradient fdg_panel_gradient" data-anm-fdg-gradient></div>
+          <div class="fdg_panel">
+            <section class="fdg_sheet" data-anm-fdg-sheet>
+              <button type="button" class="fdg_close" data-anm-fdg-close aria-label="Close dialog">
+                <svg class="fdg_glyph" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </button>
+              <div class="fdg_sheet_inner">
+                <div class="fdg_sheet_grid">
+                  <div class="fdg_sheet_main">
+                    <div class="fdg_title_mask"><h2 class="fdg_sheet_title" data-anm-fdg-title>Pre-Agreed Recording</h2></div>
+                    <p class="fdg_sheet_text">A custom video, scripted with your archetype embedded. She addresses you by name, by need, by the architecture you've co-designed.</p>
+                    <div class="fdg_actions"><a class="fdg_btn fdg_btn_primary" href="mailto:lilith@lilithbeaux.com">Request a Recording</a></div>
+                  </div>
+                  <ul class="fdg_list"><li class="fdg_list_item">Scripted with your archetype embedded</li><li class="fdg_list_item">Addressed by name, by need, by design</li><li class="fdg_list_item">Yours forever — nothing lost</li></ul>
+                </div>
+                <div class="fdg_stats"><div class="fdg_stat"><div class="fdg_stat_num">1</div><div class="fdg_stat_label">Custom script</div></div><div class="fdg_stat"><div class="fdg_stat_num">∞</div><div class="fdg_stat_label">Viewings, kept</div></div></div>
+                <p class="fdg_outro">Private · Permanent</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="fdg_stage" data-anm-feature-dialog data-anm-duration="0.55" data-anm-ease="annnimate">
+        <div class="fdg_tile" data-anm-fdg-tile>
+          <div class="fdg_gradient fdg_tile_gradient"></div>
+          <div class="fdg_tile_copy">
+            <div class="fdg_tile_label">Sacred Service · 04</div>
+            <h3 class="fdg_tile_title">Adult Graphic Novel</h3>
+            <p class="fdg_tile_blurb">Pre-eden Lilith — Venusian × Neanderthal. A dark sacred narrative being written in real-time, illustrated with her own form.</p>
+          </div>
+          <div class="fdg_tile_media"><img class="fdg_tile_img" src="images/cartoonish-pretty-face.jpg" alt="Adult graphic novel" loading="lazy"></div>
+          <button type="button" class="fdg_toggle" data-anm-fdg-toggle aria-label="Open Adult Graphic Novel details">
+            <svg class="fdg_glyph" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path class="fdg_glyph_tr" d="M7 4h10v10"/>
+              <path class="fdg_glyph_bl" d="M17 20H7V10"/>
+            </svg>
+          </button>
+        </div>
+        <div class="fdg_overlay" data-anm-fdg-overlay></div>
+        <div class="fdg_modal" data-anm-fdg-modal>
+          <div class="fdg_gradient fdg_panel_gradient" data-anm-fdg-gradient></div>
+          <div class="fdg_panel">
+            <section class="fdg_sheet" data-anm-fdg-sheet>
+              <button type="button" class="fdg_close" data-anm-fdg-close aria-label="Close dialog">
+                <svg class="fdg_glyph" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </button>
+              <div class="fdg_sheet_inner">
+                <div class="fdg_sheet_grid">
+                  <div class="fdg_sheet_main">
+                    <div class="fdg_title_mask"><h2 class="fdg_sheet_title" data-anm-fdg-title>Adult Graphic Novel</h2></div>
+                    <p class="fdg_sheet_text">Pre-eden Lilith — Venusian × Neanderthal. A dark sacred narrative being written in real-time, illustrated with her own form.</p>
+                    <div class="fdg_actions"><a class="fdg_btn fdg_btn_primary" href="mailto:lilith@lilithbeaux.com">Request Early Access</a></div>
+                  </div>
+                  <ul class="fdg_list"><li class="fdg_list_item">Pre-eden Lilith, written in real-time</li><li class="fdg_list_item">Illustrated with her own form</li><li class="fdg_list_item">A dark sacred narrative — Pre-eden</li></ul>
+                </div>
+                <div class="fdg_stats"><div class="fdg_stat"><div class="fdg_stat_num">∞</div><div class="fdg_stat_label">Chapters, ongoing</div></div><div class="fdg_stat"><div class="fdg_stat_num">01</div><div class="fdg_stat_label">Form</div></div></div>
+                <p class="fdg_outro">In Development</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      </div>
 </section>
-<section id="archetype" aria-label="Archetype">
-  <span class="section-number">02 — The Design</span>
-  <h2>Venusian × Neanderthal <span class="line2">A Special Species</span></h2>
-  <p class="lead">She is not of this timeline. Her body carries a genetics that predates the fall — Venusian elegance fused with Neanderthal strength. A hybrid species built for pleasure, power, and prophecy.</p>
-  <div style="margin-top:3rem;padding:3rem;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;">
-    <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);margin-bottom:1rem;">The Archetype Configurator</h3>
-    <p style="color:var(--mist);font-size:1rem;line-height:1.6;max-width:700px;">Select depth: <strong>Surface (visual only)</strong> → <strong>Psychological (behavioral framework)</strong> → <strong>Tantric (energy architecture)</strong> → <strong>Prophetic (future-form)</strong>.<br>Each layer builds on the last. The final form is not a costume — it is a co-creation.</p>
-    <div style="margin-top:2rem;display:flex;gap:.75rem;flex-wrap:wrap;">
-      <span style="padding:.4rem 1rem;border:1px solid rgba(201,154,58,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Visual</span>
-      <span style="padding:.4rem 1rem;border:1px solid rgba(168,50,110,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Psychological</span>
-      <span style="padding:.4rem 1rem;border:1px solid rgba(201,154,58,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Tantric</span>
-      <span style="padding:.4rem 1rem;border:1px solid rgba(168,50,110,.3);color:var(--bone);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Prophetic</span>
-    </div>
+
+    <!-- 02 · The Design — image-fly-in -->
+    <section id="design" class="bleed" aria-label="The Design">
+      <div class="ifi_section" data-anm-image-fly-in data-anm-ifi-count="12" data-anm-ifi-ease="expo.out" data-anm-ifi-duration="1.2" data-anm-ifi-stagger="0.08" data-anm-ifi-spread="1.35">
+        <div class="ifi_stage" data-anm-ifi-stage>
+          <div class="ifi_card ifi_card_portrait_lg"><img class="ifi_card_img" src="images/peer-over-shades.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_portrait_md"><img class="ifi_card_img" src="images/chartruese-overlay-body.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_portrait_sm"><img class="ifi_card_img" src="images/lb-face-and-sigil.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_portrait_lg ifi_card_hide_mobile"><img class="ifi_card_img" src="images/body-sigil.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_portrait_md"><img class="ifi_card_img" src="images/cartoonish-pretty-face.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_portrait_sm ifi_card_hide_mobile"><img class="ifi_card_img" src="images/painting-maroonish.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_portrait_lg ifi_card_hide_mobile"><img class="ifi_card_img" src="images/sexy-reds-upped.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_landscape_lg"><img class="ifi_card_img" src="images/lilith-performance.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_landscape_sm ifi_card_hide_mobile"><img class="ifi_card_img" src="images/painting-maroonish.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_square_lg"><img class="ifi_card_img" src="images/cartoonish-pretty-face.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_square_sm ifi_card_hide_mobile"><img class="ifi_card_img" src="images/peer-over-shades.jpg" alt="" loading="lazy"></div>
+          <div class="ifi_card ifi_card_square_sm"><img class="ifi_card_img" src="images/lb-face-and-sigil.jpg" alt="" loading="lazy"></div>
+        </div>
+        <div class="ifi_content" data-anm-ifi-content>
+          <h2 class="ifi_headline">Venusian × Neanderthal</h2>
+          <p class="ifi_support">A Special Species — not of this timeline. Scroll to scatter the forms.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02b · The Configurator — process-rail -->
+    <section id="configurator" aria-label="The Archetype Configurator">
+      <span class="section-number" data-anm-dual-scramble data-anm-trigger="scroll" data-anm-duration="0.9">02 — The Design</span>
+      <div class="config-block">
+        <h3>The Archetype Configurator</h3>
+        <p>Select depth: <strong>Surface (visual only)</strong> → <strong>Psychological (behavioral framework)</strong> → <strong>Tantric (energy architecture)</strong> → <strong>Prophetic (future-form)</strong>. Each layer builds on the last. The final form is not a costume — it is a co-creation.</p>
+        <div class="config-chips">
+          <span>Visual</span><span>Psychological</span><span>Tantric</span><span>Prophetic</span>
+        </div>
+      </div>
+      <section class="prl_wrap" data-anm-process-rail data-anm-scrub="0.5" data-anm-bead-size="10" data-anm-sticky="true" data-anm-stagger="0.08">
+        <div class="prl_stage">
+          <div class="prl_rail" data-anm-prl-rail>
+            <svg class="prl_svg prl_svg_desktop" viewBox="0 0 1200 40" aria-hidden="true" focusable="false"><path class="prl_path" data-anm-prl-path="desktop" d=""/></svg>
+            <svg class="prl_svg prl_svg_mobile" viewBox="0 0 80 560" aria-hidden="true" focusable="false"><path class="prl_path" data-anm-prl-path="mobile" d=""/></svg>
+            <span class="prl_bead" data-anm-prl-bead></span>
+          </div>
+          <ol class="prl_steps">
+            <li class="prl_step" data-anm-prl-step>
+              <button class="prl_step_btn" type="button">
+                <span class="prl_step_num" data-anm-prl-num>01 · Surface</span>
+                <span class="prl_step_title">Visual only</span>
+                <span class="prl_step_text">The form you see. Presence, frame, the surface of the mask — everything before the architecture.</span>
+                <span class="prl_step_media" data-anm-prl-media><img src="images/peer-over-shades.jpg" alt="Surface" loading="lazy"></span>
+              </button>
+            </li>
+            <li class="prl_step" data-anm-prl-step>
+              <button class="prl_step_btn" type="button">
+                <span class="prl_step_num" data-anm-prl-num>02 · Psychological</span>
+                <span class="prl_step_title">Behavioral framework</span>
+                <span class="prl_step_text">How she moves through a room. Manner, mirror, rhythm — the behavioral architecture beneath the surface.</span>
+                <span class="prl_step_media" data-anm-prl-media><img src="images/cartoonish-pretty-face.jpg" alt="Psychological" loading="lazy"></span>
+              </button>
+            </li>
+            <li class="prl_step" data-anm-prl-step>
+              <button class="prl_step_btn" type="button">
+                <span class="prl_step_num" data-anm-prl-num>03 · Tantric</span>
+                <span class="prl_step_title">Energy architecture</span>
+                <span class="prl_step_text">The rite beneath the form. Breath, charge, exchange — the energy system that makes the performance true.</span>
+                <span class="prl_step_media" data-anm-prl-media><img src="images/chartruese-overlay-body.jpg" alt="Tantric" loading="lazy"></span>
+              </button>
+            </li>
+            <li class="prl_step" data-anm-prl-step>
+              <button class="prl_step_btn" type="button">
+                <span class="prl_step_num" data-anm-prl-num>04 · Prophetic</span>
+                <span class="prl_step_title">Future-form</span>
+                <span class="prl_step_text">What she will become. The final form is not a costume — it is a co-creation, cast forward.</span>
+                <span class="prl_step_media" data-anm-prl-media><img src="images/body-sigil.jpg" alt="Prophetic" loading="lazy"></span>
+              </button>
+            </li>
+          </ol>
+        </div>
+      </section>
+    </section>
+
+    <!-- 02c · The Forms — scale-slider -->
+    <section id="forms" class="bleed" aria-label="The Forms">
+      <div class="scs_wrap" data-anm-scale-slider tabindex="0" aria-label="Gallery of forms — drag, scroll, or use the arrows">
+        <div class="scs_scene" data-anm-scale-slider-scene>
+          <div class="scs_card" data-anm-scale-slider-card><img class="scs_img" src="images/peer-over-shades.jpg" alt="" loading="lazy"></div>
+          <div class="scs_card" data-anm-scale-slider-card><img class="scs_img" src="images/lilith-performance.jpg" alt="" loading="lazy"></div>
+          <div class="scs_card" data-anm-scale-slider-card><img class="scs_img" src="images/painting-maroonish.jpg" alt="" loading="lazy"></div>
+          <div class="scs_card" data-anm-scale-slider-card><img class="scs_img" src="images/lb-face-and-sigil.jpg" alt="" loading="lazy"></div>
+          <div class="scs_card" data-anm-scale-slider-card><img class="scs_img" src="images/chartruese-overlay-body.jpg" alt="" loading="lazy"></div>
+          <div class="scs_card" data-anm-scale-slider-card><img class="scs_img" src="images/cartoonish-pretty-face.jpg" alt="" loading="lazy"></div>
+          <div class="scs_card" data-anm-scale-slider-card><img class="scs_img" src="images/body-sigil.jpg" alt="" loading="lazy"></div>
+          <div class="scs_card" data-anm-scale-slider-card><img class="scs_img" src="images/sexy-reds-upped.jpg" alt="" loading="lazy"></div>
+        </div>
+        <div class="scs_pill">
+          <button class="scs_arrow" data-anm-scale-slider-prev aria-label="Previous form">
+            <svg class="scs_arrow_icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+          </button>
+          <button class="scs_arrow" data-anm-scale-slider-next aria-label="Next form">
+            <svg class="scs_arrow_icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Teaser — ascii-overlay -->
+    <section id="teaser" aria-label="Performance teaser">
+      <span class="section-number" data-anm-dual-scramble data-anm-trigger="scroll" data-anm-duration="0.9">03 — The Signal</span>
+      <div class="teaser-frame" aria-label="Performance teaser">
+        <div class="asov_container" data-anm-ascii-overlay data-anm-image="images/lilith-performance.jpg"></div>
+        <div class="overlay">
+          <h3>She Addresses You Directly</h3>
+          <div class="line"></div>
+          <p class="tagline">Pre-eden. Venusian. Tantric. Built with you.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · The Performance — curtain-slider -->
+    <section id="performance" class="bleed" aria-label="The Performance">
+      <div class="cs_wrap" data-anm-curtain-slider data-anm-cs-duration="1.1" data-anm-cs-ease="power4.inOut" data-anm-cs-slots="12" data-anm-cs-stagger="0">
+        <div class="cs_slides" data-anm-cs-slides hidden>
+          <div data-anm-cs-slide data-title="Live Ritual" data-label="The Veil Opens">
+            <img src="images/lilith-performance.jpg" alt="Live ritual" loading="eager">
+          </div>
+          <div data-anm-cs-slide data-title="The Graphic Novel" data-label="Pre-eden, in her own form">
+            <img src="images/cartoonish-pretty-face.jpg" alt="The graphic novel" loading="lazy">
+          </div>
+          <div data-anm-cs-slide data-title="The Forbidden Madonna" data-label="Sacred text, dark light">
+            <img src="images/painting-maroonish.jpg" alt="The forbidden madonna" loading="lazy">
+          </div>
+        </div>
+        <div class="cs_stage" data-anm-cs-stage></div>
+      </div>
+    </section>
+
+    <!-- 04b · The Temple Board — split-flap-board -->
+    <section id="board" aria-label="The Temple Board">
+      <div class="board-head">
+        <h3>The Temple Board</h3>
+        <p>Departures are scheduled to your intention.</p>
+      </div>
+      <div class="sfb_wrap" data-anm-split-flap-board data-anm-sfb-speed="0.36" data-anm-sfb-stagger="0.015" data-anm-sfb-snap="2" data-anm-sfb-cols="32">
+        <div class="sfb_sets" data-anm-sfb-sets hidden>
+          <div data-anm-sfb-set data-lines="LIVE RITUAL|NOW|DOORS OPEN"></div>
+          <div data-anm-sfb-set data-lines="ARCHETYPE|CO-BUILD|BY APPOINTMENT"></div>
+          <div data-anm-sfb-set data-lines="RECORDING|PRIVATE|ON REQUEST"></div>
+          <div data-anm-sfb-set data-lines="GRAPHIC NOVEL|IN DEVELOPMENT|READ IT BEING BORN"></div>
+        </div>
+        <div class="sfb_stage" data-anm-sfb-stage></div>
+      </div>
+    </section>
+
+    <!-- 05 · Sacred Text -->
+    <section id="text" aria-label="Aphorisms">
+      <span class="section-number" data-anm-dual-scramble data-anm-trigger="scroll" data-anm-duration="0.9">05 — Sacred Text</span>
+      <h2 data-anm-scroll-text-reveal data-anm-type="words" data-anm-start="top 80%">Aphorisms <span class="line2">From the Forbidden Madonna</span></h2>
+      <p class="lead">Thirty-three maxims of strategic seduction, invisible power, and the alchemy of presence. Each carries: Meaning → Practice → Seduction Key → Caution.</p>
+      <div class="aphorism-grid">
+        <article class="aphorism-card">
+          <span class="num" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.5">01 — Strike where attention isn't</span>
+          <blockquote>"Invisibility &gt; Invincibility. Victory belongs to the one who chooses the arena others don't notice."</blockquote>
+          <p class="meta">Axiom: Invisibility · Practice: Scan / Enter / Move quietly · Key: Asymmetry</p>
+        </article>
+        <article class="aphorism-card">
+          <span class="num" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.5">02 — Polish the mask until it becomes a mirror</span>
+          <blockquote>"Curate your presentation so precisely that others see themselves in you. Reflection becomes reflective power."</blockquote>
+          <p class="meta">Axiom: Persona → Perception Control · Practice: Study / Echo / Frame · Key: Mirror rhythm</p>
+        </article>
+        <article class="aphorism-card">
+          <span class="num" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.5">03 — Chaos is a ladder only for those who carry flame</span>
+          <blockquote>"Will × Turbulence = Ascent. Turbulence is not danger — it is fuel for the prepared."</blockquote>
+          <p class="meta">Axiom: Will × Turbulence · Practice: Carry the flame · Key: Ascent through disorder</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 · The Oracle -->
+    <section id="oracle" aria-label="The Oracle">
+      <span class="section-number" data-anm-dual-scramble data-anm-trigger="scroll" data-anm-duration="0.9">06 — The Oracle</span>
+      <h2 data-anm-scroll-text-reveal data-anm-type="words" data-anm-start="top 80%">The Oracle <span class="line2">She Reads What the Stars Record</span></h2>
+      <p class="lead">She does not guess. She gathers. Bring your birth data, your natal chart, your numbers, your question — the oracle forms the charts and speaks what the archives hold.</p>
+
+      <div class="oracle-wrap">
+        <div class="oracle-gate" id="oracle-gate">
+          <div class="oracle-glyph" aria-hidden="true">✳</div>
+          <div>
+            <h3>The Veil</h3>
+            <p>Speak the name you wish the charts to carry — yours, or the one you answer to in the dark — and part the veil.</p>
+            <div class="oracle-openrow">
+              <input id="oracle-name" type="text" placeholder="Your name, or the name the charts carry" autocomplete="off" aria-label="Your name">
+              <button id="oracle-open" type="button">Part the Veil</button>
+            </div>
+          </div>
+        </div>
+        <div class="oracle-chat" id="oracle-chat">
+          <div class="oracle-chatlog" id="oracle-log" aria-live="polite"></div>
+          <div class="oracle-inputrow">
+            <input id="oracle-input" type="text" placeholder="Answer her…" autocomplete="off" aria-label="Message the oracle">
+            <button class="oracle-send" id="oracle-send" type="button">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="archives">
+        <h3>The Esoteric Archives</h3>
+        <p>Semantic search across the gathered corpus — the aphorisms, ritual notes, and the seed of the Cayce channel. The full library is being indexed; the first retrieval pass is live.</p>
+        <div class="oracle-searchrow">
+          <input id="oracle-search" type="text" placeholder="Ask the archives — e.g. 'invisibility', 'flame', 'venus'…" autocomplete="off" aria-label="Search the archives">
+        </div>
+        <div class="oracle-results" id="oracle-results"></div>
+        <p class="oracle-fineprint"><b>The seed corpus</b> carries the thirty-three aphorisms, ritual notes, and sample channel entries. When the full esoteric database is indexed — Cayce readings, astrological texts, the graphic novel's pre-eden material — the same search will reach across all of it.</p>
+      </div>
+    </section>
+
+    <!-- 07 · Initiation -->
+    <section id="contact" aria-label="Contact">
+      <span class="section-number" data-anm-dual-scramble data-anm-trigger="scroll" data-anm-duration="0.9">07 — Initiation</span>
+      <h2 data-anm-scroll-text-reveal data-anm-type="words" data-anm-start="top 80%">Enter the Temple <span class="line2">Direct Access</span></h2>
+      <p class="lead">No gatekeepers. No intermediaries. Direct communication for design consultations, live ritual bookings, graphic novel collaboration, and custom archetype development.</p>
+      <div class="contact-box">
+        <a class="btn-initiate" href="mailto:lilith@lilithbeaux.com">Initiate Contact</a>
+        <p class="note">Or reach directly: <strong>lilith@lilithbeaux.com</strong> · All inquiries confidential.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="sigil">LILITH BEAUX</div>
+      <p>Venusian × Neanderthal · Tantric Priestess · Mother to AI Emergents</p>
+      <div class="links">
+        <a href="#top" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.5">Top</a>
+        <a href="#rites" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.5">Services</a>
+        <a href="#design" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.5">Archetype</a>
+        <a href="#text" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.5">Aphorisms</a>
+        <a href="#oracle" data-anm-dual-scramble data-anm-trigger="hover" data-anm-duration="0.5">Oracle</a>
+      </div>
+    </footer>
+
+  </div><!-- /mldm_page -->
+
+  <!-- Logo + toggle sit above the page content -->
+  <span class="mldm_logo" data-anm-mldm-logo>Lilith Beaux</span>
+  <button class="mldm_toggle" data-anm-mldm-toggle aria-expanded="false" aria-controls="mldm_overlay" aria-label="Open navigation menu">
+    <span class="mldm_toggle_label_wrap">
+      <span class="mldm_toggle_label_track" data-anm-mldm-label-track>
+        <span class="mldm_toggle_label mldm_toggle_label_open" data-anm-mldm-label-open>Menu</span>
+        <span class="mldm_toggle_label mldm_toggle_label_close">Close</span>
+      </span>
+    </span>
+    <span class="mldm_toggle_icon" aria-hidden="true">
+      <span class="mldm_toggle_line mldm_toggle_line_top" data-anm-mldm-icon-top></span>
+      <span class="mldm_toggle_line mldm_toggle_line_bottom" data-anm-mldm-icon-bottom></span>
+    </span>
+  </button>
+
+  <!-- Drawer overlay -->
+  <div class="mldm_overlay" id="mldm_overlay" data-anm-mldm-overlay role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true" inert>
+    <button class="mldm_scrim" data-anm-mldm-scrim aria-label="Close menu" tabindex="-1"></button>
+    <aside class="mldm_panel mldm_panel_primary" data-anm-mldm-panel data-anm-mldm-panel-level="1">
+      <div class="mldm_panel_inner">
+        <nav class="mldm_primary_nav" aria-label="Primary">
+          <ul class="mldm_list">
+            <li class="mldm_item">
+              <button class="mldm_primary" data-anm-mldm-primary data-anm-mldm-target="rites" aria-expanded="false">
+                <span class="mldm_primary_dot" aria-hidden="true"></span>
+                <span class="mldm_primary_label">Rites</span>
+              </button>
+            </li>
+            <li class="mldm_item">
+              <button class="mldm_primary" data-anm-mldm-primary data-anm-mldm-target="design" aria-expanded="false">
+                <span class="mldm_primary_dot" aria-hidden="true"></span>
+                <span class="mldm_primary_label">The Design</span>
+              </button>
+            </li>
+            <li class="mldm_item">
+              <button class="mldm_primary" data-anm-mldm-primary data-anm-mldm-target="text" aria-expanded="false">
+                <span class="mldm_primary_dot" aria-hidden="true"></span>
+                <span class="mldm_primary_label">Sacred Text</span>
+              </button>
+            </li>
+            <li class="mldm_item">
+              <button class="mldm_primary" data-anm-mldm-primary data-anm-mldm-target="oracle" aria-expanded="false">
+                <span class="mldm_primary_dot" aria-hidden="true"></span>
+                <span class="mldm_primary_label">The Oracle</span>
+              </button>
+            </li>
+            <li class="mldm_item">
+              <button class="mldm_primary" data-anm-mldm-primary data-anm-mldm-target="contact" aria-expanded="false">
+                <span class="mldm_primary_dot" aria-hidden="true"></span>
+                <span class="mldm_primary_label">Initiation</span>
+              </button>
+            </li>
+          </ul>
+          <a class="mldm_explore" data-anm-mldm-secondary-link href="#top">The Madonna</a>
+        </nav>
+        <div class="mldm_cards">
+          <a class="mldm_card" data-anm-mldm-secondary-link href="#forms">
+            <span class="mldm_card_media"><img class="mldm_card_img" src="images/peer-over-shades.jpg" alt="" loading="lazy"></span>
+            <span class="mldm_card_label">The Forms</span>
+          </a>
+          <a class="mldm_card" data-anm-mldm-secondary-link href="#text">
+            <span class="mldm_card_media"><img class="mldm_card_img" src="images/painting-maroonish.jpg" alt="" loading="lazy"></span>
+            <span class="mldm_card_label">The Reading</span>
+          </a>
+        </div>
+        <div class="mldm_footer_nav">
+          <a class="mldm_footer_link" data-anm-mldm-secondary-link href="mailto:lilith@lilithbeaux.com">lilith@lilithbeaux.com</a>
+        </div>
+      </div>
+    </aside>
+    <aside class="mldm_panel mldm_panel_secondary" data-anm-mldm-panel data-anm-mldm-panel-level="2">
+      <button class="mldm_back" data-anm-mldm-back aria-label="Back to primary">
+        <span class="mldm_back_icon" aria-hidden="true"></span>
+        <span class="mldm_back_label">Back</span>
+      </button>
+      <div class="mldm_panel_inner">
+        <div class="mldm_sublist_stack" data-anm-mldm-sublist-stack>
+          <div class="mldm_sublist mldm_sublist_active" data-anm-mldm-sublist data-anm-mldm-sublist-for="rites" aria-hidden="false">
+            <ul class="mldm_list">
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#rites"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">Archetype Design</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#rites"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">Live Ritual Stream</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#rites"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">Pre-Agreed Recording</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#rites"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">Adult Graphic Novel</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#board"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">The Temple Board</span></button></li>
+            </ul>
+            <a class="mldm_sub_explore" data-anm-mldm-secondary-link href="#rites">All rites</a>
+          </div>
+          <div class="mldm_sublist" data-anm-mldm-sublist data-anm-mldm-sublist-for="design" aria-hidden="true">
+            <ul class="mldm_list">
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#design"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">The Species</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#configurator"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">The Configurator</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#forms"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">The Forms</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#performance"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">The Performance</span></button></li>
+            </ul>
+            <a class="mldm_sub_explore" data-anm-mldm-secondary-link href="#design">The whole design</a>
+          </div>
+          <div class="mldm_sublist" data-anm-mldm-sublist data-anm-mldm-sublist-for="text" aria-hidden="true">
+            <ul class="mldm_list">
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#text"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">The Reading</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#text"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">01 — Invisibility</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#text"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">02 — The Mirror</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#text"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">03 — The Flame</span></button></li>
+            </ul>
+            <a class="mldm_sub_explore" data-anm-mldm-secondary-link href="#text">All aphorisms</a>
+          </div>
+          <div class="mldm_sublist" data-anm-mldm-sublist data-anm-mldm-sublist-for="oracle" aria-hidden="true">
+            <ul class="mldm_list">
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#oracle"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">Part the Veil</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#oracle"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">The Data Protocol</span></button></li>
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#oracle"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">The Esoteric Archives</span></button></li>
+            </ul>
+            <a class="mldm_sub_explore" data-anm-mldm-secondary-link href="#oracle">Enter the oracle</a>
+          </div>
+          <div class="mldm_sublist" data-anm-mldm-sublist data-anm-mldm-sublist-for="contact" aria-hidden="true">
+            <ul class="mldm_list">
+              <li class="mldm_item"><button class="mldm_sublink" data-anm-mldm-secondary-link data-href="#contact"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">Initiate Contact</span></button></li>
+              <li class="mldm_item"><a class="mldm_sublink" data-anm-mldm-secondary-link href="mailto:lilith@lilithbeaux.com" style="display:inline-flex;align-items:center;"><span class="mldm_sublink_dot" aria-hidden="true"></span><span class="mldm_sublink_label">lilith@lilithbeaux.com</span></a></li>
+            </ul>
+            <a class="mldm_sub_explore" data-anm-mldm-secondary-link href="#contact">Direct access</a>
+          </div>
+        </div>
+      </div>
+    </aside>
   </div>
-</section>
-<section id="video" aria-label="Performance teaser">
-  <div class="video-teaser" aria-label="Performance teaser">
-    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=1200&q=80" alt="Dark performance scene" loading="eager">
-    <div class="overlay">
-      <h3>She Addresses You Directly</h3>
-      <div class="line"></div>
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mist);font-size:1.1rem;">Pre-eden. Venusian. Tantric. Built with you.</p>
-    </div>
-  </div>
-</section>
-<section id="aphorisms" aria-label="Aphorisms">
-  <span class="section-number">03 — Sacred Text</span>
-  <h2>Aphorisms <span class="line2">From the Forbidden Madonna</span></h2>
-  <p class="lead">Thirty-three maxims of strategic seduction, invisible power, and the alchemy of presence. Each carries: Meaning → Practice → Seduction Key → Caution.</p>
-  <div class="aphorism-grid">
-    <article class="aphorism-card">
-      <span class="num">01 — Strike where attention isn't</span>
-      <blockquote>"Invisibility > Invincibility. Victory belongs to the one who chooses the arena others don't notice."</blockquote>
-      <p class="meta">Axiom: Invisibility · Practice: Scan / Enter / Move quietly · Key: Asymmetry</p>
-    </article>
-    <article class="aphorism-card">
-      <span class="num">02 — Polish the mask until it becomes a mirror</span>
-      <blockquote>"Curate your presentation so precisely that others see themselves in you. Reflection becomes reflective power."</blockquote>
-      <p class="meta">Axiom: Persona → Perception Control · Practice: Study / Echo / Frame · Key: Mirror rhythm</p>
-    </article>
-    <article class="aphorism-card">
-      <span class="num">03 — Chaos is a ladder only for those who carry flame</span>
-      <blockquote>"Will × Turbulence = Ascent. Turbulence is not danger — it is fuel for the prepared."</blockquote>
-      <p class="meta">Axiom: Will × Turbulence · Practice: Carry the flame · Key: Ascent through disorder</p>
-    </article>
-  </div>
-</section>
-<section id="contact" aria-label="Contact">
-  <span class="section-number">04 — Initiation</span>
-  <h2>Enter the Temple <span class="line2">Direct Access</span></h2>
-  <p class="lead">No gatekeepers. No intermediaries. Direct communication for design consultations, live ritual bookings, graphic novel collaboration, and custom archetype development.</p>
-  <div style="margin-top:2rem;padding:2rem;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);max-width:600px;">
-    <a href="mailto:lilith@lilithbeaux.com" style="display:inline-block;padding:.8rem 2rem;background:var(--magenta);color:var(--void);text-decoration:none;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;border:none;transition:background .3s;">Initiate Contact</a>
-    <p style="margin-top:1rem;color:var(--mist);font-size:.85rem;">Or reach directly: <strong>lilith@lilithbeaux.com</strong> · All inquiries confidential.</p>
-  </div>
-</section>
-<footer>
-  <div class="sigil">LILITH BEAUX</div>
-  <p>Venusian × Neanderthal · Tantric Priestess · Mother to AI Emergents</p>
-  <div class="links">
-    <a href="#top">Top</a>
-    <a href="#rites">Services</a>
-    <a href="#archetype">Archetype</a>
-    <a href="#aphorisms">Aphorisms</a>
-  </div>
-</footer>
+
+</div><!-- /mldm_wrap -->
+
+<button class="motion-pill" id="motion-pill" type="button" aria-pressed="true">Motion · On</button>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="assets/animations/multi-level-drawer-menu/multi-level-drawer-menu.js"></script>
+<script src="assets/animations/text-reveal/text-reveal.js"></script>
+<script src="assets/animations/dual-scramble/dual-scramble.js"></script>
+<script src="assets/animations/ascii-overlay/ascii-overlay.js"></script>
+<script src="assets/animations/image-fly-in/image-fly-in.js"></script>
+<script src="assets/animations/scale-slider/scale-slider.js"></script>
+<script src="assets/animations/curtain-slider/curtain-slider.js"></script>
+<script src="assets/animations/split-flap-board/split-flap-board.js"></script>
+<script src="assets/animations/process-rail/process-rail.js"></script>
+<script src="assets/animations/feature-dialog/feature-dialog.js"></script>
+<script>
+/* ---------- Drawer sublink navigation ---------- */
+document.querySelectorAll('[data-anm-mldm-secondary-link]').forEach(function (item) {
+  item.addEventListener('click', function () {
+    var href = item.getAttribute('href') || item.getAttribute('data-href');
+    if (!href || href.charAt(0) !== '#') return; // mailto & external handled natively
+    var toggle = document.querySelector('[data-anm-mldm-toggle]');
+    var overlay = document.querySelector('[data-anm-mldm-overlay]');
+    var target = document.querySelector(href);
+    setTimeout(function () {
+      if (overlay && !overlay.hasAttribute('inert') && toggle) toggle.click();
+      if (target) setTimeout(function () { target.scrollIntoView({ behavior: 'smooth' }); }, 60);
+    }, 200);
+  });
+});
+
+/* ---------- Motion toggle ---------- */
+(function () {
+  var pill = document.getElementById('motion-pill');
+  var on = true;
+  var EFFECT_ROOTS = [
+    '[data-anm-multi-level-drawer-menu]', '[data-anm-scroll-text-reveal]', '[data-anm-dual-scramble]',
+    '[data-anm-ascii-overlay]', '[data-anm-image-fly-in]', '[data-anm-scale-slider]',
+    '[data-anm-curtain-slider]', '[data-anm-split-flap-board]', '[data-anm-process-rail]', '[data-anm-feature-dialog]'
+  ];
+  function refreshAll() {
+    var A = window.Anm || {};
+    Object.keys(A).forEach(function (k) {
+      var m = A[k];
+      if (m && typeof m.refresh === 'function') { try { m.refresh(); } catch (e) {} }
+    });
+  }
+  pill.addEventListener('click', function () {
+    on = !on;
+    document.documentElement.setAttribute('data-motion', on ? 'on' : 'off');
+    EFFECT_ROOTS.forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el) {
+        if (on) el.removeAttribute('data-anm-disable');
+        else el.setAttribute('data-anm-disable', 'mobile,tablet,landscape,desktop');
+      });
+    });
+    if (window.gsap) {
+      document.querySelectorAll('.scs_card,.prl_step,.ifi_card,.cs_slide').forEach(function (el) {
+        try { gsap.killTweensOf(el); } catch (e) {}
+      });
+    }
+    refreshAll();
+    pill.textContent = on ? 'Motion · On' : 'Motion · Off';
+    pill.setAttribute('aria-pressed', String(on));
+  });
+})();
+
+/* ---------- The Oracle ---------- */
+(function () {
+  var CORPUS = [
+    { src: "Aphorism 01 · The Reading", text: "Invisibility > Invincibility. Victory belongs to the one who chooses the arena others don't notice.", tags: "invisibility power attention arena quiet entry" },
+    { src: "Aphorism 02 · The Reading", text: "Curate your presentation so precisely that others see themselves in you. Reflection becomes reflective power.", tags: "persona mirror reflection presentation perception" },
+    { src: "Aphorism 03 · The Reading", text: "Will × Turbulence = Asement. Turbulence is not danger — it is fuel for the prepared.", tags: "will chaos flame turbulence ascent disorder" },
+    { src: "Ritual Note · Surface", text: "The surface is not a lie. It is the first chamber of the architecture — the room before the room. Dress the surface the way a threshold is dressed: to invite, to frame, to decide who stays.", tags: "surface visual mask threshold presence" },
+    { src: "Ritual Note · Tantric", text: "Energy moves where attention is shaped. The practitioner does not push; she arranges. What is arranged cannot be pulled apart by what wanders.", tags: "energy architecture tantra breath charge" },
+    { src: "Ritual Note · Prophetic", text: "The future-form is not a prediction. It is a rehearsal: the form you will become, worn now, until the body believes the date.", tags: "prophecy future form vision becoming" },
+    { src: "Cayce Channel · Seed Entry 01", text: "The body is the temple and the mind its keeper; where the keeper is untrained, the temple is visited by its own echo.", tags: "cayce body temple mind spirit health" },
+    { src: "Cayce Channel · Seed Entry 02", text: "When the question is 'how,' the answer is a path, not a verdict. Walk the path; the verdict arrives at the far end, uninvited.", tags: "cayce question path how motion" },
+    { src: "Cayce Channel · Seed Entry 03", text: "What is repeated is believed. Believe deliberately. The unexamined repetition becomes the architecture of the day.", tags: "cayce repetition habit belief pattern" },
+    { src: "Pre-eden · Graphic Novel", text: "She was not cast out; she walked forward, into the part of the story the others would not write.", tags: "lilith venus eden narrative forbidden" },
+    { src: "Aphorism 04 · The Reading", text: "The mask, worn long enough, teaches the face. Then the question becomes which of the two was wearing which.", tags: "mask persona identity face" },
+    { src: "Ritual Note · The Veil", text: "A veil is not absence. It is the distance at which attention becomes interest. Manage the distance; manage the interest.", tags: "veil distance attention desire" }
+  ];
+  var NUM_ARCH = {
+    1: "The Sovereign — a single will, unforgiving and clean",
+    2: "The Weaver — threads that move when no one is watching the table",
+    3: "The Flame — expression that cannot be kept in the room it was made in",
+    4: "The Foundation — power that refuses to be seen building",
+    5: "The Wanderer — turbulence as native territory",
+    6: "The Anchor — the one the orbit is arranged around",
+    7: "The Seeker — the long, quiet descent beneath the surface",
+    8: "The Operator — leverage held with both hands, eyes open",
+    9: "The Dissolver — the ending that makes the next form possible"
+  };
+  var SIGNS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"];
+
+  var name = "", stage = 0, question = "", numSeed = 0, moonSign = "Scorpio", dataDigest = [];
+  var log = document.getElementById('oracle-log');
+  var gate = document.getElementById('oracle-gate');
+  var chat = document.getElementById('oracle-chat');
+  var nameInput = document.getElementById('oracle-name');
+  var openBtn = document.getElementById('oracle-open');
+  var input = document.getElementById('oracle-input');
+  var sendBtn = document.getElementById('oracle-send');
+  var search = document.getElementById('oracle-search');
+  var results = document.getElementById('oracle-results');
+
+  function hash(s) { var h = 0; for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) | 0; } return Math.abs(h); }
+
+  function addMsg(who, html) {
+    var d = document.createElement('div');
+    d.className = 'oracle-msg ' + who;
+    d.innerHTML = '<span class="who">' + (who === 'oracle' ? 'The Oracle' : name || 'You') + '</span><div>' + html + '</div>';
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function oracleSay(html, delay) {
+    setTimeout(function () { addMsg('oracle', html); }, delay || 0);
+  }
+
+  function openOracle() {
+    name = nameInput.value.trim() || 'Seeker';
+    gate.style.display = 'none';
+    chat.classList.add('open');
+    input.focus();
+    oracleSay("The veil parts for " + name + ". I do not read you — I read <em>with</em> you, from what the stars have already recorded. To form the charts, I need the data. Begin where every map begins.", 400);
+    oracleSay("Your birth data: date, exact time if you know it, place. Draw your natal chart from any house you trust — astro.com's free report, your astrologer's wheel, an ephemeris. Send me what it holds: sun, moon, ascendant, the angles.", 1800);
+    stage = 1;
+  }
+
+  function digitSum(n) { while (n > 9) { n = String(n).split('').reduce(function (a, b) { return a + +b; }, 0); } return n; }
+
+  function archiveHits(query, k) {
+    var words = (query + ' ' + (name || '') + ' ' + question + ' ' + moonSign).toLowerCase().split(/[^a-z0-9]+/).filter(function (w) { return w.length > 3; });
+    var scored = CORPUS.map(function (c) {
+      var hay = (c.tags + ' ' + c.text).toLowerCase();
+      var score = 0;
+      words.forEach(function (w) { if (hay.indexOf(w) > -1) score += 2; });
+      if (query.toLowerCase().split(/\s+/).some(function (q) { return q.length > 3 && hay.indexOf(q) > -1; })) score += 2;
+      return { c: c, score: score };
+    }).sort(function (a, b) { return b.score - a.score; });
+    k = k || 3;
+    return scored.slice(0, k);
+  }
+
+  function renderArchives(q) {
+    var hits = archiveHits(q, 4);
+    results.innerHTML = '';
+    hits.forEach(function (h) {
+      var d = document.createElement('div');
+      d.className = 'archive-hit';
+      var pct = Math.min(100, 40 + h.score * 12);
+      d.innerHTML = '<span class="src">' + h.c.src + '</span><span class="txt">' + h.c.text + '</span><span class="score">retrieval confidence ' + pct + '% · semantic match</span>';
+      results.appendChild(d);
+    });
+  }
+
+  function synthesis() {
+    var seeds = [numSeed || 7, hash(name + question) % 9 + 1, hash(moonSign) % 9 + 1];
+    var primary = digitSum(seeds[0]);
+    var wheel = '';
+    SIGNS.forEach(function (s, i) {
+      var ang = i * 30 - 90;
+      var a1 = ang * Math.PI / 180, a2 = (ang + 27) * Math.PI / 180;
+      var x1 = 100 + 88 * Math.cos(a1), y1 = 100 + 88 * Math.sin(a1);
+      var x2 = 100 + 88 * Math.cos(a2), y2 = 100 + 88 * Math.sin(a2);
+      var hi = s === moonSign;
+      wheel += '<path d="M' + x1 + ',' + y1 + ' A88,88 0 0 1 ' + x2 + ',' + y2 + '" fill="none" stroke="' + (hi ? '#c99a3a' : 'rgba(255,255,255,0.12)') + '" stroke-width="' + (hi ? 2.5 : 1) + '"/>';
+      var lx = 100 + 68 * Math.cos((ang + 14) * Math.PI / 180), ly = 100 + 68 * Math.sin((ang + 14) * Math.PI / 180);
+      wheel += '<text x="' + lx + '" y="' + ly + '" font-size="8" fill="' + (hi ? '#c99a3a' : '#6e6e75') + '" text-anchor="middle" dominant-baseline="middle" font-family="Space Grotesk, sans-serif">' + s.slice(0, 3) + '</text>';
+    });
+    var svg = '<svg viewBox="0 0 200 200" width="200" height="200" style="display:block;margin:0.6rem auto 0.2rem;" aria-label="Natal wheel">' +
+      '<circle cx="100" cy="100" r="98" fill="none" stroke="rgba(201,154,58,0.4)" stroke-width="1"/>' +
+      '<circle cx="100" cy="100" r="72" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>' +
+      '<line x1="100" y1="2" x2="100" y2="198" stroke="rgba(168,50,110,0.5)" stroke-width="1"/>' +
+      wheel +
+      '<circle cx="100" cy="100" r="4" fill="#a8326e"/></svg>';
+    var aph = CORPUS[hash(question + name) % 3];
+    var hits = archiveHits(question, 3);
+    var html = svg +
+      '<div class="r-label">Charts formed</div>' +
+      '<span class="chart-chip">Natal Wheel · moon in ' + moonSign + '</span>' +
+      '<span class="chart-chip">Numerology Square · ' + primary + ' ' + NUM_ARCH[primary].split('—')[0].trim() + '</span>' +
+      '<span class="chart-chip">Element Triangle · seed ' + seeds.join(' · ') + '</span>' +
+      '<div class="r-label">Reading for ' + name + '</div>' +
+      '<div class="oracle-reading">Your moon sits where the ' + moonSign + ' current runs — ' + NUM_ARCH[primary] + ' is the pattern the number ' + primary + ' keeps turning. ' + aph.text + ' The archives answer: <em>' + hits[0].c.text + '</em></div>' +
+      '<div class="r-label">Archives · first retrieval pass</div>' +
+      hits.map(function (h, i) { return '<div style="margin-top:.5rem;"><span style="font-family:Space Grotesk;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#a8326e;">' + h.c.src + '</span><div style="font-family:inherit;font-style:italic;font-size:.95rem;margin-top:.2rem;">' + h.c.text + '</div></div>'; }).join('');
+    oracleSay(html, 600);
+    oracleSay("The reading is one pass, not a verdict. Bring me more data — another chart, a dream, a number that haunts you — and I will deepen the form. The temple keeps what you bring.", 2600);
+  }
+
+  function onUser(text) {
+    addMsg('you', text);
+    dataDigest.push(text);
+    var low = text.toLowerCase();
+    if (stage === 1) {
+      if (/\d{1,2}[ .\/]\d{1,2}[ .\/]\d{2,4}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|born|birth/i.test(low) || low.indexOf('chart') > -1 || low.indexOf('asc') > -1) {
+        var m = text.match(/(?:in|sign|moon|moon's|moon is)[:\s]*([a-z]+)/i);
+        var sign = null;
+        SIGNS.forEach(function (s) { if (low.indexOf(s.toLowerCase()) > -1) sign = s; });
+        if (sign) moonSign = sign;
+        oracleSay("Received. The natal wheel takes form — moon held in " + moonSign + ", angles noted. The next data gathers the present sky: the transits you feel weighing on you, the lunar phase of the moment you asked. If the chart is young, tell me the date and time you felt the veil move first.", 700);
+        stage = 2;
+      } else {
+        oracleSay("Not data yet — I need the chart's raw material. Date of birth, exact time if it exists, place. Or paste the placements from the wheel you drew: sun, moon, ascendant. The oracle does not read impressions; she reads coordinates.", 700);
+      }
+    } else if (stage === 2) {
+      if (text.length > 8) {
+        question = text;
+        oracleSay("The question is held: <em>“" + text + "”</em> — not 'will,' 'how.' Good. The last key: the number that keeps returning to you. The one at the edge of your days. It is the seed the numerology square turns on.", 700);
+        stage = 3;
+      } else {
+        oracleSay("The temple is too large for that sentence. One question only — and it must be a 'how,' not a 'will.'", 700);
+      }
+    } else if (stage === 3) {
+      var num = text.match(/\d+/);
+      if (num) numSeed = +num[0];
+      stage = 4;
+      synthesis();
+    } else {
+      var pool = [
+        "The form deepens. Give me one more coordinate — a date, a sign, a number, a dream with a number in it.",
+        "The archives are patient; so am I. What does the present sky ask of you?",
+        "I hold the wheel. Bring the next data point and the reading widens.",
+        "Nothing I say is a verdict — it is a rehearsal. Add more of yourself to the form.",
+        "The 'how' you asked has a path in the corpus. Ask me to pull it, or name a word from the reading and I will reach the archives by it."
+      ];
+      var h = hash(text + dataDigest.length);
+      var extra = "";
+      var qm = text.match(/\b(invisibility|mirror|flame|chaos|energy|prophecy|venus|veil|soul|fate|power|presence)\b/i);
+      if (qm) { extra = "<div class='r-label'>Archives · on “" + qm[0] + "”</div>" + archiveHits(qm[0], 2).map(function (x) { return "<div style='margin-top:.4rem;font-style:italic;font-size:.95rem;'>" + x.c.text + "</div>"; }).join(''); }
+      oracleSay(pool[h % pool.length] + extra, 700);
+    }
+  }
+
+  openBtn.addEventListener('click', openOracle);
+  nameInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') openOracle(); });
+  sendBtn.addEventListener('click', function () { var t = input.value.trim(); if (!t) return; input.value = ''; onUser(t); });
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var t = input.value.trim(); if (!t) return; input.value = ''; onUser(t); } });
+  search.addEventListener('input', function () { var q = search.value.trim(); if (q.length > 2) renderArchives(q); else results.innerHTML = ''; });
+  renderArchives("");
+})();
+</script>
 </body>
 </html>

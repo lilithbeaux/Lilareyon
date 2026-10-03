@@ -1,0 +1,15 @@
+.asov_container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #0a0a0a;
+  /* The sandbox's shader-scroll overlay is pointer-events: none; the click
+     ripple needs the container hit-testable again. */
+  pointer-events: auto;
+}
+
+.asov_container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
