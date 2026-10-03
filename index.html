@@ -219,8 +219,14 @@ footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
   .cs_wrap,.scs_wrap,.sfb_wrap{height:60vh;}
 }
 </style>
+<link rel="stylesheet" href="assets/theme-override.css">
 </head>
 <body>
+<button id="motion-toggle" onclick="document.body.classList.toggle('motion-off');this.classList.toggle('off');this.textContent=document.body.classList.contains('motion-off')?'MOTION: OFF':'MOTION: ON';">MOTION: ON</button>
+<div id="cursor-glow"></div>
+<script>
+  window.addEventListener('pointermove',e=>{const g=document.getElementById('cursor-glow');if(g){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';}});
+</script>
 <div class="bg-atmosphere"></div>
 
 <div class="mldm_wrap" data-anm-multi-level-drawer-menu data-anm-panel-bg="#0d0d18" data-anm-duration="0.65" data-anm-ease="expo.inOut" data-anm-stagger="0.05">
@@ -558,7 +564,7 @@ footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
     <!-- 05 · Sacred Text -->
     <section id="text" aria-label="Aphorisms">
       <span class="section-number" data-anm-dual-scramble data-anm-trigger="scroll" data-anm-duration="0.9">03 — Sacred Text</span>
-      <h2 data-anm-scroll-text-reveal data-anm-type="words" data-anm-start="top 80%">Aphorisms <span class="line2">From the Forbidden Madonna</span></h2>
+      <h2 data-anm-scroll-text-reveal data-anm-type="words" data-anm-start="top 80%" data-anm-dual-scramble data-anm-trigger="scroll">Aphorisms <span class="line2">From the Forbidden Madonna</span></h2>
       <p class="lead">Thirty-three maxims of strategic seduction, invisible power, and the alchemy of presence. Each carries: Meaning → Practice → Seduction Key → Caution.</p>
       <div class="aphorism-grid">
         <article class="aphorism-card">
