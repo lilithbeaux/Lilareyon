@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="assets/animations/ascii-overlay/ascii-overlay.css">
 <link rel="stylesheet" href="assets/animations/text-reveal/text-reveal.css">
 <link rel="stylesheet" href="assets/animations/dual-scramble/dual-scramble.css">
+<link rel="stylesheet" href="assets/animations/matrix-drip/matrix-drip.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Space+Grotesk:wght@300;500;700&display=swap');
 :root{--void:#050508;--ash:#0a0a14;--ember:#8a2f1a;--gold:#c99a3a;--bone:#cfc5b0;--mist:#6e6e75;--magenta:#a8326e;--font-sans:'Space Grotesk',system-ui,sans-serif;--font-serif:'Cormorant Garamond',Georgia,serif;}
@@ -228,6 +229,7 @@ footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
   window.addEventListener('pointermove',e=>{const g=document.getElementById('cursor-glow');if(g){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';}});
 </script>
 <div class="bg-atmosphere"></div>
+<canvas id="matrix-canvas" class="matrix-drip" aria-hidden="true"></canvas>
 
 <div class="mldm_wrap" data-anm-multi-level-drawer-menu data-anm-panel-bg="#0d0d18" data-anm-duration="0.65" data-anm-ease="expo.inOut" data-anm-stagger="0.05">
 
@@ -794,6 +796,7 @@ footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
 <script src="assets/animations/split-flap-board/split-flap-board.js"></script>
 <script src="assets/animations/process-rail/process-rail.js"></script>
 <script src="assets/animations/feature-dialog/feature-dialog.js"></script>
+<script src="assets/animations/matrix-drip/matrix-drip.js"></script>
 <script>
 /* ---------- Drawer sublink navigation ---------- */
 document.querySelectorAll('[data-anm-mldm-secondary-link]').forEach(function (item) {
