@@ -1,40 +1,66 @@
-/* === LILITH BEAUX DARK THEME — electric blue / crimson / plum / charcoal === */
+/* === LILITH BEAUX DARK THEME — Blue Lightning (renan-carneiro VS Code theme) === */
 :root{
-  --charcoal:#0a0a11;
-  --ink:#13131f;
-  --surface:#181828;
-  --edge:#2a2a3e;
-  --cyan:#00d4ff;
-  --crimson:#cc2233;
-  --plum:#6e3b87;
-  --amber:#d4a24e;
-  --paper:#ece8dc;
+  --charcoal:#16161D;
+  --ink:#131316;
+  --surface:#101010;
+  --edge:#8E8E8E;
+  --cyan:#00EFFF;
+  --crimson:#FF2F2F;
+  --plum:#bd93f9;
+  --amber:#ffb86c;
+  --paper:#F8F8F2;
   --font-body:"Space Grotesk","Inter",system-ui,sans-serif;
   --font-mono:"Geist Mono","JetBrains Mono",monospace;
 }
 
 /* Feature-dialog dark fix — kills the broken-TV light gradient */
 .fdg_stage{background-color:var(--charcoal)!important;color:var(--paper)!important}
-.fdg_tile{background-color:var(--ink)!important;border-color:var(--edge)!important}
-.fdg_gradient{filter:none!important;background-image:radial-gradient(20% 70% at 30% 100%,rgba(0,212,255,.55)0%,transparent 70%),radial-gradient(30% 60% at 70% 100%,rgba(206,34,51,.55)0%,transparent 70%),radial-gradient(25% 80% at 50% 100%,rgba(110,59,135,.55)0%,transparent 70%)!important}
+.fdg_tile{background:linear-gradient(145deg,var(--ink),var(--surface))!important;border-color:var(--edge)!important}
+.fdg_gradient{filter:none!important;background-image:radial-gradient(20% 70% at 30% 100%,rgba(0,239,255,.55)0%,transparent 70%),radial-gradient(30% 60% at 70% 100%,rgba(255,47,47,.55)0%,transparent 70%),radial-gradient(25% 80% at 50% 100%,rgba(189,147,249,.55)0%,transparent 70%)!important}
 
 /* Scramble — use theme colors instead of orange */
 .dual-scramble-color-1{color:var(--cyan)!important}
 .dual-scramble-color-2{color:var(--paper)!important}
 .dual_scramble_wrap{background-color:var(--charcoal)!important;color:var(--paper)!important;font-family:var(--font-mono)!important}
 
-/* Contact grey square — crimson/ink */
-.contact-box{background:linear-gradient(135deg,var(--ink),var(--surface))!important;border:1px solid var(--crimson)!important;border-radius:14px;box-shadow:0 10px 40px rgba(204,34,51,.25)!important;color:var(--paper)!important;padding:2rem 2.5rem!important}
-.contact-box .btn-initiate{background:var(--crimson)!important;color:#fff!important;border:none!important;text-transform:uppercase;letter-spacing:.08em;padding:.9rem 2rem!important;border-radius:10px;box-shadow:0 0 20px rgba(204,34,51,.45)!important}
+/* Contact grey square — crimson/ink (reference gradient pattern for all boxes) */
+.contact-box{background:linear-gradient(135deg,var(--ink),var(--surface))!important;border:1px solid var(--crimson)!important;border-radius:14px;box-shadow:0 10px 40px rgba(255,47,47,.25)!important;color:var(--paper)!important;padding:2rem 2.5rem!important}
+.contact-box .btn-initiate{background:var(--crimson)!important;color:#fff!important;border:none!important;text-transform:uppercase;letter-spacing:.08em;padding:.9rem 2rem!important;border-radius:10px;box-shadow:0 0 20px rgba(255,47,47,.45)!important}
 
 /* Motion toggle (visible, default ON) */
-#motion-toggle{position:fixed;top:14px;right:14px;z-index:9999;border:1px solid var(--cyan);background:rgba(10,10,17,.85);color:var(--cyan);font-family:var(--font-mono);font-size:.78rem;padding:.35rem .7rem;border-radius:8px;cursor:pointer;letter-spacing:.06em;backdrop-filter:blur(8px)}
+#motion-toggle{position:fixed;top:14px;right:14px;z-index:9999;border:1px solid var(--cyan);background:rgba(22,22,29,.85);color:var(--cyan);font-family:var(--font-mono);font-size:.78rem;padding:.35rem .7rem;border-radius:8px;cursor:pointer;letter-spacing:.06em;backdrop-filter:blur(8px)}
 #motion-toggle.off{border-color:var(--crimson);color:var(--crimson);opacity:.8}
 body.motion-off .fdg_stage,.body-motion-off .fdg_stage{animation:none!important;transition:none!important}
 body.motion-off [data-anm-dual-scramble],body.motion-off .dual_scramble_layer{animation:none!important;opacity:1!important}
 
 /* Cursor glow */
-#cursor-glow{position:fixed;pointer-events:none;z-index:9998;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.18)0%,transparent 70%);mix-blend-mode:screen;transform:translate(-50%,-50%);transition:opacity .2s;opacity:.9}
+#cursor-glow{position:fixed;pointer-events:none;z-index:9998;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(0,239,255,.18)0%,transparent 70%);mix-blend-mode:screen;transform:translate(-50%,-50%);transition:opacity .2s;opacity:.9}
 
 /* Dark body base */
 body{background-color:var(--charcoal)!important;color:var(--paper)!important}
+
+/* === Hero / top section — Blue Lightning fix === */
+.bg-atmosphere{background:radial-gradient(circle at 20% 30%,rgba(0,239,255,.10) 0%,transparent 60%),radial-gradient(circle at 80% 70%,rgba(189,147,249,.10) 0%,transparent 60%),var(--charcoal)!important;pointer-events:none}
+.hero h1{color:var(--paper)!important;text-shadow:0 0 80px rgba(0,239,255,.22),0 0 20px rgba(189,147,249,.22)!important}
+.hero h1 .accent{color:var(--cyan)!important}
+.hero .subline{color:#8E8E8E!important}
+.hero .cta{border-color:rgba(0,239,255,.45)!important;color:var(--cyan)!important}
+.hero .cta:hover{background:rgba(0,239,255,.12)!important;border-color:var(--cyan)!important}
+.mldm_logo{color:var(--cyan)!important}
+.mldm_toggle_label{color:var(--paper)!important}
+.section-number{color:var(--plum)!important}
+#motion-toggle{top:auto!important;bottom:1.2rem!important}
+
+/* === Contrast/gradient treatment for EVERY box — no flat grey === */
+.mldm_panel{background:linear-gradient(160deg,var(--ink),var(--surface))!important;border-color:rgba(142,142,142,.25)!important}
+.mldm_scrim{background-color:rgba(22,22,29,.75)!important}
+.fdg_sheet{background:linear-gradient(160deg,var(--ink),var(--surface))!important;border-color:rgba(142,142,142,.2)!important}
+.aphorism-card{background:linear-gradient(145deg,var(--ink),var(--surface))!important;border:1px solid rgba(142,142,142,.2)!important}
+.aphorism-card:hover{border-color:rgba(0,239,255,.4)!important}
+.config-block{background:linear-gradient(145deg,var(--ink),var(--surface))!important;border:1px solid rgba(142,142,142,.2)!important}
+.oracle-wrap{background:linear-gradient(160deg,var(--ink),var(--surface))!important;border-color:rgba(142,142,142,.2)!important}
+.archive-hit{background:linear-gradient(145deg,var(--ink),var(--surface))!important;border:1px solid rgba(142,142,142,.15)!important}
+.archive-hit:hover{border-color:rgba(189,147,249,.4)!important}
+.teaser-frame{background:linear-gradient(160deg,var(--ink),var(--surface))!important;border-color:rgba(142,142,142,.2)!important}
+.sfb_wrap{--sfb-tile:#131316!important}
+.scs_wrap{background:var(--charcoal)!important}
