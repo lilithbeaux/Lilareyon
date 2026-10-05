@@ -18,12 +18,18 @@
   var glyphs = 'アカサタナハマヤラワ01X*#@∞Ωμφ∫∂∇∴↑↓→↔♂♀';
   var glyphArray = glyphs.split('');
 
+  // High-definition: render at device-pixel density so the drip is crisp
+  // on HiDPI/retina displays instead of being upscaled and blurred.
+  var DPR = Math.max(1, window.devicePixelRatio || 1);
   function resize() {
     width = window.innerWidth;
     height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-    fontSize = Math.max(12, Math.floor(width / 100));
+    canvas.width = Math.floor(width * DPR);
+    canvas.height = Math.floor(height * DPR);
+    // Scale the drawing context so coordinates stay in CSS pixels but render
+    // at full device resolution.
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    fontSize = Math.max(14, Math.floor(width / 90));
     columns = Math.floor(width / fontSize);
     drops = new Array(columns).fill(1).map(function () { return Math.random() * -50; });
   }
@@ -37,9 +43,9 @@
   // Blue Lightning palette: cyan bodies, crimson accents, plum trails.
   function getDripColor() {
     var r = Math.random();
-    if (r < 0.6) return 'rgba(0, 239, 255, 0.13)';    // cyan
-    if (r < 0.85) return 'rgba(255, 47, 47, 0.20)';   // crimson
-    return 'rgba(189, 147, 249, 0.10)';               // plum
+    if (r < 0.6) return 'rgba(0, 239, 255, 0.85)';    // lightning cyan
+    if (r < 0.85) return 'rgba(255, 47, 47, 0.78)';   // red
+    return 'rgba(189, 147, 249, 0.75)';               // purple
   }
 
   var typingMode = false;
@@ -50,7 +56,7 @@
 
   function draw() {
     // Fade trail — clears with the page background so nothing milks up.
-    ctx.fillStyle = 'rgba(10, 10, 12, 0.08)';
+    ctx.fillStyle = 'rgba(22, 22, 29, 0.10)'; // Eigengrau fade — matches page bg
     ctx.fillRect(0, 0, width, height);
 
     ctx.font = fontSize + "px 'Geist Mono', 'Courier New', monospace";

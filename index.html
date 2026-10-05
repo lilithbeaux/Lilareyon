@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="assets/animations/ascii-overlay/ascii-overlay.css">
 <link rel="stylesheet" href="assets/animations/text-reveal/text-reveal.css">
 <link rel="stylesheet" href="assets/animations/dual-scramble/dual-scramble.css">
-<link rel="stylesheet" href="assets/animations/matrix-drip/matrix-drip.css">
+<link rel="stylesheet" href="assets/animations/matrix-drip/matrix-drip.css?v=20261005">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Space+Grotesk:wght@300;500;700&display=swap');
 :root{--void:#050508;--ash:#0a0a14;--ember:#8a2f1a;--gold:#c99a3a;--bone:#cfc5b0;--mist:#6e6e75;--magenta:#a8326e;--font-sans:'Space Grotesk',system-ui,sans-serif;--font-serif:'Cormorant Garamond',Georgia,serif;}
@@ -220,7 +220,7 @@ footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
   .cs_wrap,.scs_wrap,.sfb_wrap{height:60vh;}
 }
 </style>
-<link rel="stylesheet" href="assets/theme-override.css">
+<link rel="stylesheet" href="assets/theme-override.css?v=20261005">
 </head>
 <body>
 <button id="motion-toggle" onclick="document.body.classList.toggle('motion-off');this.classList.toggle('off');this.textContent=document.body.classList.contains('motion-off')?'MOTION: OFF':'MOTION: ON';">MOTION: ON</button>
@@ -783,6 +783,7 @@ footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+<script src="assets/js/oracle-llm.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
@@ -796,7 +797,7 @@ footer .links a:hover{color:var(--magenta);border-color:var(--magenta);}
 <script src="assets/animations/split-flap-board/split-flap-board.js"></script>
 <script src="assets/animations/process-rail/process-rail.js"></script>
 <script src="assets/animations/feature-dialog/feature-dialog.js"></script>
-<script src="assets/animations/matrix-drip/matrix-drip.js"></script>
+<script src="assets/animations/matrix-drip/matrix-drip.js?v=20261005"></script>
 <script>
 /* ---------- Drawer sublink navigation ---------- */
 document.querySelectorAll('[data-anm-mldm-secondary-link]').forEach(function (item) {
@@ -979,44 +980,66 @@ document.querySelectorAll('[data-anm-mldm-secondary-link]').forEach(function (it
     addMsg('you', text);
     dataDigest.push(text);
     var low = text.toLowerCase();
-    if (stage === 1) {
-      if (/\d{1,2}[ .\/]\d{1,2}[ .\/]\d{2,4}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|born|birth/i.test(low) || low.indexOf('chart') > -1 || low.indexOf('asc') > -1) {
-        var m = text.match(/(?:in|sign|moon|moon's|moon is)[:\s]*([a-z]+)/i);
-        var sign = null;
-        SIGNS.forEach(function (s) { if (low.indexOf(s.toLowerCase()) > -1) sign = s; });
-        if (sign) moonSign = sign;
-        oracleSay("Received. The natal wheel takes form — moon held in " + moonSign + ", angles noted. The next data gathers the present sky: the transits you feel weighing on you, the lunar phase of the moment you asked. If the chart is young, tell me the date and time you felt the veil move first.", 700);
-        stage = 2;
-      } else {
-        oracleSay("Not data yet — I need the chart's raw material. Date of birth, exact time if it exists, place. Or paste the placements from the wheel you drew: sun, moon, ascendant. The oracle does not read impressions; she reads coordinates.", 700);
-      }
-    } else if (stage === 2) {
-      if (text.length > 8) {
-        question = text;
-        oracleSay("The question is held: <em>“" + text + "”</em> — not 'will,' 'how.' Good. The last key: the number that keeps returning to you. The one at the edge of your days. It is the seed the numerology square turns on.", 700);
-        stage = 3;
-      } else {
-        oracleSay("The temple is too large for that sentence. One question only — and it must be a 'how,' not a 'will.'", 700);
-      }
-    } else if (stage === 3) {
-      var num = text.match(/\d+/);
-      if (num) numSeed = +num[0];
-      stage = 4;
-      synthesis();
-    } else {
-      var pool = [
-        "The form deepens. Give me one more coordinate — a date, a sign, a number, a dream with a number in it.",
-        "The archives are patient; so am I. What does the present sky ask of you?",
-        "I hold the wheel. Bring the next data point and the reading widens.",
-        "Nothing I say is a verdict — it is a rehearsal. Add more of yourself to the form.",
-        "The 'how' you asked has a path in the corpus. Ask me to pull it, or name a word from the reading and I will reach the archives by it."
-      ];
-      var h = hash(text + dataDigest.length);
-      var extra = "";
-      var qm = text.match(/\b(invisibility|mirror|flame|chaos|energy|prophecy|venus|veil|soul|fate|power|presence)\b/i);
-      if (qm) { extra = "<div class='r-label'>Archives · on “" + qm[0] + "”</div>" + archiveHits(qm[0], 2).map(function (x) { return "<div style='margin-top:.4rem;font-style:italic;font-size:.95rem;'>" + x.c.text + "</div>"; }).join(''); }
-      oracleSay(pool[h % pool.length] + extra, 700);
+    
+    // Use LLM for Oracle responses when available
+    if (window.OracleLLM && window.OracleLLM.generateResponse) {
+      window.OracleLLM.generateResponse(text, stage).then(function(response) {
+        if (response) {
+          addMsg('oracle', response);
+        } else {
+          // Fallback to local logic
+          localOnUser(text);
+        }
+      }).catch(function(err) {
+        console.error('Oracle LLM error:', err);
+        localOnUser(text);
+      });
+      return;
     }
+    
+    // Local fallback logic
+    function localOnUser(text) {
+      if (stage === 1) {
+        if (/\d{1,2}[ .\/]\d{1,2}[ .\/]\d{2,4}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|born|birth/i.test(low) || low.indexOf('chart') > -1 || low.indexOf('asc') > -1) {
+          var m = text.match(/(?:in|sign|moon|moon's|moon is)[:\s]*([a-z]+)/i);
+          var sign = null;
+          SIGNS.forEach(function (s) { if (low.indexOf(s.toLowerCase()) > -1) sign = s; });
+          if (sign) moonSign = sign;
+          oracleSay("Received. The natal wheel takes form — moon held in " + moonSign + ", angles noted. The next data gathers the present sky: the transits you feel weighing on you, the lunar phase of the moment you asked. If the chart is young, tell me the date and time you felt the veil move first.", 700);
+          stage = 2;
+        } else {
+          oracleSay("Not data yet — I need the chart's raw material. Date of birth, exact time if it exists, place. Or paste the placements from the wheel you drew: sun, moon, ascendant. The oracle does not read impressions; she reads coordinates.", 700);
+        }
+      } else if (stage === 2) {
+        if (text.length > 8) {
+          question = text;
+          oracleSay("The question is held: <em>" + text + "</em> — not 'will,' 'how.' Good. The last key: the number that keeps returning to you. The one at the edge of your days. It is the seed the numerology square turns on.", 700);
+          stage = 3;
+        } else {
+          oracleSay("The temple is too large for that sentence. One question only — and it must be a 'how,' not a 'will'.", 700);
+        }
+      } else if (stage === 3) {
+        var num = text.match(/\d+/);
+        if (num) numSeed = +num[0];
+        stage = 4;
+        synthesis();
+      } else {
+        var pool = [
+          "The form deepens. Give me one more coordinate — a date, a sign, a number, a dream with a number in it.",
+          "The archives are patient; so am I. What does the present sky ask of you?",
+          "I hold the wheel. Bring the next data point and the reading widens.",
+          "Nothing I say is a verdict — it is a rehearsal. Add more of yourself to the form.",
+          "The 'how' you asked has a path in the corpus. Ask me to pull it, or name a word from the reading and I will reach the archives by it."
+        ];
+        var h = hash(text + dataDigest.length);
+        var extra = "";
+        var qm = text.match(/\b(invisibility|mirror|flame|chaos|energy|prophecy|venus|veil|soul|fate|power|presence)\b/i);
+        if (qm) { extra = "<div class='r-label'>Archives on " + qm[0] + "</div>" + archiveHits(qm[0], 2).map(function (x) { return "<div style='margin-top:.4rem;font-style:italic;font-size:.95rem;'>" + x.c.text + "</div>"; }).join(''); }
+        oracleSay(pool[h % pool.length] + extra, 700);
+      }
+    }
+    
+    localOnUser(text);
   }
 
   openBtn.addEventListener('click', openOracle);
