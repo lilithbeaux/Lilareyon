@@ -1,24 +1,25 @@
-/* Lilith Beaux Theme Override - Blue Lightning Palette
-   Colors:
-   - Eigengrau: #0a0a0a (very dark gray, "brain gray" in low light)
-   - Cyan: #00d4ff (bright electric blue)
-   - Crimson: #cc2233 (vibrant red-pink)
-   - Plum: #6e3b87 (deep purple)
-   - Amber: #d4a24e (warm gold/amber)
-   - Paper: #ece8dc (light beige)
-   - Font: Space Grotesk, Inter, system-ui
+/* Lilith Beaux Theme Override - Blue Lightning Palette (ACTUAL theme)
+   Corrected 2026-10-04. Backgrounds:
+   - Eigengrau bg: #16161D
+   - Text: #F8F8F2
+   - Lightning accent: #00EFFF
+   - Red: #FF2F2F
+   - Greys: #8E8E8E
+   Token palette (Dracula): pink #ff79c6, cyan #8be9fd, purple #bd93f9,
+   green #50fa7b, yellow #f1fa8c, orange #ffb86c.
+   Font: Space Grotesk, Inter, system-ui
 */
 
 :root{
-  --charcoal:#0a0a11;
-  --ink:#13131f;
-  --surface:#181828;
-  --edge:#2a2a3e;
-  --cyan:#00d4ff;
-  --crimson:#cc2233;
-  --plum:#6e3b87;
-  --amber:#d4a24e;
-  --paper:#ece8dc;
+  --charcoal:#16161D;   /* Eigengrau — page background */
+  --ink:#1b1b24;
+  --surface:#22222e;
+  --edge:#8E8E8E;       /* grey */
+  --cyan:#00EFFF;       /* lightning */
+  --crimson:#FF2F2F;    /* red */
+  --plum:#bd93f9;       /* purple */
+  --amber:#ffb86c;      /* orange */
+  --paper:#F8F8F2;      /* text */
   --font-body:"Space Grotesk","Inter",system-ui,sans-serif;
   --font-mono:"Geist Mono","JetBrains Mono",monospace;
 }
@@ -26,7 +27,7 @@
 /* Feature-dialog dark fix - kills broken-TV light gradient */
 .fdg_stage{background-color:var(--charcoal)!important;color:var(--paper)!important}
 .fdg_tile{background-color:var(--ink)!important;border-color:var(--edge)!important}
-.fdg_gradient{filter:none!important;background-image:radial-gradient(20% 70% at 30% 100%,rgba(0,212,255,.55)0%,transparent 70%),radial-gradient(30% 60% at 70% 100%,rgba(206,34,51,.55)0%,transparent 70%),radial-gradient(25% 80% at 50% 100%,rgba(110,59,135,.55)0%,transparent 70%)!important}
+.fdg_gradient{filter:none!important;background-image:radial-gradient(20% 70% at 30% 100%,rgba(0,239,255,.55)0%,transparent 70%),radial-gradient(30% 60% at 70% 100%,rgba(255,47,47,.55)0%,transparent 70%),radial-gradient(25% 80% at 50% 100%,rgba(189,147,249,.55)0%,transparent 70%)!important}
 
 /* Scramble colors - use theme colors */
 .dual-scramble-color-1{color:var(--cyan)!important}
@@ -34,15 +35,15 @@
 .dual_scramble_wrap{background-color:var(--charcoal)!important;color:var(--paper)!important;font-family:var(--font-mono)!important}
 
 /* Contact box - crimson/ink gradient */
-.contact-box{background:linear-gradient(135deg,var(--ink),var(--surface))!important;border:1px solid var(--crimson)!important;border-radius:14px;box-shadow:0 10px 40px rgba(204,34,51,.25)!important;color:var(--paper)!important;padding:2rem 2.5rem!important}
-.contact-box .btn-initiate{background:var(--crimson)!important;color:#fff!important;border:none!important;text-transform:uppercase;letter-spacing:.08em;padding:.9rem 2rem!important;border-radius:10px;box-shadow:0 0 20px rgba(204,34,51,.45)!important}
+.contact-box{background:linear-gradient(135deg,var(--ink),var(--surface))!important;border:1px solid var(--crimson)!important;border-radius:14px;box-shadow:0 10px 40px rgba(255,47,47,.25)!important;color:var(--paper)!important;padding:2rem 2.5rem!important}
+.contact-box .btn-initiate{background:var(--crimson)!important;color:#fff!important;border:none!important;text-transform:uppercase;letter-spacing:.08em;padding:.9rem 2rem!important;border-radius:10px;box-shadow:0 0 20px rgba(255,47,47,.45)!important}
 
 /* Motion toggle - visible by default */
-#motion-toggle{position:fixed;top:14px;right:14px;z-index:9999;border:1px solid var(--cyan);background:rgba(10,10,17,.85);color:var(--cyan);font-family:var(--font-mono);font-size:.78rem;padding:.35rem .7rem;border-radius:8px;cursor:pointer;letter-spacing:.06em;backdrop-filter:blur(8px)}
+#motion-toggle{position:fixed;top:14px;right:14px;z-index:9999;border:1px solid var(--cyan);background:rgba(22,22,29,.85);color:var(--cyan);font-family:var(--font-mono);font-size:.78rem;padding:.35rem .7rem;border-radius:8px;cursor:pointer;letter-spacing:.06em;backdrop-filter:blur(8px)}
 #motion-toggle.off{border-color:var(--crimson);color:var(--crimson);opacity:.8}
 
 /* Cursor glow - permanent */
-#cursor-glow{position:fixed;pointer-events:none;z-index:9998;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.18)0%,transparent 70%);mix-blend-mode:screen;transform:translate(-50%,-50%);transition:opacity .2s;opacity:.9}
+#cursor-glow{position:fixed;pointer-events:none;z-index:9998;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(0,239,255,.18)0%,transparent 70%);mix-blend-mode:screen;transform:translate(-50%,-50%);transition:opacity .2s;opacity:.9}
 
 /* Dark body base */
 body{background-color:var(--charcoal)!important;color:var(--paper)!important}
